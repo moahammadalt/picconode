@@ -1,0 +1,14 @@
+{
+  "presets": [
+    "backpack-core/babel",
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "test": "./test"
+      }
+    }]
+  ]
+}

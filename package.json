@@ -1,0 +1,25 @@
+{
+  "name": "picconode",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./build/main.js",
+    "dev": "backpack dev",
+    "build": "backpack build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.16.2",
+    "express-validator": "^6.1.1",
+    "hbs": "^4.0.4",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^3.2.0",
+    "backpack-core": "^0.8.4"
+  }
+}
