@@ -1,10 +1,15 @@
-import express from "express";
-import bodyParser from "body-parser";
-import path from "path";
-import expressValidator from "express-validator";
-import config from "config";
-import hbs from "hbs";
+import express from 'express';
+import bodyParser from 'body-parser';
+import path from 'path';
+import hbs from 'hbs';
+import expressValidator from 'express-validator';
+
 import api from 'api';
+
+import config from 'config';
+import { adminApiExistParamsValidation } from 'middlewares';
+
+
 
 export default new (class expressServer {
   constructor() {
@@ -20,9 +25,10 @@ export default new (class expressServer {
     this.app.engine("html", hbs.__express);
     this.app.use(express.static(path.join(path.resolve("."), "/src/views")));
     this.app.use(bodyParser.urlencoded({ extended: false }));
-    this.app.use(bodyParser.json());
-		//this.app.use(expressValidator();
+		this.app.use(bodyParser.json());
+		//this.app.use(expressValidator());
 		
+		this.app.use('/adminAPI', adminApiExistParamsValidation);
 		this.app.use(api());
 
     // global error handling middleware

@@ -1,11 +1,26 @@
 export default {
   adminApi: {
-    register: '/adminAPI/register',
-    login: '/adminAPI/login',
-    dashboardInit: '/adminAPI/init',
-    logout: '/adminAPI/logout',
+    registration: {
+			url: '/adminAPI/register',
+			bodyParams: ['userName', 'password'],
+    },
+    login: {
+			url: '/adminAPI/login',
+		},
+    dashboardInit: {
+			url: '/adminAPI/init'
+		},
+    logout: {
+			url: '/adminAPI/logout'
+		},
   },
   public: {
-    home: '/',
+    home: {
+			url: '/',
+			QueryParams: ['posts', 'bla'],
+		},
+		home: {
+			url: '/404',
+		},
   }
 };

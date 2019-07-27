@@ -1,5 +1,5 @@
-import { expressServer, databaseCon } from 'loaders';
+import { expressServer, DBCon } from 'loaders';
 
 expressServer.connect();
 
-databaseCon.connect();
+DBCon.connect();

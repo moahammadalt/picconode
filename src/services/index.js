@@ -1,0 +1,1 @@
+export { default as adminRegistration } from './adminAuth/registration';
