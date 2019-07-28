@@ -1,5 +1,5 @@
-import mysql from 'mysql';
-import util from 'util';
+import mysql from "mysql";
+import { promisify } from "util";
 
 import config from "config";
 
@@ -12,22 +12,21 @@ export default new (class databaseCon {
     databaseCon.instance = this;
 
     this.con = mysql.createConnection({
-			host: config.db.host,
-			user: config.db.user,
-			password: config.db.password,
-			database: config.db.name,
-		});
+      host: config.DB.host,
+      user: config.DB.user,
+      password: config.DB.password,
+      database: config.DB.name
+    });
 
-		this.con.query = util.promisify(this.con.query)
-		//const query = util.promisify(conn.query).bind(conn);
-		
-		return this.con;
+    this.con.query = promisify(this.con.query);
+
+    return this.con;
   }
 
   connect() {
     this.con.connect(err => {
-			if (err) throw err;
-			console.log("Connected!");
-		});
+      if (err) throw err;
+      console.log("Connected!");
+    });
   }
 })();

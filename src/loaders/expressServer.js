@@ -2,12 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import hbs from 'hbs';
-import expressValidator from 'express-validator';
 
 import api from 'api';
 
 import config from 'config';
-import { adminApiExistParamsValidation } from 'middlewares';
+import { adminApiExistParamsValidation, adminAPIAuth } from 'middlewares';
 
 
 
@@ -21,26 +20,28 @@ export default new (class expressServer {
 
     this.app = express();
 
-    this.app.set("view engine", "html");
-    this.app.engine("html", hbs.__express);
-    this.app.use(express.static(path.join(path.resolve("."), "/src/views")));
+    this.app.set('view engine', 'html');
+    this.app.engine('html', hbs.__express);
+    this.app.use(express.static(path.join(path.resolve('.'), '/src/views')));
     this.app.use(bodyParser.urlencoded({ extended: false }));
 		this.app.use(bodyParser.json());
-		//this.app.use(expressValidator());
 		
+		//middleware
+		this.app.use('/adminAPI', adminAPIAuth);
 		this.app.use('/adminAPI', adminApiExistParamsValidation);
+
 		this.app.use(api());
 
     // global error handling middleware
     this.app.use((err, req, res, next) => {
-      console.log(err); // to see properties of message in our console
+      console.log('err is: ', err); // to see properties of message in our console
       res.status(422).send(err.message ? err.message : err);
     });
   }
 
   connect(port) {
     if (!this.port) {
-      this.port = port || config.port;
+      this.port = port || config.PORT;
     }
 
     this.app.listen(this.port, () => {

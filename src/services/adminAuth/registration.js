@@ -1,11 +1,13 @@
 import bcrypt from 'bcrypt';
 
-import { insert } from 'model/db';
+import { insert } from 'utils/db';
+import JWT from 'utils/jwt';
+import config from 'config';
 
 export default async (req, res) => {
   const adminObj = {
-		user_name: 'piccoloveliero',
-		password: '123',
+		user_name: config.ADMIN.userName,
+		password: config.ADMIN.password,
 	};
 	
 	const hash = await bcrypt.hash(adminObj.password, 10);
@@ -13,17 +15,24 @@ export default async (req, res) => {
 
 	try {
 		const response = await insert({
-			table: `admin_usser`,
+			table: 'admin_user',
 			fields: Object.keys(adminObj),
-			values: Object.values(adminObj)
+			values: Object.values(adminObj),
+			data: adminObj,
 		});
 
-		res.send(response);
+		const payload = {
+			user_name: adminObj.user_name,
+			id: response.data.id
+		};
+		const token = JWT.sign(payload);
+
+		res.send({
+			...response,
+			token,
+		});
 	}
 	catch (err) {
 		res.status(500).send(err);
 	}
-
-
-	//db.select(`category`, ['id', 'category_name'])
 };

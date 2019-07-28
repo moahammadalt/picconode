@@ -6,6 +6,11 @@ export default {
     },
     login: {
 			url: '/adminAPI/login',
+			bodyParams: ['userName', 'password'],
+		},
+		productCreate: {
+			url: '/adminAPI/product/create',
+			bodyParams: ['productName'],
 		},
     dashboardInit: {
 			url: '/adminAPI/init'

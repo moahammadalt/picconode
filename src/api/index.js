@@ -1,11 +1,13 @@
 import { Router } from 'express';
 
-import adminApi from './adminAPI';
+import adminAPI from './adminAPI';
+import productAPI from './productAPI';
 
 export default () => {
 	const router = Router();
 	
-	adminApi(router);
+	adminAPI(router);
+	productAPI(router);
 
 	return router;
 }
