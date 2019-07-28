@@ -8,6 +8,13 @@ export default {
 			url: '/adminAPI/login',
 			bodyParams: ['userName', 'password'],
 		},
+		categoryCreate: {
+			url: '/adminAPI/category/create',
+			bodyParams: ['name', 'slug'],
+		},
+		categoryList: {
+			url: '/adminAPI/category',
+		},
 		productCreate: {
 			url: '/adminAPI/product/create',
 			bodyParams: ['productName'],

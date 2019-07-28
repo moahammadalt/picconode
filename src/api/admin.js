@@ -1,6 +1,7 @@
-import routes from 'config/routes';
-
 import { adminRegistration, adminLogin } from 'services';
+
+import routes from 'config/routes';
+import { serviceHandler } from 'utils/service';
 
 export default router => {
 
@@ -8,12 +9,12 @@ export default router => {
 
 	router.post(
 		adminApi.registration.url,
-		adminRegistration
+		(...arg) => { serviceHandler(...arg, adminRegistration) }
 	);
 
 	router.post(
 		adminApi.login.url,
-		adminLogin
+		(...arg) => { serviceHandler(...arg, adminLogin) }
 	);
 	  
 };

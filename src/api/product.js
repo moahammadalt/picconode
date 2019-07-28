@@ -1,6 +1,8 @@
-import routes from 'config/routes';
-
 import { productCreate } from 'services';
+
+import routes from 'config/routes';
+import { serviceHandler } from 'utils/service';
+
 
 export default router => {
 
@@ -8,7 +10,7 @@ export default router => {
 
 	router.post(
 		adminApi.productCreate.url,
-		productCreate
+		(...arg) => { serviceHandler(...arg, productCreate) }
 	);
 	  
 };

@@ -1,7 +1,6 @@
 import { DBCon } from "loaders";
 
-import { responseStatuses } from "globals/constants";
-import { handleDBError, checkValue } from "globals/helpers";
+import { checkValue } from "globals/helpers";
 
 const escapeResults = resultsArr => {
 
@@ -20,18 +19,6 @@ const escapeResults = resultsArr => {
   return escapedResult;
 };
 
-const sendSuccessResponse = data => ({
-  status: responseStatuses.success,
-  data: escapeResults(data)
-});
-
-const sendFailureResponse = error => {
-  throw {
-    status: responseStatuses.fail,
-    error: error
-  };
-};
-
 export const select = async ({ table, fields, condition }) => {
   let fieldsNames = fields === "*" ? fields : fields.map((val, index) => val);
 
@@ -40,21 +27,19 @@ export const select = async ({ table, fields, condition }) => {
   if (condition) {
     query += ` WHERE ${condition}`;
 	}
-
-	console.log('query', query);
 	
 	try {
 		const results = await DBCon.query(query);
-
-		if(Array.isArray(results) && results.length === 0) {
+    
+    if(Array.isArray(results) && results.length === 0) {
 			throw { errorMessage: 'no matched results' };
 		}
 		else{
-			return sendSuccessResponse(results);
+			return escapeResults(results);
 		}
 	}
 	catch (err) {
-		sendFailureResponse(err);
+    throw {DBError: err};
 	}
 };
 
@@ -66,7 +51,9 @@ export const insert = async ({ table, fields, values, data }) => {
     (typeof values[0] !== "object" && fields.length !== values.length) ||
     (typeof values[0] === "object" && fields.length !== values[0].length)
   ) {
-    return sendFailureResponse(error);
+    throw {
+      errorMessage: 'some thing wrong in db input'
+    };
   }
 
   let lastValues = [];
@@ -106,27 +93,19 @@ export const insert = async ({ table, fields, values, data }) => {
   try {
     const results = await DBCon.query(query, lastValues);
     data["id"] = results.insertId;
-    return sendSuccessResponse(data);
+    return escapeResults(data);
   } catch (err) {
-    //console.log('ssssss')
-    sendFailureResponse(err);
+    throw {DBError: err};
   }
 
-  /* return DBCon.query(query, lastValues, (error, results, fields)=>{
-		console.log('a', 1)
-		if(error){
-			DBCon.destroy();
-			return sendFailureResponse(error);
-		}
-		else {
-			//this.data.push(tmp_res);
-			return sendSuccessResponse(results);
-		}
-	}); */
 };
 
 /* process.on('unhandledRejection', (reason, promise) => {
   console.log('Unhandled Rejection at:', reason.stack || reason)
   // Recommended: send the information to sentry.io
   // or whatever crash reporting service you use
-}); */
+}); 
+
+process.on('uncaughtException', function(error) {
+  console.log('uncaughtException at:', error)
+ });*/

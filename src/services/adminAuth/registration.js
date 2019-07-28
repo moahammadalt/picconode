@@ -1,38 +1,37 @@
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
-import { insert } from 'utils/db';
-import JWT from 'utils/jwt';
-import config from 'config';
+import { insert } from "utils/db";
+import JWT from "utils/jwt";
+import config from "config";
 
-export default async (req, res) => {
+export default async () => {
   const adminObj = {
-		user_name: config.ADMIN.userName,
-		password: config.ADMIN.password,
-	};
-	
-	const hash = await bcrypt.hash(adminObj.password, 10);
-	adminObj.password = hash;
+    user_name: config.ADMIN.userName,
+    password: config.ADMIN.password
+  };
 
-	try {
-		const response = await insert({
-			table: 'admin_user',
-			fields: Object.keys(adminObj),
-			values: Object.values(adminObj),
-			data: adminObj,
-		});
+  const hash = await bcrypt.hash(adminObj.password, 10);
+  adminObj.password = hash;
 
-		const payload = {
-			user_name: adminObj.user_name,
-			id: response.data.id
-		};
-		const token = JWT.sign(payload);
+  try {
+    const response = await insert({
+      table: "admin_user",
+      fields: Object.keys(adminObj),
+      values: Object.values(adminObj),
+      data: adminObj
+    });
 
-		res.send({
-			...response,
-			token,
-		});
-	}
-	catch (err) {
-		res.status(500).send(err);
-	}
+    const payload = {
+      user_name: adminObj.user_name,
+      id: response.data.id
+    };
+    const token = JWT.sign(payload);
+
+    return {
+      ...response,
+      token
+    };
+  } catch (err) {
+    throw err;
+  }
 };
