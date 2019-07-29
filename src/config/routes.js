@@ -15,6 +15,12 @@ export default {
 		categoryList: {
 			url: '/adminAPI/category',
 		},
+		categoryItem: {
+			url: '/adminAPI/category/:slug',
+		},
+		categoryUpdate: {
+			url: '/adminAPI/category/:slug',
+		},
 		productCreate: {
 			url: '/adminAPI/product/create',
 			bodyParams: ['productName'],

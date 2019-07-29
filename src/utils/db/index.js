@@ -20,7 +20,7 @@ const escapeResults = resultsArr => {
 };
 
 export const select = async ({ table, fields, condition }) => {
-  let fieldsNames = fields === "*" ? fields : fields.map((val, index) => val);
+  let fieldsNames = fields === '*' || !fields ? '*' : fields.map((val, index) => val);
 
   let query = `SELECT ${fieldsNames} FROM ${table}`;
 
@@ -56,48 +56,55 @@ export const insert = async ({ table, fields, values, data }) => {
     };
   }
 
-  let lastValues = [];
   fieldsStr += fields.map((val, index) => val);
 
-  if (!Array.isArray(values[0])) {
-    // one row
-    values = values.map((val, index) => {
-      valuesStr += index !== values.length - 1 ? ` ?,` : ` ?`;
-      return !checkValue(val)
-        ? null
-        : typeof val === "boolean"
-        ? val
-        : escape(unescape(val));
-    });
-    lastValues = values;
-  } else {
-    // multiple rows [bulk]
-    valuesStr = "?";
-    values = values.map(
-      (val, index) =>
-        (val = val.map((str, index2) =>
-          !checkValue(str)
-            ? null
-            : typeof str === "boolean"
-            ? str
-            : escape(unescape(str))
-        ))
-    );
-    lastValues = [values];
-  }
+  // TODO: support bulk inserts
+  values = values.map((val, index) => {
+    valuesStr += index !== values.length - 1 ? ` ?,` : ` ?`;
+    return !checkValue(val)
+      ? null
+      : typeof val === "boolean"
+      ? val
+      : escape(unescape(val));
+  });
 
   let query = `INSERT INTO ${table} (${fieldsStr}) VALUES ${
     typeof values[0] !== "object" ? `(${valuesStr})` : `${valuesStr}`
   }`;
 
   try {
-    const results = await DBCon.query(query, lastValues);
+    const results = await DBCon.query(query, values);
     data["id"] = results.insertId;
     return escapeResults(data);
   } catch (err) {
-    throw {DBError: err};
+    throw { DBError: err };
   }
 
+};
+
+export const update = async ({ table, fields, values, condition, data }) => {
+
+  // TODO: add bulk update support
+  let query = '';
+  if(typeof fields !== 'string'){
+    let str = '';
+    str += fields.map((val, index) => ` ${val}=${((!checkValue(values[index])) ? null : (typeof values[index] === 'boolean') ? values[index] : `'${escape(unescape(values[index]))}'`)}`);
+    query = `UPDATE ${table} SET ${str} WHERE ${condition}`;
+  }
+  else{
+    query = fields;
+  }
+
+  try {
+    const results = await DBCon.query(query);
+    if(results.affectedRows === 0) {
+      throw { errorMessage: 'category not found' };
+    }
+    return escapeResults(results);
+  }
+  catch (err) {
+    throw { DBError: err };
+  }
 };
 
 /* process.on('unhandledRejection', (reason, promise) => {

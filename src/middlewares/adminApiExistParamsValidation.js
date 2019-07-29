@@ -1,16 +1,23 @@
+import pathToRegexp from 'path-to-regexp';
+
 import routes from "config/routes";
 import { responseStatuses } from "globals/constants";
-
 import { checkValue, handleMissedParamsError } from "globals/helpers";
 
 export default (req, res, next) => {
+
+  if (req.method == "GET") {
+    next();
+    return;
+  }
+  
   const requestedPath =
     req.path[req.path.length - 1] === "/"
       ? req.path.substr(0, req.path.length - 1)
       : req.path;
   const requestedAPI = req.baseUrl + requestedPath;
   const routeBodyParams = Object.values(routes.adminApi).find(
-    ({ url, bodyParams }) => requestedAPI === url && bodyParams
+    ({ url, bodyParams }) => !!pathToRegexp(url).exec(requestedAPI) && bodyParams
   );
 
   if (!routeBodyParams) {

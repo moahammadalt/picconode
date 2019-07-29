@@ -2,6 +2,7 @@ import config from 'config';
 import JWT from "utils/jwt";
 import { responseStatuses } from 'globals/constants';
 
+// TODO: add refresh token or at least invalid old token when user loged in again
 export default async (req, res, next) => {
 
 	if(req.path === '/register' || req.path === '/register/' || req.path === '/login' || req.path === '/login/') {
