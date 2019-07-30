@@ -16,8 +16,9 @@ export default (req, res, next) => {
       ? req.path.substr(0, req.path.length - 1)
       : req.path;
   const requestedAPI = req.baseUrl + requestedPath;
+  console.log('requestedAPI: ', requestedAPI);
   const routeBodyParams = Object.values(routes.adminApi).find(
-    ({ url, bodyParams }) => !!pathToRegexp(url).exec(requestedAPI) && bodyParams
+    ({ url, type, bodyParams }) => !!pathToRegexp(url).exec(requestedAPI) && req.method === type && bodyParams
   );
 
   if (!routeBodyParams) {

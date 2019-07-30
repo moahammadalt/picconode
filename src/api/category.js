@@ -23,7 +23,7 @@ export default router => {
     serviceHandler(...arg, categoryItemGet);
   });
 
-  router.post(adminApi.categoryItem.url, (...arg) => {
+  router.post(adminApi.categoryUpdate.url, (...arg) => {
     serviceHandler(...arg, categoryUpdate);
   });
 };

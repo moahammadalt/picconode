@@ -98,7 +98,7 @@ export const update = async ({ table, fields, values, condition, data }) => {
   try {
     const results = await DBCon.query(query);
     if(results.affectedRows === 0) {
-      throw { errorMessage: 'category not found' };
+      throw { errorMessage: 'object not found' };
     }
     return escapeResults(results);
   }
@@ -106,6 +106,22 @@ export const update = async ({ table, fields, values, condition, data }) => {
     throw { DBError: err };
   }
 };
+
+export const deleteRow = async ({ table, condition }) => {
+
+  let query = `DELETE FROM ${table} WHERE ${condition}`;
+
+  try {
+    const results = await DBCon.query(query);
+    if(results.affectedRows === 0) {
+      throw { errorMessage: 'object not found' };
+    }
+    return escapeResults(results);
+  }
+  catch (err) {
+    throw { DBError: err };
+  }
+}
 
 /* process.on('unhandledRejection', (reason, promise) => {
   console.log('Unhandled Rejection at:', reason.stack || reason)

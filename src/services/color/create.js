@@ -3,7 +3,7 @@ import { insert } from 'utils/db';
 export default async (req) => {
 	
 	const response = await insert({
-		table: "product",
+		table: "color",
 		fields: [ ...Object.keys(req.body), 'admin_id' ],
 		values: [ ...Object.values(req.body), req.adminUser.id ],
 		data: req.body,

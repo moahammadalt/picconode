@@ -8,8 +8,6 @@ import api from 'api';
 import config from 'config';
 import { adminApiExistParamsValidation, adminAPIAuth } from 'middlewares';
 
-
-
 export default new (class expressServer {
   constructor() {
     // singleton
