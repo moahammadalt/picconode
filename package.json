@@ -2,7 +2,7 @@
   "name": "picconode",
   "version": "1.0.0",
   "scripts": {
-    "start": "node ./build/main.js",
+    "start": "backpack",
     "dev": "backpack dev",
     "build": "backpack build"
   },

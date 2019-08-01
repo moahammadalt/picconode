@@ -59,8 +59,8 @@ CREATE TABLE `product` (
   `admin_id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `slug` varchar(200) NOT NULL,
-  `category` varchar(50) NOT NULL,
-  `category_type` varchar(50) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `category_type_id` int(11) NOT NULL,
   `description` varchar(700) NULL,
   `additional` varchar(700) NULL,
   `information` varchar(700) NULL,
@@ -73,9 +73,27 @@ CREATE TABLE `product` (
   UNIQUE KEY `slug` (`slug`),
   KEY `FK_product_admin_user` (`admin_id`),
   CONSTRAINT `FK_product_admin_user` FOREIGN KEY (`admin_id`) REFERENCES `admin_user` (`id`),
-  KEY `FK_product_category` (`category`),
-  CONSTRAINT `FK_product_category` FOREIGN KEY (`category`) REFERENCES `category` (`slug`),
-  KEY `FK_product_category_type` (`category_type`),
-  CONSTRAINT `FK_product_category_type` FOREIGN KEY (`category_type`) REFERENCES `category` (`slug`)
+  KEY `FK_product_category_id` (`category_id`),
+  CONSTRAINT `FK_product_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
+  KEY `FK_product_category_type_id` (`category_type_id`),
+  CONSTRAINT `FK_product_category_type_id` FOREIGN KEY (`category_type_id`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+/*END*/
+
+/*Added 01/08/2019*/
+CREATE TABLE `product_size` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `size_details` varchar(700) NULL,
+  `amount` int(7) NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `product_size_index` (`product_id`, `size_id`),
+  KEY `FK_product_size_product` (`product_id`),
+  CONSTRAINT `FK_product_size_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  KEY `FK_product_size_size` (`size_id`),
+  CONSTRAINT `FK_product_size_size` FOREIGN KEY (`size_id`) REFERENCES `size` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*END*/

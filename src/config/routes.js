@@ -72,7 +72,7 @@ export default {
 		productCreate: {
 			url: '/adminAPI/product/create',
 			type: 'POST',
-			bodyParams: ['name', 'slug', 'category', 'category_type'],
+			bodyParams: ['name', 'slug', 'category_id', 'category_type_id'],
 		},
 		productList: {
 			url: '/adminAPI/product',

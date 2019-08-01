@@ -24,3 +24,8 @@ export { default as productListGet } from './product/getList';
 export { default as productItemGet } from './product/getItem';
 export { default as productUpdate } from './product/update';
 export { default as productDelete } from './product/delete';
+
+export { default as productSizeCreate } from './productSize/create';
+export { default as productSizeItemGet } from './productSize/get';
+export { default as productSizeUpdate } from './productSize/update';
+export { default as productSizeDelete } from './productSize/delete';
