@@ -97,3 +97,20 @@ CREATE TABLE `product_size` (
   CONSTRAINT `FK_product_size_size` FOREIGN KEY (`size_id`) REFERENCES `size` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*END*/
+
+/*Added 03/08/2019*/
+CREATE TABLE `product_color` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `amount` int(7) NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `product_color_index` (`product_id`, `color_id`),
+  KEY `FK_product_color_product` (`product_id`),
+  CONSTRAINT `FK_product_color_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  KEY `FK_product_color_color` (`color_id`),
+  CONSTRAINT `FK_product_color_color` FOREIGN KEY (`color_id`) REFERENCES `color` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+/*END*/

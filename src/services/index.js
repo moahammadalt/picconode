@@ -29,3 +29,8 @@ export { default as productSizeCreate } from './productSize/create';
 export { default as productSizeItemGet } from './productSize/get';
 export { default as productSizeUpdate } from './productSize/update';
 export { default as productSizeDelete } from './productSize/delete';
+
+export { default as productColorCreate } from './productColor/create';
+export { default as productColorItemGet } from './productColor/get';
+export { default as productColorUpdate } from './productColor/update';
+export { default as productColorDelete } from './productColor/delete';

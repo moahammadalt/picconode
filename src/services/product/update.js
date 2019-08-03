@@ -1,21 +1,24 @@
 import { update } from "utils/db";
 import {
+  productItemGet,
   productSizeItemGet,
-	productItemGet,
   productSizeUpdate,
   productSizeCreate,
   productSizeDelete,
+  productColorItemGet,
+  productColorUpdate,
+  productColorCreate,
+  productColorDelete,
 } from "services";
 
 export default async (req) => {
   const { params } = req;
   const reqProductSizes = req.body.sizes;
-  const reqProductCategories = req.body.categories;
+  const reqProductColors = req.body.colors;
   const reqProductId = req.body.id;
 	delete req.body.sizes;
-  delete req.body.categories;
+  delete req.body.colors;
   let productBeforUpdate;
-  let productAfterUpdate;
   
   try {
 
@@ -29,23 +32,23 @@ export default async (req) => {
       data: req.body
     });
     req.body.sizes = reqProductSizes;
-    
-    const productAfterUpdateArr = await productItemGet({ params });
-    productAfterUpdate = productAfterUpdateArr[0];
+    req.body.colors = reqProductColors;
 
     const productSizes = await productSizeItemGet({
       body: { 'product_id': reqProductId}
     });
-    
+
+    const productColors = await productColorItemGet({
+      body: { 'product_id': reqProductId}
+    });
 
     if(reqProductSizes && Array.isArray(reqProductSizes) && reqProductSizes.length > 0) {
 
       for(const reqProductSizeObj of reqProductSizes) {
-        const productSizeObj = productSizes.find(productSize => productSize['size_id'] === reqProductSizeObj.id && productSize['product_id'] === reqProductId);
-        const isreqProductIdAndreqSizeIdExistInproductSizes = !!productSizeObj;
+        const productSizeObj = productSizes.find(productSize => productSize['size_id'] === reqProductSizeObj.id);
+        const isreqProductIdAndreqSizeIdExistInProductSizes = !!productSizeObj;
         
-        
-        if(!isreqProductIdAndreqSizeIdExistInproductSizes){
+        if(!isreqProductIdAndreqSizeIdExistInProductSizes){
           if(!reqProductSizeObj.is_checked){
             continue;
           }
@@ -70,10 +73,53 @@ export default async (req) => {
             });
           }
           else {
+            const deleteKey = 'id';
             await productSizeDelete({
               body: {
-                'id': productSizeObj.id,
+                [deleteKey]: productSizeObj.id,
+              },
+              key: deleteKey,
+            });
+          }
+        }
+      }
+    }
+
+    if(reqProductColors && Array.isArray(reqProductColors) && reqProductColors.length > 0) {
+
+      for(const reqProductColorObj of reqProductColors) {
+        const productColorObj = productColors.find(productColor => productColor['color_id'] === reqProductColorObj.id);
+        const isreqProductIdAndreqColorIdExistInProductColors = !!productColorObj;
+
+        if(!isreqProductIdAndreqColorIdExistInProductColors){
+          if(!reqProductColorObj.is_checked){
+            continue;
+          }
+          await productColorCreate({
+						body: {
+							'product_id': reqProductId,
+							'color_id': reqProductColorObj.id,
+							'amount': reqProductColorObj.amount,
+						}
+          });
+        }
+        else{
+          if(reqProductColorObj.is_checked) {
+            await productColorUpdate({
+              body: {
+                'product_id': reqProductId,
+                'color_id': reqProductColorObj.id,
+                'amount': reqProductColorObj.amount,
               }
+            });
+          }
+          else {
+            const deleteKey = 'id';
+            await productColorDelete({
+              body: {
+                [deleteKey]: productColorObj.id,
+              },
+              key: deleteKey,
             });
           }
         }
@@ -94,43 +140,5 @@ export default async (req) => {
   return {
 		...req.body,
 	};
-  
-
-  /* try {
-    if(productSizes && Array.isArray(productSizes)) {
-      req.body.sizes = [];
-      const sizes = await sizeListGet();
-
-      for(const reqProductSizeObj of productSizes) {
-        const sizeObject = sizes.find(size => size.slug.toLowerCase() === reqProductSizeObj.size.toLowerCase());
-        if(sizeObject) {
-          const productSizeRecord = await productSizeCreate({
-            body: {
-              'product_id': productResponse.id,
-              'size_id': sizeObject.id,
-              'size_details': reqProductSizeObj.details,
-              'amount': reqProductSizeObj.amount,
-            }
-          });
-          
-          req.body.sizes.push(reqProductSizeObj);
-        }
-      }
-    }
-  }
-
-  catch (err) {
-		await productDelete({
-			params: {
-				'slug': productResponse.slug
-			}
-		});
-		throw err;
-	}
-
-	return {
-		...req.body,
-		id: productResponse.id,
-	}; */
 
 };
