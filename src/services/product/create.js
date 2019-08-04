@@ -1,23 +1,21 @@
-import { insert, select } from 'utils/db';
+import { insert } from 'utils/db';
 import {
 	productDelete,
 	productSizeCreate,
-	productSizeDelete,
 	productColorCreate,
-	productColorDelete,
 	productImageCreate,
-	productImageDelete,
 } from "services";
 
-export default async (req) => {
 
+export default async (req) => {
+	
 	const productSizes = req.body.sizes;
 	const productColors = req.body.colors;
-	const mainImage = req.body.main_image;
+	let mainImage = req.body.main_image;
 	delete req.body.sizes;
 	delete req.body.colors;
 	delete req.body.images;
-	req.body.main_image = mainImage && mainImage.file_name;
+	req.body.main_image = mainImage && mainImage.image_name;
 	
 	const productResponse = await insert({
 		table: 'product',
@@ -28,14 +26,15 @@ export default async (req) => {
 
 	try {
 		if(mainImage) {
-			await productImageCreate({
+			const mainImageCreated = await productImageCreate({
+				...req,
 				body: {
 					'product_id': productResponse.id,
-					'image_name': mainImage.file_name
+					'image_name': mainImage.image_name
 				}
 			});
 			
-			req.body.main_image = { file_name: mainImage.file_name };
+			req.body.main_image = mainImageCreated;
 		}
 
 		if(productSizes && Array.isArray(productSizes)) {
@@ -70,17 +69,20 @@ export default async (req) => {
 						}
 					});
 					productColorObject['relation_id'] = productColorRecord.id;
-					let productImages = productColorObject.images
+					let productImages = productColorObject.images;
 					if(Array.isArray(productImages) && productImages.length > 0) {
+						let i = 0;
 						for(const productImageObj of productImages) {
-							await productImageCreate({
+							const imageCreated = await productImageCreate({
+								...req,
 								body: {
 									'product_color_id': productColorRecord.id,
 									'product_id': productResponse.id,
-									'image_name': productImageObj.file_name,
+									'image_name': productImageObj.image_name,
 								}
 							});
-							//productImageObj['image_link'] = 'fff';
+							productColorObject.images[i] = imageCreated;
+							i++;
 						}
 					}
 

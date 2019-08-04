@@ -29,7 +29,6 @@ export default async (req) => {
         key: imageDeleteKey,
       });
     }
-    
   }
   
   const deleteKey = 'id';

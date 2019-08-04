@@ -2,50 +2,58 @@ import { select } from 'utils/db';
 import { createHash } from 'globals/helpers';
 
 import {
-  productSizeItemGet,
-  productColorItemGet,
+  productSizeListGet,
+  productColorListGet,
   sizeListGet,
   colorListGet,
-  categoryListGet
+	categoryListGet,
+	productImageGetList,
 } from 'services';
 
-export default async () => {
-  let productList = await select({
-    table: 'product'
-	});
-
-	let categories = createHash(await categoryListGet(), 'id').data;
-  let sizes = createHash(await sizeListGet(), 'id').data;
-	let colors = createHash(await colorListGet(), 'id').data;
-
-	for(const productItem of productList) {
-		let productSizeItemArr = await productSizeItemGet({
-			body: {
-				product_id: productItem.id
-			}
-		});	
-	
-		let productColorItemArr = await productColorItemGet({
-			body: {
-				product_id: productItem.id
-			}
+export default async (req) => {
+	try {
+		let productList = await select({
+			table: 'product'
 		});
-	
-		productItem['category_name'] = categories[productItem.category_id].name;
-		productItem['category_type_name'] = categories[productItem.category_type_id].name;
-	
-		productItem['sizes'] = productSizeItemArr.map(productSizeItem => {
-			productSizeItem['size_name'] = sizes[productSizeItem.size_id].name;
-			productSizeItem['size_slug'] = sizes[productSizeItem.size_id].slug;
-			return productSizeItem;
-		});
-	
-		productItem['colors'] = productColorItemArr.map(productColorItem => {
-			productColorItem['color_name'] = colors[productColorItem.color_id].name;
-			productColorItem['color_slug'] = colors[productColorItem.color_id].slug;
-			return productColorItem;
+
+		const productImageList = await productImageGetList(req);
+		const productSizeList = await productSizeListGet();
+		const productColorList = await productColorListGet();
+		const categories = createHash(await categoryListGet(), 'id').data;
+		const sizes = createHash(await sizeListGet(), 'id').data;
+		const colors = createHash(await colorListGet(), 'id').data;
+
+		return productList.map(productItem => {
+			const productImages = productImageList.filter(productImageItem => productImageItem.product_id === productItem.id)
+
+			if(productItem.main_image) {
+				const mainImageObj = productImages.find(productImageObj => productImageObj.product_id === productItem.id && productImageObj.image_name === productItem.main_image);
+				productItem.main_image = mainImageObj;
+			} 
+			
+			productItem['category_name'] = categories[productItem.category_id].name;
+			productItem['category_type_name'] = categories[productItem.category_type_id].name;
+			
+			let productSizeItemArr = productSizeList.filter(productSizeItem => productSizeItem.product_id === productItem.id);
+
+			productItem['sizes'] = productSizeItemArr.map(productSizeItem => {
+				productSizeItem['size_name'] = sizes[productSizeItem.size_id].name;
+				productSizeItem['size_slug'] = sizes[productSizeItem.size_id].slug;
+				return productSizeItem;
+			});
+			
+			let productColorItemArr = productColorList.filter(productColorItem => productColorItem.product_id === productItem.id);
+
+			productItem['colors'] = productColorItemArr.map(productColorItem => {
+				productColorItem['color_name'] = colors[productColorItem.color_id].name;
+				productColorItem['color_slug'] = colors[productColorItem.color_id].slug;
+				productColorItem['images'] = productImages.filter(productImageObj => productColorItem.product_id === productImageObj.product_id && productColorItem.id === productImageObj.product_color_id);
+				return productColorItem;
+			});
+			return productItem;
 		});
 	}
-
-	return productList;
+	catch (err) {
+		throw err;
+	}
 };

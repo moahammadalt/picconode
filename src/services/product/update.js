@@ -9,6 +9,9 @@ import {
   productColorUpdate,
   productColorCreate,
   productColorDelete,
+  productImageCreate,
+  productImageDelete,
+  productImageGet,
 } from "services";
 
 export default async (req) => {
@@ -16,16 +19,58 @@ export default async (req) => {
   const reqProductSizes = req.body.sizes;
   const reqProductColors = req.body.colors;
   const reqProductId = req.body.id;
+  let reqProductMainImage = req.body.main_image;
+  let productBeforUpdate;
 	delete req.body.sizes;
   delete req.body.colors;
-  let productBeforUpdate;
-  
+  delete req.body.images;
+  delete req.body.category_name;
+  delete req.body.category_type_name;
+
+  if(reqProductMainImage) {
+    req.body.main_image = reqProductMainImage && reqProductMainImage.image_name;
+  }
   try {
 
     productBeforUpdate = await productItemGet({ params });
+    
+    
+    
+    if(reqProductMainImage && reqProductMainImage.image_name){
+      if(productBeforUpdate.main_image) {
+        if(productBeforUpdate.main_image.image_name !== reqProductMainImage.image_name) {
+          const imageDeleteKey = 'image_name';
+          await productImageDelete({
+            body: {
+              [imageDeleteKey]: productBeforUpdate.main_image.image_name
+            },
+            key: imageDeleteKey,
+          });
+          const mainImageCreated = await productImageCreate({
+            ...req,
+            body: {
+              'product_id': productBeforUpdate.id,
+              'image_name': reqProductMainImage.image_name
+            }
+          });
+          reqProductMainImage = mainImageCreated;
+        }
+      }
+      else {
+        const mainImageCreated = await productImageCreate({
+          ...req,
+          body: {
+            'product_id': productBeforUpdate.id,
+            'image_name': reqProductMainImage.image_name
+          }
+        });
+        reqProductMainImage = mainImageCreated;
+        req.body.main_image = mainImageCreated.image_name;
+      }
+    }
 
     await update({
-      table: "product",
+      table: 'product',
       fields: Object.keys(req.body),
       values: Object.values(req.body),
       condition: `id = '${reqProductId}'`,
@@ -33,6 +78,7 @@ export default async (req) => {
     });
     req.body.sizes = reqProductSizes;
     req.body.colors = reqProductColors;
+    req.body.main_image = reqProductMainImage;
 
     const productSizes = await productSizeItemGet({
       body: { 'product_id': reqProductId}
@@ -95,15 +141,44 @@ export default async (req) => {
           if(!reqProductColorObj.is_checked){
             continue;
           }
-          await productColorCreate({
+          const productColorCreated = await productColorCreate({
 						body: {
 							'product_id': reqProductId,
 							'color_id': reqProductColorObj.id,
 							'amount': reqProductColorObj.amount,
 						}
           });
+
+          if(Array.isArray(reqProductColorObj.images)) {
+            for(const reqProductColorImage of reqProductColorObj.images) {
+              await productImageCreate({
+                ...req,
+                body: {
+                  'product_color_id': productColorCreated.id,
+                  'product_id': reqProductId,
+                  'image_name': reqProductColorImage.image_name,
+                }
+              });
+            }
+          }
         }
         else{
+          const imageKey = 'product_color_id';
+          const productColorImages = await productImageGet({
+            body: {
+              [imageKey]: productColorObj.id,
+            },
+            key: imageKey
+          });
+          if(productColorImages && productColorImages[0]) {
+            await productImageDelete({
+              body: {
+                [imageKey]: productColorObj.id,
+              },
+              key: imageKey,
+            });
+          }
+
           if(reqProductColorObj.is_checked) {
             await productColorUpdate({
               body: {
@@ -112,6 +187,18 @@ export default async (req) => {
                 'amount': reqProductColorObj.amount,
               }
             });
+            if(Array.isArray(reqProductColorObj.images)) {
+              for(const reqProductColorImage of reqProductColorObj.images) {
+                await productImageCreate({
+                  ...req,
+                  body: {
+                    'product_color_id': productColorObj.id,
+                    'product_id': reqProductId,
+                    'image_name': reqProductColorImage.image_name
+                  }
+                });
+              }
+            }
           }
           else {
             const deleteKey = 'id';
@@ -125,20 +212,24 @@ export default async (req) => {
         }
       }
     }
+
+    return {
+      ...req.body,
+    };
   }
   catch (err) {
+    productBeforUpdate.main_image = productBeforUpdate.main_image && productBeforUpdate.main_image.image_name;
+    delete productBeforUpdate.category_name;
+    delete productBeforUpdate.category_type_name;
+    delete productBeforUpdate.colors;
+    delete productBeforUpdate.sizes;
     await update({
       table: "product",
-      fields: Object.keys(productBeforUpdate[0]),
-      values: Object.values(productBeforUpdate[0]),
+      fields: Object.keys(productBeforUpdate),
+      values: Object.values(productBeforUpdate),
       condition: `slug = '${params.slug}'`,
-      data: productBeforUpdate[0]
+      data: productBeforUpdate
     });
 		throw err;
   }
-  
-  return {
-		...req.body,
-	};
-
 };

@@ -27,16 +27,19 @@ export { default as productDelete } from './product/delete';
 
 export { default as productSizeCreate } from './productSize/create';
 export { default as productSizeItemGet } from './productSize/get';
+export { default as productSizeListGet } from './productSize/getList';
 export { default as productSizeUpdate } from './productSize/update';
 export { default as productSizeDelete } from './productSize/delete';
 
 export { default as productColorCreate } from './productColor/create';
 export { default as productColorItemGet } from './productColor/get';
+export { default as productColorListGet } from './productColor/getList';
 export { default as productColorUpdate } from './productColor/update';
 export { default as productColorDelete } from './productColor/delete';
 
 export { default as productImageCreate } from './productImage/create';
 export { default as productImageGet } from './productImage/get';
+export { default as productImageGetList } from './productImage/getList';
 export { default as productImageUpdate } from './productImage/update';
 export { default as productImageDelete } from './productImage/delete';
 
