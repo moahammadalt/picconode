@@ -67,6 +67,7 @@ CREATE TABLE `product` (
   `amount` int(7) NULL,
   `price` int(6) NULL,
   `currency` enum('SYP', 'USD', 'EUR') DEFAULT 'SYP',
+  `main_image` varchar(300) DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -112,5 +113,21 @@ CREATE TABLE `product_color` (
   CONSTRAINT `FK_product_color_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   KEY `FK_product_color_color` (`color_id`),
   CONSTRAINT `FK_product_color_color` FOREIGN KEY (`color_id`) REFERENCES `color` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `product_color_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_color_id` int(11) NULL,
+  `product_id` int(11) NULL,
+  `image_path` varchar(200) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `image_path` (`image_path`),
+  UNIQUE KEY `product_color_index` (`product_color_id`, `image_path`),
+  KEY `FK_product_color_image_product_color` (`product_color_id`),
+  CONSTRAINT `FK_product_color_image_product_color` FOREIGN KEY (`product_color_id`) REFERENCES `product_color` (`id`),
+  KEY `FK_product_color_image_product` (`product_id`),
+  CONSTRAINT `FK_product_color_image_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*END*/

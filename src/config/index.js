@@ -25,5 +25,7 @@ export default {
 			algorithm: [process.env.JWT_ALGORITHM],
 			expiresIn: process.env.JWT_TOKEN_EXPIRE_TIME
 		}
-	}
+	},
+	PUBLIC_VIEW_PATH: process.env.PUBLIC_VIEW_PATH,
+	PUBLIC_IMAGES_PATH: process.env.PUBLIC_IMAGES_PATH,
 };

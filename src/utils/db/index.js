@@ -6,6 +6,9 @@ const escapeResults = resultsArr => {
   if (!Array.isArray(resultsArr)) {
     return resultsArr;
   }
+  if(resultsArr.length === 0) {
+    return resultsArr;
+  }
   const escapedResult = resultsArr.map(rowObj => {
     for (let key in rowObj) {
       if (typeof rowObj[key] === "string") {
@@ -29,7 +32,7 @@ export const select = async ({ table, fields, condition }) => {
   }
 
   try {
-    const results = await DBCon.query(query);
+    const results = await DBCon.query(query);    
 
     return escapeResults(results);
   } catch (err) {
@@ -69,6 +72,7 @@ export const insert = async ({ table, fields, values, data }) => {
   try {
     const results = await DBCon.query(query, values);
     data["id"] = results.insertId;
+    
     return escapeResults(data);
   } catch (err) {
     throw { DBError: err };
@@ -116,6 +120,8 @@ export const deleteRow = async ({ table, fields, values }) => {
     : values.map(value => [value]);
 
   let query = `DELETE FROM ${table} WHERE (${tmpFields}) IN (?)`;
+  
+  
 
   try {
     const results = await DBCon.query(query, [tmpValues]);
@@ -129,11 +135,11 @@ export const deleteRow = async ({ table, fields, values }) => {
 };
 
 /* process.on('unhandledRejection', (reason, promise) => {
-  console.log('Unhandled Rejection at:', reason.stack || reason)
+  
   // Recommended: send the information to sentry.io
   // or whatever crash reporting service you use
 }); 
 
 process.on('uncaughtException', function(error) {
-  console.log('uncaughtException at:', error)
+  
  });*/

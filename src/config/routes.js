@@ -90,6 +90,10 @@ export default {
 			url: '/adminAPI/product/:slug/delete',
 			type: 'POST',
 		},
+		productImageCreate: {
+			url: '/adminAPI/productImage/create',
+			type: 'POST',
+		},
     dashboardInit: {
 			url: '/adminAPI/init',
 			type: 'GET',

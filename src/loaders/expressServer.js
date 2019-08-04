@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import fileUpload from 'express-fileupload';
 import path from 'path';
 import hbs from 'hbs';
 
@@ -20,7 +21,9 @@ export default new (class expressServer {
 
     this.app.set('view engine', 'html');
     this.app.engine('html', hbs.__express);
-    this.app.use(express.static(path.join(path.resolve('.'), '/src/views')));
+    this.app.use(express.static(path.join(path.resolve('.'), config.PUBLIC_VIEW_PATH)));
+    this.app.use(express.static(path.join(path.resolve('.'), config.PUBLIC_IMAGES_PATH)));
+    this.app.use(fileUpload());
     this.app.use(bodyParser.urlencoded({ extended: false }));
 		this.app.use(bodyParser.json());
 		

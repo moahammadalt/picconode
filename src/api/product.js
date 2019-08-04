@@ -7,6 +7,7 @@ import {
   productItemGet,
   productUpdate,
   productDelete,
+  ImageUpload,
 } from "services";
 
 export default router => {
@@ -30,5 +31,9 @@ export default router => {
 
   router.post(adminApi.productDelete.url, (...arg) => {
     serviceHandler(...arg, productDelete);
+  });
+
+  router.post(adminApi.productImageCreate.url, (...arg) => {
+    serviceHandler(...arg, ImageUpload);
   });
 };
