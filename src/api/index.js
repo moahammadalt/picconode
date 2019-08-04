@@ -5,6 +5,7 @@ import categoryAPI from './category';
 import sizeAPI from './size';
 import colorAPI from './color';
 import productAPI from './product';
+import viewAPI from './view';
 
 export default () => {
 	const router = Router();
@@ -14,6 +15,7 @@ export default () => {
 	sizeAPI(router);
 	colorAPI(router);
 	productAPI(router);
+	viewAPI(router);
 
 	return router;
 }

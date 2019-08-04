@@ -103,12 +103,12 @@ export default {
 			type: 'POST',
 		},
   },
-  public: {
+  publicApi: {
     home: {
 			url: '/',
-			QueryParams: ['posts', 'bla'],
+			path: '/index.hbs'
 		},
-		home: {
+		notFound: {
 			url: '/404',
 		},
   }

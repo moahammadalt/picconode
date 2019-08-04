@@ -44,3 +44,5 @@ export { default as productImageUpdate } from './productImage/update';
 export { default as productImageDelete } from './productImage/delete';
 
 export { default as ImageUpload } from './uploads/uploadImage';
+
+export { default as menuView } from './view/menu.js';

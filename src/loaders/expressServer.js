@@ -25,13 +25,13 @@ export default new (class expressServer {
     this.app.use(express.static(path.join(path.resolve('.'), config.PUBLIC_IMAGES_PATH)));
     this.app.use(fileUpload());
     this.app.use(bodyParser.urlencoded({ extended: false }));
-		this.app.use(bodyParser.json());
-		
+    this.app.use(bodyParser.json());
+	
 		//middleware
 		this.app.use('/adminAPI', adminAPIAuth);
 		this.app.use('/adminAPI', adminApiExistParamsValidation);
 
-		this.app.use(api());
+    this.app.use(api());
 
     // global error handling middleware
     this.app.use((err, req, res, next) => {
