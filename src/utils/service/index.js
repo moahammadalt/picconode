@@ -1,4 +1,6 @@
-import { responseStatuses } from 'globals/constants';
+import { responseStatuses, errorMessages, viewsPath } from 'globals/constants';
+import { sendClientAlarm } from 'globals/helpers';
+import routes from "config/routes";
 import { menuView } from 'services';
 
 export const serviceHandler = async (req, res, next, service) => {
@@ -16,25 +18,37 @@ export const serviceHandler = async (req, res, next, service) => {
   }
 };
 
-export const viewServiceHandler = async service => {
+export const viewServiceHandler = async ({req, res, next, viewPathUrl, service}) => {
   try {
 		const menuViewData = await menuView();
 		let response = {
 			...menuViewData
-		}
+    }
 		if(service) {
-			const serviceData = await service();
+			const serviceData = await service(req);
 			response = {
 				...response,
-				serviceData
+				...serviceData,
 			}
-		}
+    }
+    
+    res.render(viewsPath + viewPathUrl, { data: response })
 		
-		return { data: response };
-
-  } catch (error) {
-    return {
-      ...error
-    };
+  } catch (err) {
+    console.log(viewPathUrl);
+    if(err) {
+      if(err.errorRedirectPath) {
+        res.render(viewsPath + err.errorRedirectPath);
+      }
+      else if(err.errorMessage === errorMessages.notFound) {
+        res.redirect(routes.publicApi.notFound.url);
+      }
+      else{
+        res.send(sendClientAlarm(err.errorMessage));
+      }
+    }
+    else {
+      res.send(sendClientAlarm());
+    }
   }
 };

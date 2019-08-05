@@ -108,8 +108,16 @@ export default {
 			url: '/',
 			path: '/index.hbs'
 		},
+		product: {
+			url: '/:slug',
+			path: '/product.hbs',
+		},
+		productNotFound: {
+			path: '/productNotFound.hbs',
+		},
 		notFound: {
 			url: '/404',
+			path: '/notFound.hbs',
 		},
   }
 };

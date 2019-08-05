@@ -1,6 +1,7 @@
 import { DBCon } from "loaders";
 
 import { checkValue } from "globals/helpers";
+import { errorMessages } from 'globals/constants';
 
 const escapeResults = resultsArr => {
   if (!Array.isArray(resultsArr)) {
@@ -101,7 +102,7 @@ export const update = async ({ table, fields, values, condition, data }) => {
   try {
     const results = await DBCon.query(query);
     if (results.affectedRows === 0) {
-      throw { errorMessage: "object not found" };
+      throw { errorMessage: errorMessages.notFound };
     }
     return escapeResults(results);
   } catch (err) {
@@ -126,7 +127,7 @@ export const deleteRow = async ({ table, fields, values }) => {
   try {
     const results = await DBCon.query(query, [tmpValues]);
     if (results.affectedRows === 0) {
-      throw { errorMessage: "object not found" };
+      throw { errorMessage: errorMessages.notFound };
     }
     return escapeResults(results);
   } catch (err) {

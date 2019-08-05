@@ -1,17 +1,30 @@
 import routes from "config/routes";
-import path from 'path';
-import config from 'config';
 import { viewServiceHandler } from "utils/service";
 
 import {
-  menuView,
+  productItem,
 } from "services";
 
 export default router => {
   const { publicApi } = routes;
-  const viewsPath = path.join(path.resolve('.'), config.PUBLIC_VIEW_PATH);
 
-  router.get(publicApi.home.url, async (req, res, next) => {    
-    res.render(viewsPath + publicApi.home.path, await viewServiceHandler());
+  router.get(publicApi.notFound.url, (...arg) => {
+    const res = arg[1];
+    res.render(publicApi.notFound.path);
+  });
+
+  router.get(publicApi.home.url, async (req, res, next) => {
+    await viewServiceHandler({
+      req, res, next,
+      viewPathUrl: publicApi.home.path,
+    });
+  });
+
+  router.get(publicApi.product.url, async (req, res, next) => {
+    await viewServiceHandler({
+      req, res, next,
+      viewPathUrl: publicApi.product.path,
+      service: productItem,
+    });
   });
 };

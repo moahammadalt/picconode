@@ -15,7 +15,7 @@
 
   <script>
 
-    console.log('data', {{data}})
+    console.log('data', {{{json data}}})
   </script>
 </head>
 
@@ -184,30 +184,16 @@
                   <span class="plus js-plus-icon"></span>
                   <div class="menu-level-1 dropdown-menu style5">
                     <ul class="level1">
-                      <li class="level2 col-4">
-                        <a href="#" class="submenu">Women</a>
-                        <ul class="menu-level-2">
-                          <li class="level3"><a href="#" title="">Dresses</a></li>
-                          <li class="level3"><a href="#" title="">Skirts</a></li>
-                          <li class="level3"><a href="#" title="">Pants</a></li>
-                        </ul>
-                      </li>
-                      <li class="level2 col-4">
-                        <a href="#" class="submenu">Men</a>
-                        <ul class="menu-level-2">
-                          <li class="level3"><a href="#" title="">T-Shirts</a></li>
-                          <li class="level3"><a href="#" title="">Taxido</a></li>
-                          <li class="level3"><a href="#" title="">Pants</a></li>
-                        </ul>
-                      </li>
-                      <li class="level2 col-4">
-                        <a href="#" class="submenu">Kids</a>
-                        <ul class="menu-level-2">
-                          <li class="level3"><a href="#" title="">T-Shirts</a></li>
-                          <li class="level3"><a href="#" title="">Skirts</a></li>
-                          <li class="level3"><a href="#" title="">Pants</a></li>
-                        </ul>
-                      </li>
+                      {{#each data.categories}}
+                        <li class="level2 col-4">
+                          <a href="/category/{{slug}}" class="submenu">{{name}}</a>
+                          <ul class="menu-level-2">
+                            {{#each children}}
+                              <li class="level3"><a href="/category/{{../slug}}/{{slug}}" title="">{{name}}</a></li>
+                            {{/each}}
+                          </ul>
+                        </li>
+                      {{/each}}
                     </ul>
                     <div class="clearfix"></div>
                   </div>

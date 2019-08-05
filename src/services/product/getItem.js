@@ -1,5 +1,7 @@
 import { select } from 'utils/db';
 import { createHash } from 'globals/helpers';
+import { errorMessages } from 'globals/constants';
+import routes from "config/routes";
 
 import {
   productSizeItemGet,
@@ -19,6 +21,13 @@ export default async req => {
     table: 'product',
     condition: `slug='${req.params.slug}'`
   });
+
+  if(!productItemArr || productItemArr.length === 0) {
+    throw {
+      errorRedirectPath: routes.publicApi.productNotFound.path,
+      errorMessage: errorMessages.notFound,
+    }
+  }
   let productItem = productItemArr[0];
 
   const productImages = await productImageGet({

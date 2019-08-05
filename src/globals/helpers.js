@@ -5,10 +5,7 @@ export const checkValue = (value, key) => {
 };
 
 export const sendClientAlarm = (msg) => {
-  
-	if(msg == '404'){
-	  msg = `Oop's, page not found!`;
-	}
+
 	return `
 	  <div 
 		style="
@@ -21,7 +18,7 @@ export const sendClientAlarm = (msg) => {
 		  font-family: sans-serif !important;
 		  background-color: #272c33;
 		  color: #fff;">
-		<h3>${msg}</h3>
+		<h3>${msg || `Generic error happened, please contact the admin!`}</h3>
 	  </div>
 	`;
 };
@@ -63,4 +60,34 @@ export const createHash = (arr, key) => {
 
   return new Hash();
 };
+
+export const getParentChildArr = (arr, parentIdKey) => {
+  var tree = [],
+      mappedArr = {},
+      arrElem,
+      mappedElem;
+
+  // First map the nodes of the array to an object -> create a hash table.
+  for(var i = 0, len = arr.length; i < len; i++) {
+    arrElem = arr[i];
+    mappedArr[arrElem.id] = arrElem;
+    mappedArr[arrElem.id]['children'] = [];
+  }
+
+
+  for (var id in mappedArr) {
+    if (mappedArr.hasOwnProperty(id)) {
+      mappedElem = mappedArr[id];
+      // If the element is not at the root level, add it to its parent array of children.
+      if (mappedElem[parentIdKey|| 'parent_id']) {
+        mappedArr[mappedElem[parentIdKey || 'parent_id']]['children'].push(mappedElem);
+      }
+      // If the element is at the root level, add it to first level elements array.
+      else {
+        tree.push(mappedElem);
+      }
+    }
+  }
+  return tree;
+}
 
