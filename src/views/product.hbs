@@ -1,5 +1,330 @@
 {{> header }}
 
-<h2>hiiii product</h2>
+<!-- Content -->
+<div class=" container-fluid text-center breadcrumb-about">
+  <h1 class="submenu">Product Page</h1>
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="category/{{data.product.category.slug}}">{{data.product.category.name}}</a></li>
+    <li><a href="category/{{data.product.category.slug}}/{{data.product.category_type.slug}}">{{data.product.category_type.name}}</a></li>
+  </ul>
+</div>
+
+
+
+<div class="container padding-top-30">
+  <div class="single-product-detail v3 bd-bottom">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="product-img-slide">
+          <div class="product-images">
+            <!-- <div class="ribbon zoa-sale"><span>-15%</span></div>-->
+            <div class="main-img js-product-slider-normal">
+              <a href="#" class="hover-images effect"><img src="./statics/images/product/single_1.jpg" alt="photo"
+                  class="img-responsive"></a>
+              <a href="#" class="hover-images effect"><img src="./statics/images/product/single_1a.jpg" alt="photo"
+                  class="img-responsive"></a>
+              <a href="#" class="hover-images effect"><img src="./statics/images/product/single_1b.jpg" alt="photo"
+                  class="img-responsive"></a>
+              <a href="#" class="hover-images effect"><img src="./statics/images/product/single_1c.jpg" alt="photo"
+                  class="img-responsive"></a>
+              <a href="#" class="hover-images effect"><img src="./statics/images/product/single_1d.jpg" alt="photo"
+                  class="img-responsive"></a>
+            </div>
+          </div>
+          <div class="multiple-img-list js-click-product-normal">
+            <div class="product-col">
+              <div class="img active">
+                <img src="./statics/images/product/single-small_1.jpg" alt="photo" class="img-responsive">
+                <div class="bg"></div>
+              </div>
+            </div>
+            <div class="product-col">
+              <div class="img">
+                <img src="./statics/images/product/single-small_1a.jpg" alt="images" class="img-responsive">
+                <div class="bg"></div>
+              </div>
+            </div>
+            <div class="product-col">
+              <div class="img">
+                <img src="./statics/images/product/single-small_1b.jpg" alt="images" class="img-responsive">
+                <div class="bg"></div>
+              </div>
+            </div>
+            <div class="product-col">
+              <div class="img">
+                <img src="./statics/images/product/single-small_1c.jpg" alt="images" class="img-responsive">
+                <div class="bg"></div>
+              </div>
+            </div>
+            <div class="product-col">
+              <div class="img">
+                <img src="./statics/images/product/single-small_1d.jpg" alt="images" class="img-responsive">
+                <div class="bg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 zoa-width2">
+        <div class="single-product-info product-info product-grid-v2">
+          <!-- <div class="flex product-rating">
+                                <div class="group-star">
+                                    <span class="star star-5"></span>
+                                    <span class="star star-4"></span>
+                                    <span class="star star-3"></span>
+                                    <span class="star star-2"></span>
+                                    <span class="star star-1"></span>
+                                </div>
+                                <div class="number-rating">( 02 reviews )</div>
+                            </div>-->
+          <h3 class="product-title"><a href="#">{{data.product.name}}</a></h3>
+          <div class="product-price">
+            <span>${{data.product.price}}</span>
+          </div>
+
+          {{#ifCond data.product.amount '>' 0}}
+          <div class="product-countdown ">
+            <!--<span> Available:</span>
+            <h4> instock</h4> <span> Status:</span>-->
+            <h3>Only <span>{{data.product.amount}}</span> left</h3>
+          </div>
+          {{/ifCond}}
+          <div class="product-countdown ">
+            <p>{{data.product.content}}</p>
+          </div>
+          <div class="product-size">
+            <div class="size-group">
+              <label>Color </label>
+              <select class="single-option-selector" data-option="option1" id="productSelect-option-0">
+                <option value="GREY">GREY</option>
+                <option value="BLACK">BLACK</option>
+              </select>
+            </div>
+          </div>
+          <div class="product-size">
+            <div class="size-group">
+              <label>Size </label>
+              <select class="single-option-selector" data-option="option4">
+                <option value="S">S</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
+            </div>
+          </div>
+          <a href="" class="btn-wishlist">Clear</a>
+          <div class="single-product-button-group">
+            <div class="flex align-items-center element-button">
+              <!-- <div class="zoa-qtt">
+                                        <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
+                                        </button>
+                                        <input type="text" name="number" value="1" class="product_quantity_number js-number">
+                                        <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
+                                        </button>
+                                    </div>
+                                    <a href="" class="zoa-btn zoa-addcart">
+                                            <i class="zoa-icon-cart"></i>ADD TO CART
+                                        </a>-->
+              <a href="#" class="zoa-btn zoa-wishlist">
+                <i class="zoa-icon-heart"></i>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="product-social">
+            <label>Share / Notification me of new style:</label>
+            <div class="social">
+              <a href=""><i class="fa fa-pinterest"></i></a>
+              <a href=""><i class="fa fa-facebook"></i></a>
+              <a href=""><i class="fa fa-twitter"></i></a>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 single-tab ">
+        <ul class="nav nav-pills text-center bd-top bd-bottom">
+          <li class="active"><a data-toggle="pill" href="#all">DESCRIPTION</a></li>
+          <li><a data-toggle="pill" href="#all">ADDITIONAL</a></li>
+          <li><a data-toggle="pill" href="#all">INFORMATION</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="all" class="tab-pane fade active in">
+            <p>From weekend warrior to Warrior Pose II, no role can beat the Atlas Fitness Tank, a versatile top for gym
+              and yoga studio. Wicking-weave soft fabric helps prevent uncomfortable chafing.</p>
+            <ul>
+              <li>• Teal scoop neck cotton tank.</li>
+              <li>• Triblend, soft fabric.</li>
+              <li>• Relaxed fit.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container-content">
+  <div class="product-related ">
+    <h3 class="related-title text-center">MAY BE YOU LIKE</h3>
+    <div class="owl-carousel owl-theme owl-cate v2 js-owl-cate">
+      <div class="  product-item">
+        <div class="product-img">
+          <a href=""><img src="./statics/images/product/product_8_first.jpg" alt=""
+              class="img-responsive wp-post-image">
+            <img src="./statics/images/product/product_8_second.jpg" alt="" class="img-responsive image-effect"></a>
+          <div class="product-button-group ">
+            <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+            <div class="quick-view">
+              <a href="#">QUICK VIEW </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-info ">
+          <div class="title-heart">
+            <h3 class="product-title">
+              <a href="">Striped Pant</a>
+            </h3>
+            <span class="zoa-icon-heart"></span>
+          </div>
+
+          <div class="short-desc">
+            <ul class="product-desc">
+              <li>100% Ltalian wool overcoat. Featuring piped seams.</li>
+              <li>Dropped shoulders and a one-button closure.</li>
+              <li>Eropped sint occaecat cupidatat non proident.</li>
+            </ul>
+          </div>
+          <div class="product-price">
+            <span>$124.35</span>
+          </div>
+          <div class="color-group">
+            <a href="#" class="circle gray"></a>
+            <a href="#" class="circle black active"></a>
+          </div>
+        </div>
+      </div>
+      <div class="  product-item">
+        <div class="product-img">
+          <a href=""><img src="./statics/images/product/product_5_first.jpg" alt=""
+              class="img-responsive wp-post-image">
+            <img src="./statics/images/product/product_5_second.jpg" alt="" class="img-responsive image-effect"></a>
+          <div class="product-button-group ">
+            <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+            <div class="quick-view">
+              <a href="#">QUICK VIEW </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-info ">
+          <div class="title-heart">
+            <h3 class="product-title">
+              <a href="">Bold Skirt</a>
+            </h3>
+            <span class="zoa-icon-heart"></span>
+          </div>
+
+          <div class="short-desc">
+            <ul class="product-desc">
+              <li>100% Ltalian wool overcoat. Featuring piped seams.</li>
+              <li>Dropped shoulders and a one-button closure.</li>
+              <li>Eropped sint occaecat cupidatat non proident.</li>
+            </ul>
+          </div>
+          <div class="product-price">
+            <span>$124.35</span>
+          </div>
+          <div class="color-group">
+            <a href="#" class="circle red"></a>
+            <a href="#" class="circle navy-blue active"></a>
+          </div>
+        </div>
+      </div>
+      <div class="  product-item">
+        <div class="product-img">
+          <a href=""><img src="./statics/images/product/product_3_first.jpg" alt=""
+              class="img-responsive wp-post-image">
+            <img src="./statics/images/product/product_3_second.jpg" alt="" class="img-responsive image-effect"></a>
+          <div class="product-button-group ">
+            <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+            <div class="quick-view">
+              <a href="#">QUICK VIEW </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-info ">
+          <div class="title-heart">
+            <h3 class="product-title">
+              <a href="">Zipper Trouser</a>
+            </h3>
+            <span class="zoa-icon-heart"></span>
+          </div>
+
+          <div class="short-desc">
+            <ul class="product-desc">
+              <li>100% Ltalian wool overcoat. Featuring piped seams.</li>
+              <li>Dropped shoulders and a one-button closure.</li>
+              <li>Eropped sint occaecat cupidatat non proident.</li>
+            </ul>
+          </div>
+          <div class="product-price">
+            <span>$124.35</span>
+          </div>
+          <div class="color-group">
+            <a href="#" class="circle gray"></a>
+            <a href="#" class="circle black active"></a>
+          </div>
+        </div>
+      </div>
+      <div class="  product-item">
+        <div class="product-img">
+          <a href=""><img src="./statics/images/product/product_10_first.jpg" alt=""
+              class="img-responsive wp-post-image">
+            <img src="./statics/images/product/product_10_second.jpg" alt="" class="img-responsive image-effect"></a>
+          <div class="product-button-group ">
+            <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+            <div class="quick-view">
+              <a href="#">QUICK VIEW </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-info ">
+          <div class="title-heart">
+            <h3 class="product-title">
+              <a href="">Professional Suit</a>
+            </h3>
+            <span class="zoa-icon-heart"></span>
+          </div>
+
+          <div class="short-desc">
+            <ul class="product-desc">
+              <li>100% Ltalian wool overcoat. Featuring piped seams.</li>
+              <li>Dropped shoulders and a one-button closure.</li>
+              <li>Eropped sint occaecat cupidatat non proident.</li>
+            </ul>
+          </div>
+          <div class="product-price">
+            <span>$124.35</span>
+          </div>
+          <div class="color-group">
+            <a href="#" class="circle gray"></a>
+            <a href="#" class="circle black active"></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 {{> footer }}

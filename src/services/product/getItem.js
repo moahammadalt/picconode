@@ -54,9 +54,18 @@ export default async req => {
       product_id: productItemArr[0].id
     }
   });
+  
+  if(productItem.category_id && categories[productItem.category_id]) {
+    productItem['category'] = {
+      ...categories[productItem.category_id]
+    }
+  }
 
-  productItem['category_name'] = categories[productItem.category_id] && categories[productItem.category_id].name;
-  productItem['category_type_name'] = categories[productItem.category_type_id] && categories[productItem.category_type_id].name;
+  if(productItem.category_type_id && categories[productItem.category_type_id]) {
+    productItem['category_type'] = {
+      ...categories[productItem.category_type_id]
+    }
+  }
 
   productItem['sizes'] = productSizeItemArr.map(productSizeItem => {
     productSizeItem['size_name'] = sizes[productSizeItem.size_id].name;

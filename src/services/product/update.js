@@ -219,8 +219,8 @@ export default async (req) => {
   }
   catch (err) {
     productBeforUpdate.main_image = productBeforUpdate.main_image && productBeforUpdate.main_image.image_name;
-    delete productBeforUpdate.category_name;
-    delete productBeforUpdate.category_type_name;
+    delete productBeforUpdate.category;
+    delete productBeforUpdate.category_type;
     delete productBeforUpdate.colors;
     delete productBeforUpdate.sizes;
     await update({
