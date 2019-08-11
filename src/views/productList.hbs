@@ -189,11 +189,11 @@
             <div id="all" class="tab-pane fade active in">
 
               {{#each data.productList}}
-              <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+              <div id="{{id}}" class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item" >
                 <div class="product-img">
                   <a href="/{{slug}}" target="_blank">
-                    <img src="{{colors.[0].images.[0].image_link}}" alt="" class="img-responsive wp-post-image">
-                    <img src="{{colors.[0].images.[1].image_link}}" alt="" class="img-responsive image-effect">
+                    <img src="{{colors.[0].images.[0].image_link}}" alt="" class="img-responsive wp-post-image product-first-image">
+                    <img src="{{colors.[0].images.[1].image_link}}" alt="" class="img-responsive image-effect product-second-image">
                   </a>
                   <div class="product-button-group ">
                     <div class="quick-view">
@@ -213,8 +213,7 @@
                   </div>
                   <div class="color-group">
                     {{#each colors}}
-                    <a href="/ss/{{color_slug}}"
-                      class="circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
+                    <div class="product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}" data-product-color="{{color_slug}}"></div>
                     {{/each}}
                   </div>
                   <div class="product-bottom-group">
@@ -238,9 +237,36 @@
   </div>
 </div>
 
+<script>
 
 
+$(function() {
 
-</div>
+  var productListHash = createHash({{{json data.productList}}}, 'id').data;
+  console.log('productListHash: ', productListHash);
+
+  $('.product-color').click(function() {
+    var selectedElm = $(this);
+    var selectedColor = $(this).attr('data-product-color');
+    var isActive = $(this).hasClass('active');
+    if(isActive) {
+      return;
+    }
+    var productId = $(this).closest('.product-item').attr('id');
+    var activeElm = $('#'+ productId +' .product-color.active');
+    activeElm.removeClass('active');
+    selectedElm.addClass('active');
+
+    var selectedProductColorImages = productListHash[productId].colors.find(color => color.color_slug === selectedColor).images;
+    var productFirstImage = $('#'+ productId +' .product-first-image');
+    var productSecondImage = $('#'+ productId +' .product-second-image');
+    selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].image_link);
+    selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].image_link);
+  });
+
+
+});
+
+</script>
 
 {{> footer }}

@@ -25,6 +25,7 @@ const escapeResults = resultsArr => {
 export const select = async ({ table, fields, condition, orderBy, sort, limit, page, count }) => {
 
   let query = '';
+
   if(count) {
     query = `SELECT COUNT(*) AS rowsCount FROM ${table}`;
   }
@@ -32,7 +33,6 @@ export const select = async ({ table, fields, condition, orderBy, sort, limit, p
     let fieldsNames = fields === "*" || !fields ? "*" : fields.map((val, index) => val);
     query = `SELECT ${fieldsNames} FROM ${table}`;
   }
-  
 
   if (condition) {
     query += ` WHERE ${condition}`;
@@ -43,16 +43,12 @@ export const select = async ({ table, fields, condition, orderBy, sort, limit, p
   if(limit) {
     query += ` LIMIT ${limit}`;
   }
-  console.log(limit);
   if(limit && page) {
     query += ` OFFSET ${(Number(page) * Number(limit)) - Number(limit)}`;
   }
 
-  console.log('query: ', query);
-
   try {
     const results = await DBCon.query(query);    
-
     return escapeResults(results);
   } catch (err) {
     throw { DBError: err };
