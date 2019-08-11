@@ -112,6 +112,10 @@ export default {
 			url: '/:slug',
 			path: '/product.hbs',
 		},
+		productList: {
+			url: '/products',
+			path: '/productList.hbs',
+		},
 		productNotFound: {
 			path: '/productNotFound.hbs',
 		},

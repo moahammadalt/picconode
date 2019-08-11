@@ -3,6 +3,7 @@ import { viewServiceHandler } from "utils/service";
 
 import {
   productItem,
+  productList,
 } from "services";
 
 export default router => {
@@ -17,6 +18,14 @@ export default router => {
     await viewServiceHandler({
       req, res, next,
       viewPathUrl: publicApi.home.path,
+    });
+  });
+
+  router.get(publicApi.productList.url, async (req, res, next) => {
+    await viewServiceHandler({
+      req, res, next,
+      viewPathUrl: publicApi.productList.path,
+      service: productList,
     });
   });
 

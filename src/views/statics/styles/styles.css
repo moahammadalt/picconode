@@ -16604,7 +16604,7 @@ color :#008c8c;}
     background: #000; }
   .color-group .circle.red, .single-product-detail .single-product-info .size-group .circle.red {
     background: #ff413a; }
-  .color-group .circle.gray, .single-product-detail .single-product-info .size-group .circle.gray {
+  .color-group .circle.grey, .single-product-detail .single-product-info .size-group .circle.grey {
     background: #707070; }
   .color-group .circle.blue, .single-product-detail .single-product-info .size-group .circle.blue {
     background: #616adb; }
@@ -18642,6 +18642,14 @@ margin-right: 24px; }
 
 
 /*Mohammad styles*/
+.color-group .circle.orange, .single-product-detail .single-product-info .size-group .circle.red {
+  background: orange; }
+.color-group .circle.green, .single-product-detail .single-product-info .size-group .circle.green {
+    background: green; }
+.color-group .circle.purple, .single-product-detail .single-product-info .size-group .circle.purple {
+      background: purple; }
 
+.color-group .circle.gold, .single-product-detail .single-product-info .size-group .circle.gold {
+        background: gold; }
 
 /*Mohammad styles ends*/

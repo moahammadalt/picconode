@@ -13,7 +13,8 @@ import {
 export default async (req) => {
 	try {
 		let productList = await select({
-			table: 'product'
+			table: 'product',
+			...req.query,
 		});
 
 		const productImageList = await productImageGetList(req);

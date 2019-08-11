@@ -35,7 +35,7 @@ export const viewServiceHandler = async ({req, res, next, viewPathUrl, service})
     res.render(viewsPath + viewPathUrl, { data: response })
 		
   } catch (err) {
-    console.log(viewPathUrl);
+    console.log(err);
     if(err) {
       if(err.errorRedirectPath) {
         res.render(viewsPath + err.errorRedirectPath);

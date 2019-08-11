@@ -12,7 +12,7 @@ export default async (req) => {
 	const imagesPath = path.resolve('.') + config.PUBLIC_IMAGES_PATH;
 
 	return productImages.map(productImageObj => {
-		productImageObj['image_link'] = (req.headers && req.headers.host) ? (req.headers.host + imagesPath + productImageObj.image_name) : null;
+		productImageObj['image_link'] = (req.headers && req.headers.host) ? ('/images/' +  productImageObj.image_name) : null;
 		return productImageObj;
 	});
 };

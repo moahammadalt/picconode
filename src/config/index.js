@@ -26,6 +26,7 @@ export default {
 			expiresIn: process.env.JWT_TOKEN_EXPIRE_TIME
 		}
 	},
-	PUBLIC_VIEW_PATH: process.env.PUBLIC_VIEW_PATH,
-	PUBLIC_IMAGES_PATH: process.env.PUBLIC_IMAGES_PATH,
+	PUBLIC_VIEW_PATH: '/src/views/',
+	PUBLIC_IMAGES_PATH: '/src/public/images/',
+	PUBLIC_STATIC_PATH: 'src/public/',
 };

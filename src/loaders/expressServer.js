@@ -18,11 +18,10 @@ export default new (class expressServer {
     expressServer.instance = this;
 
     this.app = express();
-
     this.app.set('view engine', 'html');
     this.app.engine('html', hbs.__express);
     this.app.use(express.static(path.join(path.resolve('.'), config.PUBLIC_VIEW_PATH)));
-    this.app.use(express.static(path.join(path.resolve('.'), config.PUBLIC_IMAGES_PATH)));
+    this.app.use(express.static(config.PUBLIC_STATIC_PATH));
     this.app.use(fileUpload());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
