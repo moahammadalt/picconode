@@ -48,3 +48,6 @@ export { default as ImageUpload } from './uploads/uploadImage';
 export { default as menuView } from './view/menu.js';
 export { default as productItem } from './view/productItem.js';
 export { default as productList } from './view/productList.js';
+export { userDemandSend } from './view/productUserDemand';
+export { userDemandList } from './view/productUserDemand';
+export { userDemandReply } from './view/productUserDemand';

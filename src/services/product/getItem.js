@@ -69,11 +69,15 @@ export default async req => {
 
   productItem['sizes'] = productSizeItemArr.map(productSizeItem => {
     productSizeItem['size_name'] = sizes[productSizeItem.size_id].name;
+    productSizeItem['size_slug'] = sizes[productSizeItem.size_id].slug;
     return productSizeItem;
   });
 
+  productItem['link'] = req.protocol + '://' + req.headers.host + req.originalUrl;
+ 
   productItem['colors'] = productColorItemArr.map(productColorItem => {
     productColorItem['color_name'] = colors[productColorItem.color_id].name;
+    productColorItem['color_slug'] = colors[productColorItem.color_id].slug;
     productColorItem['images'] = productImages.filter(productImageObj => productColorItem.product_id === productImageObj.product_id && productColorItem.id === productImageObj.product_color_id);
     return productColorItem;
   });

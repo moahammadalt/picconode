@@ -16,10 +16,12 @@ export default (req, res, next) => {
       ? req.path.substr(0, req.path.length - 1)
       : req.path;
   const requestedAPI = req.baseUrl + requestedPath;
-  const routeBodyParams = Object.values(routes.adminApi).find(
-    ({ url, type, bodyParams }) => !!pathToRegexp(url).exec(requestedAPI) && req.method === type && bodyParams
+  const routesObj = { ...routes.adminApi, ...routes.publicApi};
+  const routeBodyParams = Object.values(routesObj).find(
+    ({ url, type, bodyParams }) => url && !!pathToRegexp(url).exec(requestedAPI) && req.method === type && bodyParams
   );
 
+  
   if (!routeBodyParams) {
     next();
   } else {

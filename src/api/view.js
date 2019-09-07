@@ -1,9 +1,10 @@
 import routes from "config/routes";
-import { viewServiceHandler } from "utils/service";
+import { viewServiceHandler, serviceHandler } from "utils/service";
 
 import {
   productItem,
   productList,
+  userDemandSend,
 } from "services";
 
 export default router => {
@@ -35,5 +36,9 @@ export default router => {
       viewPathUrl: publicApi.product.path,
       service: productItem,
     });
+  });
+
+  router.post(publicApi.productUserDemand.url, (...arg) => {
+    serviceHandler(...arg, userDemandSend);
   });
 };

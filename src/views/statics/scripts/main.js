@@ -1373,24 +1373,23 @@ function scrollFunction() {
 }
 
 function createHash(arr, key) {
-  var Hash = function () {
+  var Hash = function() {
     this.data = {};
     if (arr && Array.isArray(arr)) {
-      arr.map((o) => {
+      arr.map(o => {
         this.data[o[key]] = o;
       });
       this.size = arr.length;
-    }
-    else {
+    } else {
       this.size = 0;
     }
   };
-  Hash.prototype.keys = function () {
+  Hash.prototype.keys = function() {
     return Object.keys(this.data);
-  }
-  Hash.prototype.values = function () {
+  };
+  Hash.prototype.values = function() {
     return Object.values(this.data);
-  }
+  };
 
   return new Hash();
-};
+}

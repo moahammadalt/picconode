@@ -47,6 +47,9 @@ export default async (req) => {
 							'product_id': productResponse.id,
 							'size_id': productSizeObject.id,
 							'size_details': productSizeObject.details,
+							'height': productSizeObject.height,
+							'chest': productSizeObject.chest,
+							'waistline': productSizeObject.waistline,
 							'amount': productSizeObject.amount,
 						}
 					});

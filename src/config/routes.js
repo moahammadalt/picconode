@@ -106,22 +106,32 @@ export default {
   publicApi: {
     home: {
 			url: '/',
-			path: '/index.hbs'
+			path: '/index.hbs',
+			type: 'GET',
 		},
 		product: {
 			url: '/:slug',
 			path: '/product.hbs',
+			type: 'GET',
 		},
 		productList: {
 			url: '/products',
 			path: '/productList.hbs',
+			type: 'GET',
 		},
 		productNotFound: {
 			path: '/productNotFound.hbs',
+			type: 'GET',
+		},
+		productUserDemand: {
+			url: '/productUserDemand',
+			bodyParams: ['name', 'email', 'message', 'product_id'],
+			type: 'POST',
 		},
 		notFound: {
 			url: '/404',
 			path: '/notFound.hbs',
+			type: 'GET',
 		},
   }
 };

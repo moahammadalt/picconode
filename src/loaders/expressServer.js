@@ -7,7 +7,7 @@ import hbs from 'hbs';
 import api from 'api';
 
 import config from 'config';
-import { adminApiExistParamsValidation, adminAPIAuth } from 'middlewares';
+import { apiExistParamsValidation, adminAPIAuth } from 'middlewares';
 
 export default new (class expressServer {
   constructor() {
@@ -28,7 +28,7 @@ export default new (class expressServer {
 	
 		//middleware
 		this.app.use('/adminAPI', adminAPIAuth);
-		this.app.use('/adminAPI', adminApiExistParamsValidation);
+    this.app.use('/', apiExistParamsValidation);
 
     this.app.use(api());
 

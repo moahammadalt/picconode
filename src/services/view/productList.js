@@ -1,6 +1,4 @@
 import { select } from "utils/db";
-import { getParentChildArr } from 'globals/helpers';
-import { responseStatuses } from 'globals/constants';
 import { productListGet, colorListGet, sizeListGet } from 'services';
 
 export default async (req) => {
@@ -8,7 +6,7 @@ export default async (req) => {
   req.query['sort'] = req.query.sort ? req.query.sort : 'DESC';
   req.query['page'] = req.query.page ? req.query.page : 1;
   req.query['limit'] = req.query.limit ? req.query.limit : 100;
-
+  
   let productList = await productListGet(req);
   const colorList = await colorListGet();
   const sizeList = await sizeListGet();

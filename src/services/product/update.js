@@ -102,7 +102,10 @@ export default async (req) => {
 						body: {
 							'product_id': reqProductId,
 							'size_id': reqProductSizeObj.id,
-							'size_details': reqProductSizeObj.details,
+              'size_details': reqProductSizeObj.details,
+              'height': reqProductSizeObj.height,
+							'chest': reqProductSizeObj.chest,
+							'waistline': reqProductSizeObj.waistline,
 							'amount': reqProductSizeObj.amount,
 						}
           });
@@ -114,6 +117,9 @@ export default async (req) => {
                 'product_id': reqProductId,
                 'size_id': reqProductSizeObj.id,
                 'size_details': reqProductSizeObj.details,
+                'height': reqProductSizeObj.height,
+                'chest': reqProductSizeObj.chest,
+                'waistline': reqProductSizeObj.waistline,
                 'amount': reqProductSizeObj.amount,
               }
             });

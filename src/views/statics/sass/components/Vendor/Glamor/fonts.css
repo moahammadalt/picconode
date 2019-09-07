@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Glamor';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Glamor Bold'), url(Glamor-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Glamor';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Glamor Regular'), url(Glamor-Regular.ttf);
+}

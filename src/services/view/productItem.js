@@ -1,17 +1,18 @@
-import { deleteRow } from "utils/db";
-import { getParentChildArr } from 'globals/helpers';
-import { responseStatuses } from 'globals/constants';
-import { productItemGet } from 'services';
+import { productItemGet, productListGet } from 'services';
 
-export default async ({params}) => {
-  
+export default async (req) => {
 
-  const productItem = await productItemGet({ params });
-  
+  const productItem = await productItemGet(req);
+  req.query = {
+    limit: 10,
+  }
+  const productListItems = (await productListGet(req)).filter(({ id })=> id !== productItem.id);;
 
   return {
     product: {
       ...productItem,
-    }
+    },
+    requestUrl: req.hostName,
+    productListItems,
   }
 };

@@ -131,3 +131,29 @@ CREATE TABLE `product_color_image` (
   CONSTRAINT `FK_product_color_image_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*END*/
+
+/*Added 31/08/2019*/
+ALTER TABLE `product_size` 
+ADD COLUMN `height` VARCHAR(50) NULL,
+ADD COLUMN `chest` VARCHAR(50)  NULL,
+ADD COLUMN `waistline` VARCHAR(50)  NULL;
+/*END*/
+
+/*Added 07/09/2019*/
+ALTER TABLE `product` 
+CHANGE `additional` `details` VARCHAR(700),
+DROP `information`;
+
+CREATE TABLE `user_demand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(30) NOT NULL,
+  `name` varchar(100) NULL,
+  `email` varchar(100) NOT NULL,
+  `message` varchar(800) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `FK_user_demand_product` (`product_id`),
+  CONSTRAINT `FK_user_demand_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+/*END*/
