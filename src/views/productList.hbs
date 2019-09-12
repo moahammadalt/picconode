@@ -20,6 +20,1544 @@
   <div class="shop-top">
     <div class="shop-element left">
       <ul class="nav nav-pills">
+
+        <li class="{{#ifCond data.initialQuery.category '===' undefined}}active{{/ifCond}}"><a href="{{getHref data.query 'category' null}}">ALL</a></li>
+        {{#each data.categories}}
+        <li class="{{#ifCond ../data.initialQuery.category '===' slug}}active{{/ifCond}}"><a href="{{getHref data.query 'category' slug}}">{{name}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="shop-element right">
+
+      <span>Showing 1-11 of 11 results</span>
+      <!--<span>Showing 1-12 of 40 results</span>-->
+      <div class="view-mode view-group">
+        <a class="grid-icon col2 active"><i class="zoa-icon-view-3"></i></a>
+        <a class="list-icon list"><i class="fa fa-circle" aria-hidden="true"></i></a>
+      </div>
+      <!-- <div class="show">
+                                    <label>Show</label>
+                                    <select class="single-option-selector" data-option="option4" id="productSelect-option-0">
+                                        <option value="S">12</option>
+                                        <option value="L">18</option>
+                                        <option value="XL">24</option>
+                                        <option value="XXL">32</option>
+                                    </select>
+                                    <label>per page </label>
+                                </div>-->
+    </div>
+  </div>
+
+  <div class="tab-content">
+
+    <div id="all" class="tab-pane fade active in">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-12 col-left collection-sidebar" id="filter-sidebar">
+          <div class="close-sidebar-collection hidden-lg hidden-md">
+            <span>Filter</span><i class="icon_close ion-close"></i>
+          </div>
+          <div class="widget-filter filter-price">
+            <div class="pri" style="border-bottom: 1px solid #f3bd1c">
+              <h4>FILTER BY PRICE</h4>
+              <div id="slider-3"></div>
+              <p class="range-p">
+                <label for="price">Range:</label>
+                <input type="text" id="price"></p>
+            </div>
+          </div>
+
+          <!-- <div class="widget-filter">
+                        <h3>Categories</h3>
+                        <ul class="nav-home5 js-menubar">
+               <li class="level1 active dropdown">
+                    <a class="dress">Dress<span>2</span></a>
+                    <span class="icon-sub-menu"></span>
+                    <ul class="menu-level1 js-open-menu" >
+                        <li class="level2"><a href="#1" title="">Classic<span>01</span></a></li>
+                     <li class="level2"><a href="#1" title="">Sport<span>01</span></a></li>
+                           </ul>
+                </li>
+                        <li class="level1"><a href="#1" title="">Scirt<span>01</span></a></li>
+                        <li class="level1"><a href="#1" title="">Pants<span>03</span></a></li>
+                        <li class="level1"><a href="#1" title="">Suit<span>01</span></a></li>
+                 
+                <li class="level1 active dropdown">
+                    <a href="#1">Men<span>150</span></a>
+                    <span class="icon-sub-menu"></span>
+                    <ul class="menu-level1 js-open-menu" >
+                        <li class="level2"><a href="#1" title="">Shoes</a></li>
+                        <li class="level2"><a href="#1" title="">T-shirt</a></li>
+                        <li class="level2"><a href="#1" title="">Cap</a></li>
+                        <li class="level2"><a href="#1" title="">Fitness & Yoga</a></li>
+                        <li class="level2"><a href="#1" title="">Travel & Run</a></li>
+                    </ul>
+                </li>
+                <li class="level1 active dropdown">
+                    <a href="#kids" class="active kids">Kids<span>03</span></a>
+                    <span class="icon-sub-menu"></span>
+                    <ul class="menu-level1 js-open-menu" >
+                        <li class="level2"><a href="#1" title="">Scirt<span>01</span></a></li>
+                        <li class="level2"><a href="#1" class="" title="">Boy T-shirt<span>01</span></a></li>
+                        <li class="level2"><a href="#1" title="">Girl Pant<span>01</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+                    </div>-->
+
+
+
+          <div class="widget-filter filter-cate filter-color margin-5">
+            <h3>COLOR</h3>
+            <ul>
+              <li><a href="">Black<span>04</span></a></li>
+              <li><a class="active actived" href="">Gray<span>04</span></a></li>
+              <li><a href="">Red<span>01</span></a></li>
+              <li><a href="">Navy-Blue<span>02</span></a></li>
+            </ul>
+          </div>
+          <div class="widget-filter filter-cate filter-color bd-top margin-5 no-bd-bottom">
+            <h3>SIZE</h3>
+            <ul>
+              <li><a href="#">S<span>04</span></a></li>
+              <li><a href="#">M<span>12</span></a></li>
+              <li><a href="#">L<span>07</span></a></li>
+              <li><a href="#">XL<span>10</span></a></li>
+              <li><a class="active actived" href="">XXL<span>06</span></a></li>
+              <li><a href="#">Other<span>05</span></a></li>
+            </ul>
+          </div>
+          <div class="widget-filter filter-cate filter-banner no-bd-bottom">
+            <a href="" class="effect-img3 plus-zoom">
+              <img src="img/banner-sidebar.png" alt="" class="img-responsive">
+            </a>
+          </div>
+          <div class="widget-filter filter-cate filter-view no-bd-bottom">
+            <h3>RECENT VIEWED</h3>
+            <div class="owl-carousel owl-theme js-owl-view">
+              <div class="view">
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Classy Dress</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Nice Girl Skirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="view">
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_5_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Bold Scirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_7_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Jeans Shirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-9 col-sm-12 col-xs-12 collection-list">
+          <div class="product-collection-grid product-grid ">
+            <div class="row">
+
+
+              <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_1_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Classy Dress</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                  </div>
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_2_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_2_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Power Women Skirt</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_4_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Nice Gril Skirt</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_3_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_3_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Pants</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_5_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_5_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Bold Skirt</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_6_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_6_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Zipper trouser</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_7_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_7_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Jeans Shirt</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle navy-blue active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_8_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_8_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Striped Pant</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_9_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_9_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Zipper trouser - kids</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_10_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_10_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Professional Suit</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_11_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_11_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Sport Dress</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle red"></a>
+                    <a href="#" class="circle navy-blue active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <!--<div class=" text-center">
+                      <ul class="pagination">
+    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">...</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+
+  </ul>
+                  </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="women" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-12 col-left collection-sidebar" id="filter-sidebar-women">
+          <div class="close-sidebar-collection hidden-lg hidden-md">
+            <span>Filter</span><i class="icon_close ion-close"></i>
+          </div>
+          <div class="widget-filter filter-price">
+            <div class="pri" style="border-bottom: 1px solid #f3bd1c">
+              <h4>FILTER BY PRICE</h4>
+              <div id="slider-3-women"></div>
+              <p class="range-p">
+                <label for="price">Range:</label>
+                <input type="text" id="price-women"></p>
+            </div>
+          </div>
+
+          <div class="widget-filter">
+            <h3>Categories</h3>
+            <ul class="nav-home5 js-menubar">
+              <li class="level1 active dropdown">
+                <a class="dress">Dress<span>2</span></a>
+                <span class="icon-sub-menu"></span>
+                <ul class="menu-level1 js-open-menu">
+                  <li class="level2"><a href="#1" title="">Classic<span>01</span></a></li>
+                  <li class="level2"><a href="#1" title="">Sport<span>01</span></a></li>
+                </ul>
+              </li>
+              <li class="level1"><a href="#1" title="">Scirt<span>01</span></a></li>
+              <li class="level1"><a href="#1" title="">Pants<span>03</span></a></li>
+              <li class="level1"><a href="#1" title="">Suit<span>01</span></a></li>
+
+              <!--<li class="level1 active dropdown">
+                    <a href="#1">Men<span>150</span></a>
+                    <span class="icon-sub-menu"></span>
+                    <ul class="menu-level1 js-open-menu" >
+                        <li class="level2"><a href="#1" title="">Shoes</a></li>
+                        <li class="level2"><a href="#1" title="">T-shirt</a></li>
+                        <li class="level2"><a href="#1" title="">Cap</a></li>
+                        <li class="level2"><a href="#1" title="">Fitness & Yoga</a></li>
+                        <li class="level2"><a href="#1" title="">Travel & Run</a></li>
+                    </ul>
+                </li>
+                <li class="level1 active dropdown">
+                    <a href="#kids" class="active kids">Kids<span>03</span></a>
+                    <span class="icon-sub-menu"></span>
+                    <ul class="menu-level1 js-open-menu" >
+                        <li class="level2"><a href="#1" title="">Scirt<span>01</span></a></li>
+                        <li class="level2"><a href="#1" class="" title="">Boy T-shirt<span>01</span></a></li>
+                        <li class="level2"><a href="#1" title="">Girl Pant<span>01</span></a></li>
+                    </ul>
+                </li>
+            </ul>-->
+          </div>
+
+
+
+          <div class="widget-filter filter-cate filter-color bd-top margin-5">
+            <h3>COLOR</h3>
+            <ul>
+              <li><a href="">Black<span>04</span></a></li>
+              <li><a class="active" href="">Gray<span>04</span></a></li>
+              <li><a href="">Red<span>01</span></a></li>
+              <li><a href="">Navy-Blue<span>02</span></a></li>
+            </ul>
+          </div>
+          <div class="widget-filter filter-cate filter-color bd-top margin-5 no-bd-bottom">
+            <h3>SIZE</h3>
+            <ul>
+              <li><a href="#">S<span>04</span></a></li>
+              <li><a href="#">M<span>12</span></a></li>
+              <li><a href="#">L<span>07</span></a></li>
+              <li><a href="#">XL<span>10</span></a></li>
+              <li><a class="active" href="">XXL<span>06</span></a></li>
+              <li><a href="#">Other<span>05</span></a></li>
+            </ul>
+          </div>
+          <div class="widget-filter filter-cate filter-banner no-bd-bottom">
+            <a href="" class="effect-img3 plus-zoom">
+              <img src="img/banner-sidebar.png" alt="" class="img-responsive">
+            </a>
+          </div>
+          <div class="widget-filter filter-cate filter-view no-bd-bottom">
+            <h3>RECENT VIEWED</h3>
+            <div class="owl-carousel owl-theme js-owl-view">
+              <div class="view">
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Classy Dress</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Nice Girl Skirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="view">
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_5_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Bold Scirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_7_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Jeans Shirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-9 col-sm-12 col-xs-12 collection-list">
+          <div class="product-collection-grid product-grid ">
+            <div class="row">
+
+
+              <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_1_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Classy Dress</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+
+
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_2_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_2_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Power Women Skirt</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_3_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_3_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Pants</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_5_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_5_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Bold Skirt</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_6_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_6_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Zipper trouser</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_8_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_8_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Striped Pant</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_10_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_10_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Professional Suit</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_11_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_11_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Sport Dress</a>
+                    </h3>
+                    <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle red"></a>
+                    <a href="#" class="circle navy-blue active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <!--<div class=" text-center">
+                      <ul class="pagination">
+    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">...</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+
+  </ul>
+                  </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div id="kids" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-12 col-left collection-sidebar" id="filter-sidebar-kids">
+          <div class="close-sidebar-collection hidden-lg hidden-md">
+            <span>Filter</span><i class="icon_close ion-close"></i>
+          </div>
+          <div class="widget-filter filter-price">
+            <div class="pri" style="border-bottom: 1px solid #f3bd1c">
+              <h4>FILTER BY PRICE</h4>
+              <div id="slider-3-kids"></div>
+              <p class="range-p">
+                <label for="price">Range:</label>
+                <input type="text" id="price-kids"></p>
+            </div>
+          </div>
+
+          <div class="widget-filter">
+            <h3>Categories</h3>
+            <ul class="nav-home5 js-menubar">
+              <!-- <li class="level1 active dropdown">
+                    <a class="dress">Dress<span>2</span></a>
+                    <span class="icon-sub-menu"></span>
+                    <ul class="menu-level1 js-open-menu" >
+                        <li class="level2"><a href="#1" title="">Classic<span>01</span></a></li>
+                     <li class="level2"><a href="#1" title="">Sport<span>01</span></a></li>
+                           </ul>
+                </li>
+                        <li class="level1"><a href="#1" title="">Scirt<span>01</span></a></li>
+                        <li class="level1"><a href="#1" title="">Pants<span>03</span></a></li>
+                        <li class="level1"><a href="#1" title="">Suit<span>01</span></a></li>
+                 
+                <li class="level1 active dropdown">
+                    <a href="#1">Men<span>150</span></a>
+                    <span class="icon-sub-menu"></span>
+                    <ul class="menu-level1 js-open-menu" >
+                        <li class="level2"><a href="#1" title="">Shoes</a></li>
+                        <li class="level2"><a href="#1" title="">T-shirt</a></li>
+                        <li class="level2"><a href="#1" title="">Cap</a></li>
+                        <li class="level2"><a href="#1" title="">Fitness & Yoga</a></li>
+                        <li class="level2"><a href="#1" title="">Travel & Run</a></li>
+                    </ul>
+                </li>-->
+              <li class="level1 active dropdown">
+                <a class="girls">Girls<span>02</span></a>
+                <span class="icon-sub-menu"></span>
+                <ul class="menu-level1 js-open-menu">
+                  <li class="level2"><a href="#1" title="">Scirt<span>01</span></a></li>
+                  <li class="level2"><a href="#1" title="">Girl Pant<span>01</span></a></li>
+                </ul>
+              </li>
+              <li class="level1"><a href="#1" class="" title="">Boy T-shirt<span>01</span></a></li>
+            </ul>
+          </div>
+
+
+
+          <div class="widget-filter filter-cate filter-color bd-top margin-5">
+            <h3>COLOR</h3>
+            <ul>
+              <li><a href="">Black<span>04</span></a></li>
+              <li><a class="active" href="">Gray<span>04</span></a></li>
+              <li><a href="">Red<span>01</span></a></li>
+              <li><a href="">Navy-Blue<span>02</span></a></li>
+            </ul>
+          </div>
+          <div class="widget-filter filter-cate filter-color bd-top margin-5 no-bd-bottom">
+            <h3>SIZE</h3>
+            <ul>
+              <li><a href="#">S<span>04</span></a></li>
+              <li><a href="#">M<span>12</span></a></li>
+              <li><a href="#">L<span>07</span></a></li>
+              <li><a href="#">XL<span>10</span></a></li>
+              <li><a class="active" href="">XXL<span>06</span></a></li>
+              <li><a href="#">Other<span>05</span></a></li>
+            </ul>
+          </div>
+          <div class="widget-filter filter-cate filter-banner no-bd-bottom">
+            <a href="" class="effect-img3 plus-zoom">
+              <img src="img/banner-sidebar.png" alt="" class="img-responsive">
+            </a>
+          </div>
+          <div class="widget-filter filter-cate filter-view no-bd-bottom">
+            <h3>RECENT VIEWED</h3>
+            <div class="owl-carousel owl-theme js-owl-view">
+              <div class="view">
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Classy Dress</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Nice Girl Skirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="view">
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_5_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Bold Scirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+                <div class=" product-item flex">
+                  <div class="product-img">
+                    <a href="product-details.html" target="_blank"><img src="img/product/product_7_first.jpg" alt=""
+                        class="img-responsive max-width-100"></a>
+
+                  </div>
+                  <div class="product-inf">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Jeans Shirt</a>
+                    </h3>
+                    <div class="product-price">
+                      <span>$124.35</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-9 col-sm-12 col-xs-12 collection-list">
+          <div class="product-collection-grid product-grid ">
+            <div class="row">
+
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_4_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Nice Gril Skirt</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_7_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_7_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Jeans Shirt</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle navy-blue active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="  col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
+                <div class="product-img">
+                  <a href="product-details.html" target="_blank"><img src="img/product/product_9_first.jpg" alt=""
+                      class="img-responsive wp-post-image">
+                    <img src="img/product/product_9_second.jpg" alt="" class="img-responsive image-effect"></a>
+                  <div class="product-button-group ">
+                    <!-- <div class="shop-now">
+                                    <a href="#">SHOP NOW </a>
+                                </div>-->
+                    <div class="quick-view">
+                      <a href="product-details.html" target="_blank">View </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info ">
+                  <div class="title-heart">
+                    <h3 class="product-title">
+                      <a href="product-details.html" target="_blank">Zipper trouser - kids</a>
+                    </h3>
+                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                  </div>
+
+
+                  <div class="product-price">
+                    <span>$124.35</span>
+                  </div>
+                  <div class="color-group">
+                    <a href="#" class="circle gray"></a>
+                    <a href="#" class="circle black active"></a>
+                  </div>
+                  <div class="product-bottom-group">
+                    <!--<a href="#" class="zoa-btn zoa-addcart">
+                                    <span class="zoa-icon-cart"></span> ADD TO CART
+                                </a>-->
+                    <a href="product-details.html" target="_blank" class="zoa-btn zoa-quickview" title="view">
+                      <span class="zoa-icon-quick-view"></span>
+                    </a>
+                    <a href="#" class="zoa-btn zoa-wishlist" title="wishlist">
+                      <span class="zoa-icon-heart"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+<div class="container container-content hidden">
+
+  <div class="shop-top">
+    <div class="shop-element left">
+      <ul class="nav nav-pills">
         <li class="active"><a data-toggle="pill" href="#all">ALL</a></li>
         <li><a data-toggle="pill" href="#all">Women</a></li>
         <li><a data-toggle="pill" href="#all">Men</a></li>
@@ -189,11 +1727,13 @@
             <div id="all" class="tab-pane fade active in">
 
               {{#each data.productList}}
-              <div id="{{id}}" class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item" >
+              <div id="{{id}}" class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
                 <div class="product-img">
                   <a href="/{{slug}}" target="_blank">
-                    <img src="{{colors.[0].images.[0].image_link}}" alt="" class="img-responsive wp-post-image product-first-image">
-                    <img src="{{colors.[0].images.[1].image_link}}" alt="" class="img-responsive image-effect product-second-image">
+                    <img src="{{colors.[0].images.[0].image_link}}" alt=""
+                      class="img-responsive wp-post-image product-first-image">
+                    <img src="{{colors.[0].images.[1].image_link}}" alt=""
+                      class="img-responsive image-effect product-second-image">
                   </a>
                   <div class="product-button-group ">
                     <div class="quick-view">
@@ -213,7 +1753,8 @@
                   </div>
                   <div class="color-group">
                     {{#each colors}}
-                    <div class="product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}" data-product-color="{{color_slug}}"></div>
+                    <div class="product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"
+                      data-product-color="{{color_slug}}"></div>
                     {{/each}}
                   </div>
                   <div class="product-bottom-group">
@@ -240,26 +1781,26 @@
 <script>
 
 
-$(function() {
+  $(function () {
 
-  var productListHash = createHash({{{json data.productList}}}, 'id').data;
+    var productListHash = createHash({{{ json data.productList }}}, 'id').data;
   console.log('productListHash: ', productListHash);
 
-  $('.product-color').click(function() {
+  $('.product-color').click(function () {
     var selectedElm = $(this);
     var selectedColor = $(this).attr('data-product-color');
     var isActive = $(this).hasClass('active');
-    if(isActive) {
+    if (isActive) {
       return;
     }
     var productId = $(this).closest('.product-item').attr('id');
-    var activeElm = $('#'+ productId +' .product-color.active');
+    var activeElm = $('#' + productId + ' .product-color.active');
     activeElm.removeClass('active');
     selectedElm.addClass('active');
 
     var selectedProductColorImages = productListHash[productId].colors.find(color => color.color_slug === selectedColor).images;
-    var productFirstImage = $('#'+ productId +' .product-first-image');
-    var productSecondImage = $('#'+ productId +' .product-second-image');
+    var productFirstImage = $('#' + productId + ' .product-first-image');
+    var productSecondImage = $('#' + productId + ' .product-second-image');
     selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].image_link);
     selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].image_link);
   });

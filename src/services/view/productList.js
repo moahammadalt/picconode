@@ -15,6 +15,19 @@ export default async (req) => {
     table: 'product',
   });
 
+  if(req.query.orderBy === 'date_created') {
+    delete req.query.orderBy;
+  }
+  if(req.query.sort === 'DESC') {
+    delete req.query.sort;
+  }
+  if(req.query.page === 1) {
+    delete req.query.page;
+  }
+  if(req.query.limit === 100) {
+    delete req.query.limit;
+  }
+
   productList = productList.map(product => {
 
     // colros sort
@@ -32,6 +45,9 @@ export default async (req) => {
   return {
     rowsCount: productListCountArr[0].rowsCount,
     productList,
+    requestedURl: req.protocol + '://' + req.get('host') + req.originalUrl,
+    initialQuery: {...req.query},
+    query: req.query,
     colorList,
     sizeList
   }

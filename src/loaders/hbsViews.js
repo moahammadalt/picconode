@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import hbs from 'hbs';
+import url from 'url';
 
 import config from 'config';
 
@@ -31,6 +32,15 @@ export default new (class hbsViews {
 
     hbs.registerHelper('json', function(context) {
       return JSON.stringify(context, null, 2);
+    });
+
+    hbs.registerHelper('getHref', function(query, key, value) {
+      let newQuery = query ? query : {};
+      
+      newQuery[key] = value;
+
+      var queryString = '/products/?' + Object.keys(newQuery).filter(keyParams => newQuery[keyParams]).map(keyParams => keyParams + '=' + newQuery[keyParams]).join('&');
+      return queryString;
     });
 
     hbs.registerHelper('ifCond', function(v1, operator, v2, options) {
