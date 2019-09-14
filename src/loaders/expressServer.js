@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import session from 'express-session';
 import fileUpload from 'express-fileupload';
 import path from 'path';
 import hbs from 'hbs';
@@ -25,6 +26,11 @@ export default new (class expressServer {
     this.app.use(fileUpload());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
+    this.app.use(session({
+      secret: config.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: true
+    }))
 	
 		//middleware
 		this.app.use('/adminAPI', adminAPIAuth);

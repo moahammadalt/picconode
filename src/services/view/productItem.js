@@ -1,4 +1,5 @@
 import { productItemGet, productListGet } from 'services';
+import { handleViewedProductsSession } from 'session/viewedProducts';
 
 export default async (req) => {
 
@@ -6,8 +7,10 @@ export default async (req) => {
   req.query = {
     limit: 10,
   }
-  const productListItems = (await productListGet(req)).filter(({ id })=> id !== productItem.id);;
+  const productListItems = (await productListGet(req)).filter(({ id })=> id !== productItem.id);
 
+  handleViewedProductsSession(req);
+  
   return {
     product: {
       ...productItem,

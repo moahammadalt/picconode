@@ -1379,6 +1379,10 @@ function createHash(arr, key) {
   return new Hash();
 }
 
+function getQueryParameters(str) {
+  return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+}
+
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, '\\$&');

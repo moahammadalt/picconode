@@ -29,4 +29,5 @@ export default {
 	PUBLIC_VIEW_PATH: '/src/views/',
 	PUBLIC_IMAGES_PATH: '/src/public/images/',
 	PUBLIC_STATIC_PATH: 'src/public/',
+	SESSION_SECRET: process.env.SESSION_SECRET,
 };

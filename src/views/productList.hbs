@@ -23,7 +23,7 @@
 
         <li class="{{#ifCond data.initialQuery.category '===' undefined}}active{{/ifCond}}"><a href="{{getHref data.query 'category' null}}">ALL</a></li>
         {{#each data.categories}}
-        <li class="{{#ifCond ../data.initialQuery.category '===' slug}}active{{/ifCond}}"><a href="{{getHref data.query 'category' slug}}">{{name}}</a></li>
+        <li class="{{#ifCond ../data.initialQuery.category '===' slug}}active{{/ifCond}}"><a href="{{getHref ../data.query 'category' slug}}">{{name}}</a></li>
         {{/each}}
       </ul>
     </div>
@@ -58,21 +58,17 @@
           <div class="widget-filter filter-cate filter-color margin-5">
             <h3>COLOR</h3>
             <ul>
-              <li><a href="">Black<span>04</span></a></li>
-              <li><a class="active actived" href="">Gray<span>04</span></a></li>
-              <li><a href="">Red<span>01</span></a></li>
-              <li><a href="">Navy-Blue<span>02</span></a></li>
+              {{#each data.colorList}}
+              <li><a class="filter-color-item" data-color-slug="{{slug}}" href="{{getHref ../data.query 'color' slug}}">{{name}}<span>{{productsCount}}</span></a></li>
+              {{/each}}
             </ul>
           </div>
           <div class="widget-filter filter-cate filter-color bd-top margin-5 no-bd-bottom">
             <h3>SIZE</h3>
             <ul>
-              <li><a href="#">S<span>04</span></a></li>
-              <li><a href="#">M<span>12</span></a></li>
-              <li><a href="#">L<span>07</span></a></li>
-              <li><a href="#">XL<span>10</span></a></li>
-              <li><a class="active actived" href="">XXL<span>06</span></a></li>
-              <li><a href="#">Other<span>05</span></a></li>
+              {{#each data.sizeList}}
+              <li><a class="filter-size-item" data-size-slug="{{slug}}" href="{{getHref ../data.query 'size' slug}}">{{name}}<span>{{productsCount}}</span></a></li>
+              {{/each}}
             </ul>
           </div>
           <div class="widget-filter filter-cate filter-banner no-bd-bottom">
@@ -213,6 +209,9 @@ $(function () {
 
   var productListHash = createHash({{{ json data.productList }}}, 'id').data;
   console.log('productListHash: ', productListHash);
+  var queryParams = getQueryParameters();
+  var colorParams = queryParams.color && queryParams.color.split(',');
+  var sizeParams = queryParams.size && queryParams.size.split(',');
 
   $('.product-color').click(function () {
     var selectedElm = $(this);
@@ -272,6 +271,21 @@ $(function () {
     var newUrl = replaceUrlParam('price', $('#price').val());
 
     window.location = newUrl;
+  });
+
+
+  $('.filter-color-item').each(function() {
+    var colorSlug = $(this).attr('data-color-slug');
+    if(queryParams.color && colorParams.includes(colorSlug)) {
+      $(this).addClass('active');
+    }
+  });
+
+  $('.filter-size-item').each(function() {
+    var sizeSlug = $(this).attr('data-size-slug');    
+    if(queryParams.size && sizeParams.includes(sizeSlug)) {
+      $(this).addClass('active');
+    }
   });
 
 });
