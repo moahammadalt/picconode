@@ -1345,21 +1345,6 @@ $('.close-popup').on('click', function() {
 });
 
 /////////////////////////////////////////////////////////////////////////////////
-$('#slider-3').slider({
-  range: true,
-  min: 0,
-  max: 4000,
-  values: [90, 3450],
-  slide: function(event, ui) {
-    $('#price').val('$' + ui.values[0] + ' - $' + ui.values[1]);
-  }
-});
-$('#price').val(
-  '$' +
-    $('#slider-3').slider('values', 0) +
-    ' - $' +
-    $('#slider-3').slider('values', 1)
-);
 
 window.onscroll = function() {
   scrollFunction();
@@ -1392,4 +1377,27 @@ function createHash(arr, key) {
   };
 
   return new Hash();
+}
+
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function replaceUrlParam(paramName, paramValue) {
+    var url = window.location.href;
+    if (paramValue == null) {
+        paramValue = '';
+    }
+    var pattern = new RegExp('\\b('+paramName+'=).*?(&|#|$)');
+    if (url.search(pattern)>=0) {
+        return url.replace(pattern,'$1' + paramValue + '$2');
+    }
+    url = url.replace(/[?#]$/,'');
+    return url + (url.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue;
 }

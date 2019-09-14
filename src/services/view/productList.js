@@ -1,54 +1,65 @@
-import { select } from "utils/db";
+import { select } from 'utils/db';
 import { productListGet, colorListGet, sizeListGet } from 'services';
+import { validateFilterQuery } from './utils';
+import { createHash } from 'globals/helpers';
 
-export default async (req) => {
-  req.query['orderBy'] = req.query.orderBy ? req.query.orderBy : 'date_created';
-  req.query['sort'] = req.query.sort ? req.query.sort : 'DESC';
-  req.query['page'] = req.query.page ? req.query.page : 1;
-  req.query['limit'] = req.query.limit ? req.query.limit : 100;
-  
-  let productList = await productListGet(req);
-  const colorList = await colorListGet();
-  const sizeList = await sizeListGet();
-  const productListCountArr = await select({
-    count: true,
-    table: 'product',
+export default async req => {
+  // TODO: move this to a middleware
+  validateFilterQuery(req.query);
+
+  let productList = await productListGet({
+    ...req,
+    query: {
+      ...req.query,
+      orderBy: req.query.orderBy ? req.query.orderBy : 'date_created',
+      sort: req.query.sort ? req.query.sort : 'DESC',
+    }
   });
 
-  if(req.query.orderBy === 'date_created') {
-    delete req.query.orderBy;
-  }
-  if(req.query.sort === 'DESC') {
-    delete req.query.sort;
-  }
-  if(req.query.page === 1) {
-    delete req.query.page;
-  }
-  if(req.query.limit === 100) {
-    delete req.query.limit;
-  }
+  const clorListHashObj = createHash(await colorListGet(), 'slug');
+  const sizeListHashObj = createHash(await sizeListGet(), 'slug');
+  const productListCount = (await select({
+    count: true,
+    table: 'product',
+  }))[0].rowsCount;
 
   productList = productList.map(product => {
-
     // colros sort
-    const defaultColorIndex = product.colors.findIndex(color => product.default_color_id === color.color_id);
+    const defaultColorIndex = product.colors.findIndex(
+      color => product.default_color_id === color.color_id
+    );
     const defaultColorObj = product.colors[defaultColorIndex];
-    if(!!defaultColorObj /* && defaultColorObj.images.length > 2 */) {
+    if (!!defaultColorObj /* && defaultColorObj.images.length > 2 */) {
       product.colors.splice(defaultColorIndex, 1);
       product.colors.unshift(defaultColorObj);
     }
 
+    // add product color count
+    for(const singleColorObj of product.colors){
+      if(!clorListHashObj.data[singleColorObj.color_slug].productsCount) {
+        clorListHashObj.data[singleColorObj.color_slug].productsCount = 0;
+      }
+      clorListHashObj.data[singleColorObj.color_slug].productsCount += 1;
+    }
+    
+    // add product size count
+    for(const singleSizeObj of product.sizes){
+      if(!sizeListHashObj.data[singleSizeObj.size_slug].productsCount) {
+        sizeListHashObj.data[singleSizeObj.size_slug].productsCount = 0;
+      }
+      sizeListHashObj.data[singleSizeObj.size_slug].productsCount += 1;
+    }
+
     return product;
-  })
-  
+  });
 
   return {
-    rowsCount: productListCountArr[0].rowsCount,
+    productListCount,
     productList,
     requestedURl: req.protocol + '://' + req.get('host') + req.originalUrl,
-    initialQuery: {...req.query},
+    initialQuery: { ...req.query },
     query: req.query,
-    colorList,
-    sizeList
-  }
+    colorList: Object.values(clorListHashObj.data),
+    sizeList: Object.values(sizeListHashObj.data),
+  };
 };
