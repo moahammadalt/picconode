@@ -27,14 +27,14 @@
         {{/each}}
       </ul>
     </div>
-    <div class="shop-element right">
+    {{!-- <div class="shop-element right">
 
       <span>Showing 1-11 of 11 results</span>
       <div class="view-mode view-group">
         <a class="grid-icon col2 active"><i class="zoa-icon-view-3"></i></a>
         <a class="list-icon list"><i class="fa fa-circle" aria-hidden="true"></i></a>
       </div>
-    </div>
+    </div> --}}
   </div>
 
   <div class="tab-content">
@@ -76,75 +76,47 @@
               <img src="img/banner-sidebar.png" alt="" class="img-responsive">
             </a>
           </div>
+          {{#ifCond data.recentViewedProducts.length '>' 0}}
           <div class="widget-filter filter-cate filter-view no-bd-bottom">
             <h3>RECENT VIEWED</h3>
             <div class="owl-carousel owl-theme js-owl-view">
+              {{#each data.recentViewedProducts}}
               <div class="view">
                 <div class=" product-item flex">
                   <div class="product-img">
-                    <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                    <a href="{{[0].link}}" target="_blank"><img src="{{[0].colors.images.[0].image_link}}" alt=""
                         class="img-responsive max-width-100"></a>
-
                   </div>
                   <div class="product-inf">
                     <h3 class="product-title">
-                      <a href="product-details.html" target="_blank">Classy Dress</a>
+                      <a href="{{[0].link}}" target="_blank">{{[0].name}}</a>
                     </h3>
                     <div class="product-price">
-                      <span>$124.35</span>
+                      <span>${{[0].price}}</span>
                     </div>
                   </div>
                 </div>
+                {{#ifCond [1] '!==' undefined}}
                 <div class=" product-item flex">
                   <div class="product-img">
-                    <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
+                    <a href="{{[1].link}}" target="_blank"><img src="{{[1].colors.images.[0].image_link}}" alt=""
                         class="img-responsive max-width-100"></a>
-
                   </div>
                   <div class="product-inf">
                     <h3 class="product-title">
-                      <a href="product-details.html" target="_blank">Nice Girl Skirt</a>
+                      <a href="{{[1].link}}" target="_blank">{{[1].name}}</a>
                     </h3>
                     <div class="product-price">
-                      <span>$124.35</span>
+                      <span>${{[0].price}}</span>
                     </div>
                   </div>
                 </div>
+                {{/ifCond}}
               </div>
-              <div class="view">
-                <div class=" product-item flex">
-                  <div class="product-img">
-                    <a href="product-details.html" target="_blank"><img src="img/product/product_5_first.jpg" alt=""
-                        class="img-responsive max-width-100"></a>
-
-                  </div>
-                  <div class="product-inf">
-                    <h3 class="product-title">
-                      <a href="product-details.html" target="_blank">Bold Scirt</a>
-                    </h3>
-                    <div class="product-price">
-                      <span>$124.35</span>
-                    </div>
-                  </div>
-                </div>
-                <div class=" product-item flex">
-                  <div class="product-img">
-                    <a href="product-details.html" target="_blank"><img src="img/product/product_7_first.jpg" alt=""
-                        class="img-responsive max-width-100"></a>
-
-                  </div>
-                  <div class="product-inf">
-                    <h3 class="product-title">
-                      <a href="product-details.html" target="_blank">Jeans Shirt</a>
-                    </h3>
-                    <div class="product-price">
-                      <span>$124.35</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {{/each}}
             </div>
           </div>
+          {{/ifCond}}
         </div>
 
 
@@ -208,7 +180,6 @@
 $(function () {
 
   var productListHash = createHash({{{ json data.productList }}}, 'id').data;
-  console.log('productListHash: ', productListHash);
   var queryParams = getQueryParameters();
   var colorParams = queryParams.color && queryParams.color.split(',');
   var sizeParams = queryParams.size && queryParams.size.split(',');
@@ -245,7 +216,7 @@ $(function () {
   else{
     var tmpStartPrice = Number(currentPrice.split('-')[0]);
     var tmpEndPrice = Number(currentPrice.split('-')[1]);
-    if(tmpStartPrice >= lowPriceFilter && tmpEndPrice < maxPriceFilter && tmpStartPrice < tmpEndPrice) {
+    if(tmpStartPrice >= lowPriceFilter && tmpEndPrice <= maxPriceFilter && tmpStartPrice < tmpEndPrice) {
       startPrice = tmpStartPrice;
       endPrice = tmpEndPrice;
     }

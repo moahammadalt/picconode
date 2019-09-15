@@ -17,10 +17,10 @@ export const getValidQueryParams = ({
     validate: val => {
       const priceArr = val.split('-').map(num => Number(num));
       return (
-        priceArr[0] &&
+        (priceArr[0] || priceArr[0] === 0) &&
         priceArr[1] &&
         priceArr[0] >= lowPrice &&
-        priceArr[1] < maxPrice &&
+        priceArr[1] <= maxPrice &&
         priceArr[0] < priceArr[1]
       );
     }

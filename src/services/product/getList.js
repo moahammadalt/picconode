@@ -32,8 +32,8 @@ export default async (req) => {
 				productItem.main_image = mainImageObj;
 			} 
 			
-			productItem['category_name'] = categories[productItem.category_id].name;
-			productItem['category_type_name'] = categories[productItem.category_type_id].name;
+			productItem['category_slug'] = categories[productItem.category_id].slug;
+			productItem['category_type_slug'] = categories[productItem.category_type_id].slug;
 			
 			let productSizeItemArr = productSizeList.filter(productSizeItem => productSizeItem.product_id === productItem.id);
 

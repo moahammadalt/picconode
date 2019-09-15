@@ -23,10 +23,15 @@ export default async req => {
   });
 
   if(!productItemArr || productItemArr.length === 0) {
-    throw {
-      errorRedirectPath: routes.publicApi.productNotFound.path,
-      errorMessage: errorMessages.notFound,
+    if(!req.ignoreErrorRender) {
+      throw {
+        errorRedirectPath: routes.publicApi.productNotFound.path,
+        errorMessage: errorMessages.notFound,
+      }
     }
+    else {
+      return;
+    }    
   }
   let productItem = productItemArr[0];
 

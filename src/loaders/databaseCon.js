@@ -1,6 +1,8 @@
 import mysql from "mysql";
 import { promisify } from "util";
 
+import { eventHandler, events } from 'eventsObj/eventHandler';
+
 import config from "config";
 
 export default new (class databaseCon {
@@ -17,6 +19,8 @@ export default new (class databaseCon {
       password: config.DB.password,
       database: config.DB.name
     });
+
+    eventHandler.emit(events.DBConnectionCreated, this.con);
 
     this.con.query = promisify(this.con.query);
 
