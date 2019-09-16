@@ -3,7 +3,6 @@ import {
   productListGet,
   colorListGet,
   sizeListGet,
-  categoryListGet,
   productItemGet
 } from 'services';
 import { getViewdProductsSlugs } from 'session/viewedProducts';
@@ -11,9 +10,10 @@ import { validateFilterQuery } from './utils';
 import { createHash } from 'globals/helpers';
 
 export default async req => {
+  let categoriesListHash = req.menuViewData.categoriesHash.data;
+  
   const clorListHashObj = createHash(await colorListGet(), 'slug');
   const sizeListHashObj = createHash(await sizeListGet(), 'slug');
-  const categoryListHashObj = createHash(await categoryListGet(), 'slug');
   const productListCount = (await select({
     count: true,
     table: 'product'
@@ -26,10 +26,8 @@ export default async req => {
     query: req.query,
     availablesColorsSlugs: Object.keys(clorListHashObj.data),
     availablesSizesSlugs: Object.keys(sizeListHashObj.data),
-    categoriesSlugs: Object.keys(categoryListHashObj.data)
+    categoriesHash: req.menuViewData.categoriesHash
   });
-
-  console.log('req.query', req.query);
 
   let productList = await productListGet({
     ...req,
@@ -105,6 +103,22 @@ export default async req => {
         sizeListHashObj.data[singleSizeObj.size_slug].productsCount += 1;
       }
 
+      // add product category count
+      if(!categoriesListHash[product.category_slug].productsCount) {
+        categoriesListHash[product.category_slug].productsCount = 0;
+      }
+      categoriesListHash[product.category_slug].productsCount += 1;
+
+      // add product category type count
+      const categoryTypeIndex = categoriesListHash[product.category_slug].children.findIndex(({ slug }) => slug === product.category_type_slug);
+
+      if(categoriesListHash[product.category_slug].children[categoryTypeIndex]) {
+        if(!categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount) {
+          categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount = 0;
+        }
+        categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount += 1;
+      }
+      
       return product;
     });
 
@@ -134,7 +148,6 @@ export default async req => {
     productListCount,
     productList,
     requestedURl: req.protocol + '://' + req.get('host') + req.originalUrl,
-    initialQuery: { ...req.query },
     query: req.query,
     recentViewedProducts,
     colorList: Object.values(clorListHashObj.data),

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>Piccolo Veliero</title>
   <link rel="shortcut icon" href="../statics/images/favicon.png" type="image/png">
-  <link rel="stylesheet" href ="../statics/styles/jquery-ui.css">
+  <link rel="stylesheet" href="../statics/styles/jquery-ui.css">
   <link rel="stylesheet" href="../statics/styles/owl.carousel.min.css">
   <link rel="stylesheet" href="../statics/styles/slick.css">
   <link rel="stylesheet" href="../statics/styles/slick-theme.css">
@@ -25,7 +25,7 @@
 
   <script>
 
-    console.log('data: ', {{{json data}}})
+    console.log('data: ', {{{ json data }}})
   </script>
 </head>
 
@@ -44,10 +44,10 @@
         </div>
       </form>
       <ul class="nav-home5 js-menubar">
-        <li class="level1 active dropdown">
+        <li class="level1">
           <a href="#">Home</a>
         </li>
-        <li class="level1 active dropdown">
+        <li class="level1">
           <a href="#">About Us</a>
         </li>
         <li class="level1 active dropdown"><a href="#">Shop</a>
@@ -82,51 +82,87 @@
             <div class="clearfix"></div>
           </div>
         </li>
-        <!-- <li class="level1">
-                    <a href="#">Collections</a>
-                    <span class="icon-sub-menu"></span>
-                    <ul class="menu-level1 js-open-menu">
-                        <li class="level2"><a href="#" title="About Us ">Summer Collection </a></li>
-                        <li class="level2"><a href="#" title="Contact">Winter Collection</a></li>
-                        <li class="level2"><a href="#" title="Coming Soon">New Collection</a></li>
-                    </ul>
-                </li>-->
         <li class="level1">
           <a href="#">Contact us</a>
         </li>
       </ul>
       <h4 class="mb-title">Languages</h4>
-      <div class="mobile-social mg-bottom-30">
+      <div class="mobile-social">
         <a href="#" class="submenu">EN</a>
         <a href="#" class="submenu">FR</a>
         <a href="#" class="submenu">IT</a>
       </div>
 
+      <h4 class="mb-title">connect and follow</h4>
+      <div class="mobile-social mg-bottom-30">
+        <a href=""><i class="fa fa-facebook"></i></a>
+        <a href=""><i class="fa fa-twitter"></i></a>
+        <a href=""><i class="fa fa-google-plus"></i></a>
+      </div>
+
     </div>
   </div>
-
   <!-- end push menu-->
 
-
-  <!-- Push cart -->
-  <div class="pushmenu pushmenu-left cart-box-container">
-    <div class="cart-list">
-      <div class="cart-list-heading">
-        <h3 class="cart-title">My cart</h3>
+  <!-- Push wishlist -->
+  <div class="pushmenu pushmenu-left wishlist-box-container">
+    <div class="wishlist-list">
+      <div class="wishlist-list-heading">
+        <h3 class="wishlist-title">My wishlist</h3>
         <span class="close-left js-close"><i class="ion-ios-close-empty"></i></span>
       </div>
-      <div class="cart-inside">
-        <div class="cart-bottom">
-          <p>No products in the cart</p>
-          <div class="cart-button mg-top-30">
-            <a class="zoa-btn checkout" href="#" title="">Start Shopping</a>
+      <div class="wishlist-inside">
+
+        <div class="wishlist-bottom">
+          <p>Items you like most.</p>
+          <div class="view">
+            <div class=" product-item flex">
+              <div class="product-img">
+                <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                    class="img-responsive max-width-100"></a>
+
+              </div>
+              <div class="product-inf">
+                <h3 class="product-title">
+                  <a href="product-details.html" target="_blank">Classy Dress</a>
+                </h3>
+                <div class="product-price">
+                  <span>$124.35</span>
+                </div>
+              </div>
+              <div class="product-remove">
+                <a href="#" class="btn-del" title="remove item" target="_blank"><i class="ion-ios-close-empty"></i></a>
+              </div>
+            </div>
+            <div class=" product-item flex">
+              <div class="product-img">
+                <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
+                    class="img-responsive max-width-100"></a>
+
+              </div>
+              <div class="product-inf">
+                <h3 class="product-title">
+                  <a href="product-details.html" target="_blank">Nice Girl Skirt</a>
+                </h3>
+                <div class="product-price">
+                  <span>$124.35</span>
+                </div>
+              </div>
+              <div class="product-remove">
+                <a href="#" class="btn-del" title="remove item" target="_blank"><i class="ion-ios-close-empty"></i></a>
+              </div>
+            </div>
           </div>
+          <div class="wishlist-button mg-top-30">
+            <a class="zoa-btn checkout btn-wishlist-empty" href="wishlist-items.html" title="">View All</a>
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
-  <!-- End pushcart -->
 
+  </div>
+  <!-- End wishlist -->
 
   <!-- Search form -->
   <div class="search-form-wrapper header-search-form">
@@ -147,17 +183,13 @@
   </div>
   <!-- End search form -->
 
-
-  <!-- Account -->
-  <!-- End Account -->
-
   <!--  Wrappage Start -->
   <div class="wrappage">
-    <header id="header" class="header-v2">
+    <header id="header" class="header-v6">
       <div class="header-center">
         <div class="container container-content">
           <div class="row flex align-items-center justify-content-between">
-            <div class="col-md-4 col-xs-4 col-sm-4 col2 hidden-lg hidden-md">
+            <div class="col-md-4 col-xs-4 col-sm-4 col2 hidden-lg hidden-md padding-top-20">
               <div class="topbar-right">
                 <div class="element">
                   <a href="#" class="icon-pushmenu js-push-menu">
@@ -167,7 +199,7 @@
                       <style type="text/css">
                         .st0 {
                           fill: none;
-                          stroke: #fff !important;
+                          stroke: #fff;
                           stroke-width: 3;
                           stroke-linecap: round;
                           stroke-miterlimit: 10;
@@ -186,62 +218,61 @@
             <div class="col-md-3 col-xs-4 col-sm-4 col2 justify-content-center">
               <a href="#"><img src="../statics/images/logo2.png" alt="" class="img-reponsive"></a>
             </div>
-            <div class="col-md-9 col-xs-4 col-sm-4 col2 flex justify-content-end">
+            <div class="col-md-9 col-xs-4 col-sm-4 col2 flex justify-content-end padding-top-20">
               <ul class="nav navbar-nav js-menubar hidden-xs hidden-sm">
-                <li class="level1 active"><a href="#">Home</a></li>
-                <li class="level1 active"><a href="#">About Us</a></li>
-                <li class="level1 active dropdown"><a href="#">Shop</a>
+                <li class="level1"><a href="index.html">Home</a>
+
+                </li>
+                <li class="level1"><a href="about.html">About Us</a>
+
+                </li>
+                <li class="level1 active dropdown"><a href="products.html">Shop</a>
                   <span class="plus js-plus-icon"></span>
                   <div class="menu-level-1 dropdown-menu style5">
                     <ul class="level1">
-                      {{#each data.categories}}
-                        <li class="level2 col-4">
-                          <a href="/category/{{slug}}" class="submenu">{{name}}</a>
-                          <ul class="menu-level-2">
-                            {{#each children}}
-                              <li class="level3"><a href="/category/{{../slug}}/{{slug}}" title="">{{name}}</a></li>
-                            {{/each}}
-                          </ul>
-                        </li>
+                      {{#each data.categoriesHash.data}}
+                      <li class="level2 col-4">
+                        <a href="/category/{{slug}}" class="submenu">{{name}}</a>
+                        <ul class="menu-level-2">
+                          {{#each children}}
+                          <li class="level3"><a href="/category/{{../slug}}/{{slug}}" title="">{{name}}</a></li>
+                          {{/each}}
+                        </ul>
+                      </li>
                       {{/each}}
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                 </li>
 
-                <li class="level1 active dropdown">
+                <li class="level1">
+                  <a href="contact.html">Contact Us</a>
+
+                </li>
+                <li class="level1">
                   <a href="#">Languages</a>
-                  <ul class="dropdown-menu menu-level-1 last-element">
-                    <li class="level2"><a href="#" title="">English</a></li>
-                    <li class="level2"><a href="#" title="">French</a></li>
-                    <li class="level2"><a href="#" title="">Italian</a></li>
+                  <ul class="dropdown-menu menu-level-1 mobile-social">
+                    <li class="level2"><a href="#" title="En">English </a></li>
+                    <li class="level2"><a href="#" title="Fr">French</a></li>
+                    <li class="level2"><a href="#" title="It">Italian</a></li>
                   </ul>
                 </li>
               </ul>
               <div class="topbar-left">
 
-                <div class="element element-search ">
-                  <a href="#" class="zoa-icon search-toggle">
-                    <svg class="search-icon" width="20" height="20" version="1.1" id="Layer_2"
-                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                      viewBox="0 0 90 90" style="enable-background:new 0 0 90 90;" xml:space="preserve">
-                      <style type="text/css">
-                        .search-icon {
-                          fill: none;
-                          stroke: #fff !important;
-                          stroke-width: 3;
-                        }
-                      </style>
-                      <g>
-                        <path d="M0,39.4C0,50,4.1,59.9,11.6,67.3c7.4,7.5,17.3,11.6,27.8,11.6c9.5,0,18.5-3.4,25.7-9.5l19.8,19.7c1.2,1.2,3.1,1.2,4.2,0
-        c0.6-0.6,0.9-1.3,0.9-2.1s-0.3-1.5-0.9-2.1L69.3,65.1c6.2-7.1,9.5-16.2,9.5-25.7c0-10.5-4.1-20.4-11.6-27.9C59.9,4.1,50,0,39.4,0
-        C28.8,0,19,4.1,11.6,11.6S0,28.9,0,39.4z M63.1,15.8c6.3,6.3,9.8,14.7,9.8,23.6S69.4,56.7,63.1,63s-14.7,9.8-23.6,9.8
-        S22.2,69.3,15.9,63C9.5,56.8,6,48.4,6,39.4s3.5-17.3,9.8-23.6S30.5,6,39.4,6S56.8,9.5,63.1,15.8z" />
-                      </g>
-                    </svg>
+
+                <div class="element element-wishlist">
+                  <a class="zoa-icon icon-wishlist">
+                    <i class="fa fa-heart-o wishlist"></i>
+                    <span class="count cart-count">4</span>
                   </a>
                 </div>
 
+                <div class="element element-search hidden-xs hidden-sm">
+                  <a class="zoa-icon search-toggle">
+                    <i class="fa fa-2x fa-search"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

@@ -137,7 +137,7 @@ jQuery(document).ready(function($) {
       });
   });
   // Open menu dropdown home 5
-  $('.js-menubar li .icon-sub-menu').on('click', function() {
+  $('.js-menubar li .icon-sub-menu, .dress, .girls').on('click', function() {
     $(this).toggleClass('up-icon');
     $(this)
       .parent()
@@ -158,12 +158,14 @@ jQuery(document).ready(function($) {
   // Push menu home 5
   var menuLeft = $('.pushmenu-left');
   var menuHome6 = $('.menu-home5');
-  var nav_list = $('.icon-cart');
+  var nav_list = $('.icon-cart, .icon-wishlist');
   var nav_click = $('.icon-pushmenu');
   nav_list.on('click', function(event) {
     event.stopPropagation();
     $(this).toggleClass('active');
-    $('body').toggleClass('pushmenu-push-toright-cart');
+    $('body').toggleClass(
+      'pushmenu-push-toright-cart, pushmenu-push-toright-wishlist'
+    );
     menuLeft.toggleClass('pushmenu-open');
     $('.container').toggleClass('canvas-container');
   });
@@ -176,14 +178,16 @@ jQuery(document).ready(function($) {
   $('.wrappage').on('click', function() {
     $(this).removeClass('active');
     $('body')
-      .removeClass('pushmenu-push-toright-cart')
+    .removeClass('pushmenu-push-toright-cart, pushmenu-push-toright-wishlist')
       .removeClass('pushmenu-push-toleft');
     menuLeft.removeClass('pushmenu-open');
     menuHome6.removeClass('pushmenu-open');
   });
   $('.close-left').on('click', function() {
     $(this).removeClass('active');
-    $('body').removeClass('pushmenu-push-toright-cart');
+    $('body').removeClass(
+      'pushmenu-push-toright-cart, pushmenu-push-toright-wishlist'
+    );
     menuLeft.removeClass('pushmenu-open');
   });
   $('.close-left').on('click', function() {
@@ -311,7 +315,9 @@ jQuery(document).ready(function($) {
     $('.wrappage').addClass('show-filter');
   });
   $(document).bind('mouseup touchend', function(e) {
-    var container = jQuery('#filter-sidebar');
+    var container = jQuery(
+      '#filter-sidebar, #filter-sidebar-women, #filter-sidebar-kids'
+    );
     if (
       !container.is(e.target) && // if the target of the click isn't the container...
       container.has(e.target).length === 0

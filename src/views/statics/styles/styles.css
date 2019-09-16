@@ -19313,4 +19313,12 @@ margin-top: 5px;
   text-transform: capitalize;
 }
 
+a{
+  cursor: pointer;
+}
+
+.filter-category-type .level1.active a{
+  color: #f3bd1c;
+}
+
 /*Mohammad styles ends*/

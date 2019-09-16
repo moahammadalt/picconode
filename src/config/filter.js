@@ -5,12 +5,17 @@ export const maxPrice = 4000;
 export const getValidQueryParams = ({
   availablesColorsSlugs,
   availablesSizesSlugs,
-  categoriesSlugs
+  categoriesHash
 } = {}) => [
   {
     param: 'category',
     isSingle: true,
-    validate: val => categoriesSlugs.includes(val)
+    validate: val => categoriesHash.keys().includes(val)
+  },
+  {
+    param: 'type',
+    isSingle: true,
+    validate: val => true
   },
   {
     param: 'price',

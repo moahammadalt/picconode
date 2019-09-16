@@ -4,13 +4,13 @@ export const validateFilterQuery = ({
   query,
   availablesColorsSlugs,
   availablesSizesSlugs,
-  categoriesSlugs,
+  categoriesHash,
 }) => {
   for (const paramName of Object.keys(query)) {
     const matchedParam = getValidQueryParams({
       availablesColorsSlugs,
       availablesSizesSlugs,
-      categoriesSlugs,
+      categoriesHash,
     }).find(validParam => validParam.param === paramName);
     if (!matchedParam) {
       delete query[paramName];

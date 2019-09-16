@@ -24,6 +24,7 @@ export const viewServiceHandler = async ({req, res, next, viewPathUrl, service})
 		let response = {
 			...menuViewData
     }
+    req.menuViewData = {...menuViewData};
 		if(service) {
 			const serviceData = await service(req);
 			response = {

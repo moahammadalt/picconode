@@ -21,20 +21,14 @@
     <div class="shop-element left">
       <ul class="nav nav-pills">
 
-        <li class="{{#ifCond data.initialQuery.category '===' undefined}}active{{/ifCond}}"><a href="{{getHref data.query 'category' null}}">ALL</a></li>
-        {{#each data.categories}}
-        <li class="{{#ifCond ../data.initialQuery.category '===' slug}}active{{/ifCond}}"><a href="{{getHref ../data.query 'category' slug}}">{{name}}</a></li>
+        <li class="{{#ifCond data.query.category '===' undefined}}active{{/ifCond}}"><a
+            href="{{getHref data.query 'category' null}}">ALL</a></li>
+        {{#each data.categoriesHash.data}}
+        <li class="{{#ifCond ../data.query.category '===' slug}}active{{/ifCond}}"><a
+            href="{{getHref ../data.query 'category' slug}}">{{name}}</a></li>
         {{/each}}
       </ul>
     </div>
-    {{!-- <div class="shop-element right">
-
-      <span>Showing 1-11 of 11 results</span>
-      <div class="view-mode view-group">
-        <a class="grid-icon col2 active"><i class="zoa-icon-view-3"></i></a>
-        <a class="list-icon list"><i class="fa fa-circle" aria-hidden="true"></i></a>
-      </div>
-    </div> --}}
   </div>
 
   <div class="tab-content">
@@ -55,11 +49,25 @@
             </div>
           </div>
 
+          {{#each data.categoriesHash.data}}
+          {{#ifCond @key '===' ../data.query.category}}
+          <div class="widget-filter filter-category-type">
+            <h3>Categories</h3>
+            <ul class="nav-home5 js-menubar">
+              {{#each children}}
+              <li class="level1 {{#ifCond ../../data.query.type '===' slug}}active{{/ifCond}}"><a href="{{getHref ../../data.query 'type' slug}}" title="">{{name}}<span>{{productsCount}}</span></a></li>
+              {{/each}}
+            </ul>
+          </div>
+          {{/ifCond}}
+          {{/each}}
+
           <div class="widget-filter filter-cate filter-color margin-5">
             <h3>COLOR</h3>
             <ul>
               {{#each data.colorList}}
-              <li><a class="filter-color-item" data-color-slug="{{slug}}" href="{{getHref ../data.query 'color' slug}}">{{name}}<span>{{productsCount}}</span></a></li>
+              <li><a class="filter-color-item" data-color-slug="{{slug}}"
+                  href="{{getHref ../data.query 'color' slug}}">{{name}}<span>{{productsCount}}</span></a></li>
               {{/each}}
             </ul>
           </div>
@@ -67,7 +75,8 @@
             <h3>SIZE</h3>
             <ul>
               {{#each data.sizeList}}
-              <li><a class="filter-size-item" data-size-slug="{{slug}}" href="{{getHref ../data.query 'size' slug}}">{{name}}<span>{{productsCount}}</span></a></li>
+              <li><a class="filter-size-item" data-size-slug="{{slug}}"
+                  href="{{getHref ../data.query 'size' slug}}">{{name}}<span>{{productsCount}}</span></a></li>
               {{/each}}
             </ul>
           </div>
@@ -129,8 +138,10 @@
               <div id="{{id}}" class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
                 <div class="product-img">
                   <a href="/{{slug}}" target="_blank">
-                    <img src="{{colors.[0].images.[0].image_link}}" alt="" class="img-responsive wp-post-image product-first-image">
-                    <img src="{{colors.[0].images.[1].image_link}}" alt="" class="img-responsive image-effect product-second-image">
+                    <img src="{{colors.[0].images.[0].image_link}}" alt=""
+                      class="img-responsive wp-post-image product-first-image">
+                    <img src="{{colors.[0].images.[1].image_link}}" alt=""
+                      class="img-responsive image-effect product-second-image">
                   </a>
                   <div class="product-button-group ">
                     <div class="quick-view">
@@ -150,7 +161,8 @@
                   </div>
                   <div class="color-group">
                     {{#each colors}}
-                    <a class="product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}" data-product-color="{{color_slug}}"></a>
+                    <a class="product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"
+                      data-product-color="{{color_slug}}"></a>
                     {{/each}}
                   </div>
                   <div class="product-bottom-group">
@@ -209,18 +221,18 @@ $(function () {
   var lowPriceFilter = 0;
   var startPrice;
   var endPrice;
-  if(!currentPrice) {
+  if (!currentPrice) {
     startPrice = lowPriceFilter;
     endPrice = maxPriceFilter;
   }
-  else{
+  else {
     var tmpStartPrice = Number(currentPrice.split('-')[0]);
     var tmpEndPrice = Number(currentPrice.split('-')[1]);
-    if(tmpStartPrice >= lowPriceFilter && tmpEndPrice <= maxPriceFilter && tmpStartPrice < tmpEndPrice) {
+    if (tmpStartPrice >= lowPriceFilter && tmpEndPrice <= maxPriceFilter && tmpStartPrice < tmpEndPrice) {
       startPrice = tmpStartPrice;
       endPrice = tmpEndPrice;
     }
-    else{
+    else {
       startPrice = lowPriceFilter;
       endPrice = maxPriceFilter;
     }
@@ -231,30 +243,30 @@ $(function () {
     min: lowPriceFilter,
     max: maxPriceFilter,
     values: [startPrice, endPrice],
-    slide: function(event, ui) {
+    slide: function (event, ui) {
       $('#price').val(ui.values[0] + '-' + ui.values[1]);
     }
   });
-    
+
   $('#price').val(startPrice + '-' + endPrice);
 
-  $("#slider-3").on("slidestop", function(event, ui) {
+  $("#slider-3").on("slidestop", function (event, ui) {
     var newUrl = replaceUrlParam('price', $('#price').val());
 
     window.location = newUrl;
   });
 
 
-  $('.filter-color-item').each(function() {
+  $('.filter-color-item').each(function () {
     var colorSlug = $(this).attr('data-color-slug');
-    if(queryParams.color && colorParams.includes(colorSlug)) {
+    if (queryParams.color && colorParams.includes(colorSlug)) {
       $(this).addClass('active');
     }
   });
 
-  $('.filter-size-item').each(function() {
-    var sizeSlug = $(this).attr('data-size-slug');    
-    if(queryParams.size && sizeParams.includes(sizeSlug)) {
+  $('.filter-size-item').each(function () {
+    var sizeSlug = $(this).attr('data-size-slug');
+    if (queryParams.size && sizeParams.includes(sizeSlug)) {
       $(this).addClass('active');
     }
   });
