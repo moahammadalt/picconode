@@ -60,11 +60,11 @@ export default new (class expressServer {
   }
 
   connect(port) {
-    if (!this.port) {
-      this.port = port || config.PORT;
-    }
+    this.port = port || config.PORT;
 
-    this.app.listen(this.port, () => {
+    this.hostname = config.HOSTNAME;
+
+    this.app.listen(this.port, this.hostname, () => {
       console.log(`listening on port ${this.port}`);
     });
   }

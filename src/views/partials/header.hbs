@@ -232,10 +232,10 @@
                     <ul class="level1">
                       {{#each data.categoriesHash.data}}
                       <li class="level2 col-4">
-                        <a href="/category/{{slug}}" class="submenu">{{name}}</a>
+                        <a href="/products/?category={{../slug}}" class="submenu">{{name}}</a>
                         <ul class="menu-level-2">
                           {{#each children}}
-                          <li class="level3"><a href="/category/{{../slug}}/{{slug}}" title="">{{name}}</a></li>
+                          <li class="level3"><a href="/products/?category={{../slug}}&type={{slug}}" title="">{{name}}</a></li>
                           {{/each}}
                         </ul>
                       </li>

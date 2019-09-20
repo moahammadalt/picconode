@@ -128,6 +128,20 @@ export default {
 			bodyParams: ['name', 'email', 'message', 'product_id'],
 			type: 'POST',
 		},
+		wishlistItemCreate: {
+			url: '/wishlist/itemCreate',
+			bodyParams: ['slug'],
+			type: 'POST',
+		},
+		wishlistItemDelete: {
+			url: '/wishlist/itemDelete',
+			bodyParams: ['slug'],
+			type: 'POST',
+		},
+		wishlistGet: {
+			url: '/wishlist',
+			type: 'GET',
+		},
 		notFound: {
 			url: '/404',
 			path: '/notFound.hbs',

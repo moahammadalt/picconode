@@ -43,6 +43,10 @@ export { default as productImageGetList } from './productImage/getList';
 export { default as productImageUpdate } from './productImage/update';
 export { default as productImageDelete } from './productImage/delete';
 
+export { default as wishlistItemCreate } from './wishlist/create';
+export { default as wishlistItemDelete } from './wishlist/delete';
+export { default as wishlistGet } from './wishlist/get';
+
 export { default as ImageUpload } from './uploads/uploadImage';
 
 export { default as menuView } from './view/menu.js';

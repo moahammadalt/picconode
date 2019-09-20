@@ -154,7 +154,7 @@
                     <h3 class="product-title">
                       <a href="/{{slug}}" target="_blank">{{name}}</a>
                     </h3>
-                    <a class="" title="remove item"> <span class="fa fa-heart"></span></a>
+                    <a class="" title="remove item"> <span data-wishlist-slug="{{slug}}" class="fa fa-heart wishlist-product"></span></a>
                   </div>
                   <div class="product-price">
                     <span>${{price}}</span>
@@ -270,6 +270,28 @@ $(function () {
       $(this).addClass('active');
     }
   });
+
+  $('.wishlist-product').click(function () {
+    var _thisElm = $(this);
+    var productSlug = _thisElm.attr('data-wishlist-slug');
+    var isAlreadyWishlisted = _thisElm.hasClass('fa-heart');
+    
+    $.ajax({
+      type: 'POST',
+      url: '/wishlist/'+ (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') +'',
+      contentType: "application/json",
+      data: JSON.stringify({
+        slug: productSlug,
+      }),
+      success: function (data) {
+        console.log('data: ', data);
+        _thisElm.removeClass(isAlreadyWishlisted ? 'fa-heart' : 'fa-heart-o');
+        _thisElm.addClass(isAlreadyWishlisted ? 'fa-heart-o' : 'fa-heart');
+      }
+    });
+  });
+
+  
 
 });
 

@@ -13,9 +13,6 @@ import {
 } from 'services';
 
 export default async req => {
-  let categories = createHash(await categoryListGet(), 'id').data;
-  let sizes = createHash(await sizeListGet(), 'id').data;
-  let colors = createHash(await colorListGet(), 'id').data;
 
   let productItemArr = await select({
     table: 'product',
@@ -33,6 +30,11 @@ export default async req => {
       return;
     }    
   }
+  
+  let categories = createHash(await categoryListGet(), 'id').data;
+  let sizes = createHash(await sizeListGet(), 'id').data;
+  let colors = createHash(await colorListGet(), 'id').data;
+  
   let productItem = productItemArr[0];
 
   const productImages = await productImageGet({
