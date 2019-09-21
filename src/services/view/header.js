@@ -20,5 +20,6 @@ export default async (req) => {
     categoriesHash: createHash(categoriesList, 'slug'),
     wishlistItemsLength,
     ...wishlistProducts,
+    wishlistHeaderProducts: (wishlistProducts && wishlistProducts.wishlistProducts.length > 2) ? wishlistProducts.wishlistProducts.slice(0, 2) : wishlistProducts.wishlistProducts,
   }
 };
