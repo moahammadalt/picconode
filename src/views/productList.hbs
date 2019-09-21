@@ -154,7 +154,7 @@
                     <h3 class="product-title">
                       <a href="/{{slug}}" target="_blank">{{name}}</a>
                     </h3>
-                    <a class="" title="remove item"> <span data-wishlist-slug="{{slug}}" class="fa fa-heart wishlist-product"></span></a>
+                    <a class="" title="remove item"> <span data-wishlist-slug="{{slug}}" class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span></a>
                   </div>
                   <div class="product-price">
                     <span>${{price}}</span>

@@ -10,12 +10,12 @@ import viewAPI from './view';
 export default () => {
 	const router = Router();
 	
+	viewAPI(router);
 	adminAPI(router);
 	categoryAPI(router);
 	sizeAPI(router);
 	colorAPI(router);
 	productAPI(router);
-	viewAPI(router);
-
+	
 	return router;
 }

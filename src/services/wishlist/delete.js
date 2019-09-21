@@ -1,4 +1,4 @@
-import { deleteWishlistSessionItem } from 'session/wishList';
+import { deleteWishlistSessionItem } from 'session/wishlist';
 
 export default async (req) => {
   const isProductSlugDeleted = deleteWishlistSessionItem(req);

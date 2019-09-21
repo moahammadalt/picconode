@@ -51,7 +51,7 @@
                 <div class="single-product-button-group">
                   <div class="flex align-items-center element-button">
 
-                    <a class="zoa-btn zoa-wishlist">
+                    <a data-wishlist-slug="{{data.product.slug}}" class="wishlist-product zoa-btn zoa-wishlist {{#ifCond data.product.isWishlisted '===' true}}active{{/ifCond}}">
                       <i class="zoa-icon-heart"></i>
                     </a>
                   </div>
@@ -375,6 +375,27 @@
         }
       });
       
+    });
+
+    $('.wishlist-product').click(function() {
+      var _thisElm = $(this);
+      var productSlug = _thisElm.attr('data-wishlist-slug');
+      console.log('productSlug: ', productSlug);
+      var isAlreadyWishlisted = _thisElm.hasClass('active');
+      
+      $.ajax({
+        type: 'POST',
+        url: '/wishlist/'+ (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') +'',
+        contentType: "application/json",
+        data: JSON.stringify({
+          slug: productSlug,
+        }),
+        success: function (data) {
+          console.log('data: ', data);
+          _thisElm.removeClass(isAlreadyWishlisted ? 'active' : '');
+          _thisElm.addClass(isAlreadyWishlisted ? '' : 'active');
+        }
+      });
     });
 
 

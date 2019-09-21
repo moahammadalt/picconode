@@ -1,6 +1,6 @@
 import config from 'config';
 import { productItemGet } from 'services';
-import { saveWishlistProduct } from 'session/wishList';
+import { saveWishlistProduct } from 'session/wishlist';
 
 export default async (req) => {
   let savedResponse;

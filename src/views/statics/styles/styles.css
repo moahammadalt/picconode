@@ -14794,7 +14794,7 @@ color: #333;}--*/
         line-height: 40px;
         padding: 0 12px;
        /* margin-left: 20px; */}
-        .single-product-detail .single-product-info .single-product-button-group .element-button .zoa-wishlist:hover {
+        .single-product-detail .single-product-info .single-product-button-group .element-button .zoa-wishlist.active {
           color: #fff;
           background: #f3bd1c; }
 .single-product-detail .single-product-info .single-product-button-group .element-button .zoa-wishlist:focus {
@@ -19320,5 +19320,4 @@ a{
 .filter-category-type .level1.active a{
   color: #f3bd1c;
 }
-
 /*Mohammad styles ends*/

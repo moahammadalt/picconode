@@ -25,6 +25,14 @@ export default router => {
     });
   });
 
+  router.get(publicApi.wishlistView.url, async (req, res, next) => {
+    await viewServiceHandler({
+      req, res, next,
+      viewPathUrl: publicApi.wishlistView.path,
+      service: wishlistGet,
+    });
+  });
+
   router.get(publicApi.productList.url, async (req, res, next) => {
     await viewServiceHandler({
       req, res, next,
@@ -51,9 +59,5 @@ export default router => {
 
   router.post(publicApi.wishlistItemDelete.url, (...arg) => {
     serviceHandler(...arg, wishlistItemDelete);
-  });
-
-  router.post(publicApi.wishlistGet.url, (...arg) => {
-    serviceHandler(...arg, wishlistGet);
   });
 };

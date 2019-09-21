@@ -49,7 +49,7 @@ export { default as wishlistGet } from './wishlist/get';
 
 export { default as ImageUpload } from './uploads/uploadImage';
 
-export { default as menuView } from './view/menu.js';
+export { default as headerView } from './view/header';
 export { default as productItem } from './view/productItem.js';
 export { default as productList } from './view/productList.js';
 export { userDemandSend } from './view/productUserDemand';

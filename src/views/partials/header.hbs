@@ -116,45 +116,29 @@
         <div class="wishlist-bottom">
           <p>Items you like most.</p>
           <div class="view">
+            {{#each data.wishlistHeaderProducts}}
             <div class=" product-item flex">
               <div class="product-img">
-                <a href="product-details.html" target="_blank"><img src="img/product/product_1_first.jpg" alt=""
+                <a href="product-details.html" target="_blank"><img src="{{colors.[0].images.[0].image_link}}" alt=""
                     class="img-responsive max-width-100"></a>
 
               </div>
               <div class="product-inf">
                 <h3 class="product-title">
-                  <a href="product-details.html" target="_blank">Classy Dress</a>
+                  <a href="product-details.html" target="_blank">{{slug}}</a>
                 </h3>
                 <div class="product-price">
-                  <span>$124.35</span>
+                  <span>${{price}}</span>
                 </div>
               </div>
               <div class="product-remove">
                 <a href="#" class="btn-del" title="remove item" target="_blank"><i class="ion-ios-close-empty"></i></a>
               </div>
             </div>
-            <div class=" product-item flex">
-              <div class="product-img">
-                <a href="product-details.html" target="_blank"><img src="img/product/product_4_first.jpg" alt=""
-                    class="img-responsive max-width-100"></a>
-
-              </div>
-              <div class="product-inf">
-                <h3 class="product-title">
-                  <a href="product-details.html" target="_blank">Nice Girl Skirt</a>
-                </h3>
-                <div class="product-price">
-                  <span>$124.35</span>
-                </div>
-              </div>
-              <div class="product-remove">
-                <a href="#" class="btn-del" title="remove item" target="_blank"><i class="ion-ios-close-empty"></i></a>
-              </div>
-            </div>
+            {{/each}}
           </div>
           <div class="wishlist-button mg-top-30">
-            <a class="zoa-btn checkout btn-wishlist-empty" href="wishlist-items.html" title="">View All</a>
+            <a class="zoa-btn checkout btn-wishlist-empty" href="/wishlist-products" title="">View All</a>
           </div>
 
         </div>
@@ -264,7 +248,7 @@
                 <div class="element element-wishlist">
                   <a class="zoa-icon icon-wishlist">
                     <i class="fa fa-heart-o wishlist"></i>
-                    <span class="count cart-count">4</span>
+                    <span class="count cart-count">{{data.wishlistItemsLength}}</span>
                   </a>
                 </div>
 

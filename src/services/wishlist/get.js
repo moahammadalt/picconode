@@ -1,13 +1,31 @@
-import config from 'config';
+import { getWishListSlugsSession } from 'session/wishlist';
+import { productItemGet } from 'services';
 
 export default async (req) => {
-  // check if product slug is valid
 
-  //save to wishlist session
+  const allWishlistProductsSlug = getWishListSlugsSession(req);
+  let wishlistProductsSlug;
+  let wishlistProducts = [];
 
-  //after save return success to client
+  if(req.query.limit) {
+    wishlistProductsSlug = allWishlistProductsSlug.slice(0, req.query.limit);
+  }
+  else {
+    wishlistProductsSlug = allWishlistProductsSlug;
+  }
 
-	return {
-		ss: 'get',
-	};
+  // prepare wishlisted products
+  for (let slug of wishlistProductsSlug) {
+    let productItem = await productItemGet({
+      ...req,
+      params: {
+        slug
+      },
+      ignoreErrorRender: true
+    });
+    
+    productItem && wishlistProducts.push(productItem);
+  }
+
+  return { wishlistProducts };
 };

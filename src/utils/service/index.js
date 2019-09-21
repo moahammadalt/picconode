@@ -1,7 +1,7 @@
 import { responseStatuses, errorMessages, viewsPath } from 'globals/constants';
 import { sendClientAlarm } from 'globals/helpers';
 import routes from "config/routes";
-import { menuView } from 'services';
+import { headerView } from 'services';
 
 export const serviceHandler = async (req, res, next, service) => {
   try {
@@ -20,11 +20,11 @@ export const serviceHandler = async (req, res, next, service) => {
 
 export const viewServiceHandler = async ({req, res, next, viewPathUrl, service}) => {
   try {
-		const menuViewData = await menuView();
+		const headerViewData = await headerView(req);
 		let response = {
-			...menuViewData
+			...headerViewData
     }
-    req.menuViewData = {...menuViewData};
+    req.headerViewData = {...headerViewData};
 		if(service) {
 			const serviceData = await service(req);
 			response = {

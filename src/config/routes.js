@@ -142,6 +142,11 @@ export default {
 			url: '/wishlist',
 			type: 'GET',
 		},
+		wishlistView: {
+			url: '/wishlist-products',
+			path: '/wishlistProducts.hbs',
+			type: 'GET',
+		},
 		notFound: {
 			url: '/404',
 			path: '/notFound.hbs',

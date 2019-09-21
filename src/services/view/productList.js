@@ -3,14 +3,15 @@ import {
   productListGet,
   colorListGet,
   sizeListGet,
-  productItemGet
+  productItemGet,
 } from 'services';
+import { getWishListSlugsSession } from 'session/wishlist';
 import { getViewdProductsSlugs } from 'session/viewedProducts';
 import { validateFilterQuery } from './utils';
 import { createHash } from 'globals/helpers';
 
 export default async req => {
-  let categoriesListHash = req.menuViewData.categoriesHash.data;
+  let categoriesListHash = req.headerViewData.categoriesHash.data;
   
   const clorListHashObj = createHash(await colorListGet(), 'slug');
   const sizeListHashObj = createHash(await sizeListGet(), 'slug');
@@ -26,7 +27,7 @@ export default async req => {
     query: req.query,
     availablesColorsSlugs: Object.keys(clorListHashObj.data),
     availablesSizesSlugs: Object.keys(sizeListHashObj.data),
-    categoriesHash: req.menuViewData.categoriesHash
+    categoriesHash: req.headerViewData.categoriesHash
   });
 
   let productList = await productListGet({
@@ -37,6 +38,8 @@ export default async req => {
       sort: req.query.sort ? req.query.sort : 'DESC'
     }
   });
+
+  const productsWishlistSlugs = getWishListSlugsSession(req);
 
   productList = productList
     .filter(product => {
@@ -117,6 +120,11 @@ export default async req => {
           categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount = 0;
         }
         categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount += 1;
+      }
+
+      //handle if product in wishlist
+      if(productsWishlistSlugs.includes(product.slug)) {
+        product['isWishlisted'] = true;
       }
       
       return product;
