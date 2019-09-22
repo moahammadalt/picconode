@@ -33,6 +33,20 @@ export default router => {
     });
   });
 
+  router.get(publicApi.about.url, async (req, res, next) => {
+    await viewServiceHandler({
+      req, res, next,
+      viewPathUrl: publicApi.about.path,
+    });
+  });
+
+  router.get(publicApi.contact.url, async (req, res, next) => {
+    await viewServiceHandler({
+      req, res, next,
+      viewPathUrl: publicApi.contact.path,
+    });
+  });
+
   router.get(publicApi.productList.url, async (req, res, next) => {
     await viewServiceHandler({
       req, res, next,

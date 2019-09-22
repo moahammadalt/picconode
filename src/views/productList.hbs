@@ -4,7 +4,7 @@
 <div class=" container-fluid text-center breadcrumb-about">
   <h1 class="submenu">Our Products</h1>
   <ul class="breadcrumb">
-    <li><a href="index.html">Home</a></li>
+    <li><a href="/">Home</a></li>
     <li class="active">Shop</li>
   </ul>
 
@@ -93,7 +93,7 @@
               <div class="view">
                 <div class=" product-item flex">
                   <div class="product-img">
-                    <a href="{{[0].link}}" target="_blank"><img src="{{[0].colors.images.[0].image_link}}" alt=""
+                    <a href="{{[0].link}}" target="_blank"><img src="{{[0].colors.[0].images.[0].image_link}}" alt=""
                         class="img-responsive max-width-100"></a>
                   </div>
                   <div class="product-inf">
@@ -108,7 +108,7 @@
                 {{#ifCond [1] '!==' undefined}}
                 <div class=" product-item flex">
                   <div class="product-img">
-                    <a href="{{[1].link}}" target="_blank"><img src="{{[1].colors.images.[0].image_link}}" alt=""
+                    <a href="{{[1].link}}" target="_blank"><img src="{{[1].colors.[0].images.[0].image_link}}" alt=""
                         class="img-responsive max-width-100"></a>
                   </div>
                   <div class="product-inf">

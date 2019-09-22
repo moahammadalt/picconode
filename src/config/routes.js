@@ -125,7 +125,7 @@ export default {
 		},
 		productUserDemand: {
 			url: '/productUserDemand',
-			bodyParams: ['name', 'email', 'message', 'product_id'],
+			bodyParams: ['email', 'message'],
 			type: 'POST',
 		},
 		wishlistItemCreate: {
@@ -145,6 +145,16 @@ export default {
 		wishlistView: {
 			url: '/wishlist-products',
 			path: '/wishlistProducts.hbs',
+			type: 'GET',
+		},
+		about: {
+			url: '/about',
+			path: '/about.hbs',
+			type: 'GET',
+		},
+		contact: {
+			url: '/contact',
+			path: '/contact.hbs',
 			type: 'GET',
 		},
 		notFound: {

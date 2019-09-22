@@ -85,7 +85,7 @@ export default async req => {
         color => product.default_color_id === color.color_id
       );
       const defaultColorObj = product.colors[defaultColorIndex];
-      if (!!defaultColorObj /* && defaultColorObj.images.length > 2 */) {
+      if (!!defaultColorObj) {
         product.colors.splice(defaultColorIndex, 1);
         product.colors.unshift(defaultColorObj);
       }

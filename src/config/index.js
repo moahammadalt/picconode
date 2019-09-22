@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 export default {
+	IS_PROD: process.env.IS_PROD,
 	PORT: process.env.PORT,
 	HOSTNAME: process.env.HOSTNAME,
 	ADMIN: {
@@ -29,6 +30,7 @@ export default {
 	},
 	PUBLIC_VIEW_PATH: '/src/views/',
 	PUBLIC_IMAGES_PATH: '/src/public/images/',
+	PROD_PUBLIC_IMAGES_PATH: '/images/',
 	PUBLIC_STATIC_PATH: 'src/public/',
 	SESSION_SECRET: process.env.SESSION_SECRET,
 };

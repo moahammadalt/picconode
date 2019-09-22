@@ -20,7 +20,6 @@
   <script src="../statics/lib/slick.min.js"></script>
   <script src="../statics/lib/countdown.js"></script>
   <script src="../statics/lib/jquery-ui_c2b0c2990b0899f3e3e3d0791bf33206.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnMr64OtHBrpxBLLbYX2K2Waf4enq8sp0&amp;=myMap"></script>
   <script src="../statics/scripts/main.js"></script>
 
   <script>
@@ -45,39 +44,25 @@
       </form>
       <ul class="nav-home5 js-menubar">
         <li class="level1">
-          <a href="#">Home</a>
+          <a href="/">Home</a>
         </li>
         <li class="level1">
-          <a href="#">About Us</a>
+          <a href="/about">About Us</a>
         </li>
-        <li class="level1 active dropdown"><a href="#">Shop</a>
+        <li class="level1 active dropdown"><a href="/products">Shop</a>
           <span class="icon-sub-menu"></span>
           <div class="menu-level1 js-open-menu">
             <ul class="level1">
+              {{#each data.categoriesHash.data}}
               <li class="level2">
-                <a href="#">Women</a>
+                <a href="/products/?category={{slug}}">{{name}}</a>
                 <ul class="menu-level-2">
-                  <li class="level3"><a href="#" title="">Dresses</a></li>
-                  <li class="level3"><a href="#" title="">Skirts</a></li>
-                  <li class="level3"><a href="#" title="">Pants</a></li>
+                  {{#each children}}
+                  <li class="level3"><a href="/products/?category={{../slug}}&type={{slug}}" title="">{{name}}</a></li>
+                  {{/each}}
                 </ul>
               </li>
-              <li class="level2">
-                <a href="#">Men</a>
-                <ul class="menu-level-2">
-                  <li class="level3"><a href="#" title="">T-shirts</a></li>
-                  <li class="level3"><a href="#" title="">Taxido</a></li>
-                  <li class="level3"><a href="#" title="">Pants</a></li>
-                </ul>
-              </li>
-              <li class="level2">
-                <a href="#">Kids</a>
-                <ul class="menu-level-2">
-                  <li class="level3"><a href="#" title="">T-shirts</a></li>
-                  <li class="level3"><a href="#" title="">Skirts</a></li>
-                  <li class="level3"><a href="#" title="">Pants</a></li>
-                </ul>
-              </li>
+              {{/each}}
             </ul>
             <div class="clearfix"></div>
           </div>
@@ -86,12 +71,12 @@
           <a href="#">Contact us</a>
         </li>
       </ul>
-      <h4 class="mb-title">Languages</h4>
+      {{!-- <h4 class="mb-title">Languages</h4>
       <div class="mobile-social">
         <a href="#" class="submenu">EN</a>
         <a href="#" class="submenu">FR</a>
         <a href="#" class="submenu">IT</a>
-      </div>
+      </div> --}}
 
       <h4 class="mb-title">connect and follow</h4>
       <div class="mobile-social mg-bottom-30">
@@ -119,20 +104,20 @@
             {{#each data.wishlistHeaderProducts}}
             <div class=" product-item flex">
               <div class="product-img">
-                <a href="product-details.html" target="_blank"><img src="{{colors.[0].images.[0].image_link}}" alt=""
+                <a href="/{{slug}}" target="_blank"><img src="{{colors.[0].images.[0].image_link}}" alt=""
                     class="img-responsive max-width-100"></a>
 
               </div>
               <div class="product-inf">
                 <h3 class="product-title">
-                  <a href="product-details.html" target="_blank">{{slug}}</a>
+                  <a href="/{{slug}}" target="_blank">{{slug}}</a>
                 </h3>
                 <div class="product-price">
                   <span>${{price}}</span>
                 </div>
               </div>
               <div class="product-remove">
-                <a href="#" class="btn-del" title="remove item" target="_blank"><i class="ion-ios-close-empty"></i></a>
+                <a class="btn-del" title="remove item" target="_blank"><i class="ion-ios-close-empty"></i></a>
               </div>
             </div>
             {{/each}}
@@ -204,22 +189,23 @@
             </div>
             <div class="col-md-9 col-xs-4 col-sm-4 col2 flex justify-content-end padding-top-20">
               <ul class="nav navbar-nav js-menubar hidden-xs hidden-sm">
-                <li class="level1"><a href="index.html">Home</a>
+                <li class="level1"><a href="/">Home</a>
 
                 </li>
-                <li class="level1"><a href="about.html">About Us</a>
+                <li class="level1"><a href="/about">About Us</a>
 
                 </li>
-                <li class="level1 active dropdown"><a href="products.html">Shop</a>
+                <li class="level1 active dropdown"><a href="/products">Shop</a>
                   <span class="plus js-plus-icon"></span>
                   <div class="menu-level-1 dropdown-menu style5">
                     <ul class="level1">
                       {{#each data.categoriesHash.data}}
                       <li class="level2 col-4">
-                        <a href="/products/?category={{../slug}}" class="submenu">{{name}}</a>
+                        <a href="/products/?category={{slug}}" class="submenu">{{name}}</a>
                         <ul class="menu-level-2">
                           {{#each children}}
-                          <li class="level3"><a href="/products/?category={{../slug}}&type={{slug}}" title="">{{name}}</a></li>
+                          <li class="level3"><a href="/products/?category={{../slug}}&type={{slug}}"
+                              title="">{{name}}</a></li>
                           {{/each}}
                         </ul>
                       </li>
@@ -230,17 +216,17 @@
                 </li>
 
                 <li class="level1">
-                  <a href="contact.html">Contact Us</a>
+                  <a href="/contact">Contact Us</a>
 
                 </li>
-                <li class="level1">
+                {{!-- <li class="level1">
                   <a href="#">Languages</a>
                   <ul class="dropdown-menu menu-level-1 mobile-social">
                     <li class="level2"><a href="#" title="En">English </a></li>
                     <li class="level2"><a href="#" title="Fr">French</a></li>
                     <li class="level2"><a href="#" title="It">Italian</a></li>
                   </ul>
-                </li>
+                </li> --}}
               </ul>
               <div class="topbar-left">
 

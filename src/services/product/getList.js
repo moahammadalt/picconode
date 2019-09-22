@@ -51,6 +51,7 @@ export default async (req) => {
 				productColorItem['images'] = productImages.filter(productImageObj => productColorItem.product_id === productImageObj.product_id && productColorItem.id === productImageObj.product_color_id);
 				return productColorItem;
 			});
+			productItem['colors'] = productItem['colors'].reverse();
 			return productItem;
 		});
 	}

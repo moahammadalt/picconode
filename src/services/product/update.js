@@ -28,7 +28,7 @@ export default async (req) => {
   delete req.body.category_type_name;
 
   if(reqProductMainImage) {
-    req.body.main_image = reqProductMainImage && reqProductMainImage.image_name;
+    req.body.main_image = reqProductMainImage.image_name;
   }
   try {
 
