@@ -28,6 +28,14 @@ export default {
 			expiresIn: process.env.JWT_TOKEN_EXPIRE_TIME
 		}
 	},
+	MAIL: {
+		host: process.env.MAIL_HOST,
+		port: process.env.MAIL_OUTGOING_HOST,
+		mainUserName: process.env.MAIL_MAIN_USER_NAME,
+		mainUserPassword: process.env.MAIL_MAIN_USER_PASSWORD,
+		salesUser: process.env.MAIL_SALES_USER_NAME,
+		contactUser: process.env.MAIL_CONTACT_USER_NAME,
+	},
 	PUBLIC_VIEW_PATH: '/src/views/',
 	PUBLIC_IMAGES_PATH: '/src/public/images/',
 	PROD_PUBLIC_IMAGES_PATH: '/images/',

@@ -16,7 +16,7 @@ export default async req => {
 
   let productItemArr = await select({
     table: 'product',
-    condition: `slug='${req.params.slug}'`
+    condition: `${(isNaN(req.params.slug) ? 'slug' : 'id')}='${req.params.slug}'`
   });
 
   if(!productItemArr || productItemArr.length === 0) {

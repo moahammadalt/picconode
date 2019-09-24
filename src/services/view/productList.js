@@ -11,6 +11,7 @@ import { validateFilterQuery } from './utils';
 import { createHash } from 'globals/helpers';
 
 export default async req => {
+
   let categoriesListHash = req.headerViewData.categoriesHash.data;
   
   const clorListHashObj = createHash(await colorListGet(), 'slug');
