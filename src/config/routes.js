@@ -147,6 +147,11 @@ export default {
 			path: '/wishlistProducts.hbs',
 			type: 'GET',
 		},
+		emailSubscription: {
+			url: '/subscription/email-subscribe',
+			bodyParams: ['email'],
+			type: 'POST',
+		},
 		about: {
 			url: '/about',
 			path: '/about.hbs',

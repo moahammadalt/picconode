@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="footer padding-bottom-50 padding-top-50">
+<footer class="footer padding-bottom-50">
 
 	<div class="menu-footer">
 		<div class="container">
@@ -52,13 +52,16 @@
 		<div class="subs-footer">
 			<div class="form-newsletter">
 				<div class="input-group newsletter-group">
-					<span class="wpcf7-form-control-wrap email-632"><input type="email" name="email-632" value="" size="40"
+					<span class="wpcf7-form-control-wrap email-632"><input id="email-subscription-field" type="email" name="email-632" value="" size="40"
 							class=" newsletter-input form-control" aria-required="true" aria-invalid="false"
 							placeholder="Enter your e-mail"></span>
 					<p></p>
-					<div class="input-group-btn text-center padding-top-20"><input type="submit" value="SUBSCRIBE"
+					<div class="input-group-btn text-center padding-top-20"><input id="email-subscription-submit" type="button" value="SUBSCRIBE"
 							class="wpcf7-form-control wpcf7-submit btn btn-default"><span class="ajax-loader"></span><span
 							class="arrow-btn"></span></div>
+					<br />
+					<p id="email-subscription-success-message" class="sub-conf1 hidden">Your message have been send successfuly. Thank You.</p>
+          <p id="email-subscription-failure-message" class="sub-conf2 hidden">An error has been occured. Try again.</p>
 				</div>
 			</div>
 		</div>

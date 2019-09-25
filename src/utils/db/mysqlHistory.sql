@@ -164,3 +164,14 @@ ADD COLUMN `phone` VARCHAR(100) NULL,
 ADD COLUMN `subject` VARCHAR(200)  NULL,
 MODIFY `product_id` int(30) null;
 /*END*/
+
+/*Added 26/09/2019*/
+CREATE TABLE `subscription` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+/*END*/

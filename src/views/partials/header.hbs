@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../statics/styles/slick-theme.css">
   <link rel="stylesheet" href="../statics/styles/owl.theme.default.min.css">
   <link rel="stylesheet" type="text/css" href="../statics/styles/styles.css">
+  <link rel="stylesheet" type="text/css" href="../statics/styles/mohammad.css">
 
   <script src="../statics/lib/jquery.js"></script>
   <script src="../statics/lib/bootstrap.min.js"></script>
@@ -21,6 +22,7 @@
   <script src="../statics/lib/countdown.js"></script>
   <script src="../statics/lib/jquery-ui_c2b0c2990b0899f3e3e3d0791bf33206.js"></script>
   <script src="../statics/scripts/main.js"></script>
+  <script src="../statics/scripts/common.js"></script>
 
   <script>
 
@@ -34,14 +36,14 @@
     <div class="menu-push">
       <span class="close-left js-close"><i class="ion-ios-close-empty f-40"></i></span>
       <div class="clearfix"></div>
-      <form role="search" method="get" id="searchform" class="searchform" action="/search">
+      {{!-- <form role="search" method="get" id="searchform" class="searchform" action="/search">
         <div>
           <label class="screen-reader-text" for="q"></label>
           <input type="text" placeholder="Search for products" value="" name="q" id="q" autocomplete="off">
           <input type="hidden" name="type" value="product">
           <button type="submit" id="searchsubmit"><i class="ion-ios-search-strong"></i></button>
         </div>
-      </form>
+      </form> --}}
       <ul class="nav-home5 js-menubar">
         <li class="level1">
           <a href="/">Home</a>
@@ -99,6 +101,7 @@
       <div class="wishlist-inside">
 
         <div class="wishlist-bottom">
+          {{#ifCond data.wishlistHeaderProducts.length '>' 0}}
           <p>Items you like most.</p>
           <div class="view">
             {{#each data.wishlistHeaderProducts}}
@@ -125,6 +128,13 @@
           <div class="wishlist-button mg-top-30">
             <a class="zoa-btn checkout btn-wishlist-empty" href="/wishlist-products" title="">View All</a>
           </div>
+          {{else}}
+          <p>Your wishlist is empty.</p>
+          <p>Save the items you like most so you don't lose sight of them.</p>
+          <div class="wishlist-button mg-top-30">
+            <a class="zoa-btn checkout btn-wishlist-empty" href="/products" title="">Start Shopping</a>
+          </div>
+          {{/ifCond}}
 
         </div>
       </div>
@@ -134,7 +144,7 @@
   <!-- End wishlist -->
 
   <!-- Search form -->
-  <div class="search-form-wrapper header-search-form">
+  {{!-- <div class="search-form-wrapper header-search-form">
     <div class="container">
       <div class="search-results-wrapper">
         <div class="btn-search-close">
@@ -149,7 +159,7 @@
         <button type="submit" id="search-btn"><i class="ion-ios-search-strong"></i></button>
       </form>
     </div>
-  </div>
+  </div> --}}
   <!-- End search form -->
 
   <!--  Wrappage Start -->
@@ -185,7 +195,7 @@
               </div>
             </div>
             <div class="col-md-3 col-xs-4 col-sm-4 col2 justify-content-center">
-              <a href="#"><img src="../statics/images/logo2.png" alt="" class="img-reponsive"></a>
+              <a href="#"><img src="../statics/images/logo.png" alt="" class="img-reponsive"></a>
             </div>
             <div class="col-md-9 col-xs-4 col-sm-4 col2 flex justify-content-end padding-top-20">
               <ul class="nav navbar-nav js-menubar hidden-xs hidden-sm">
@@ -238,11 +248,12 @@
                   </a>
                 </div>
 
-                <div class="element element-search hidden-xs hidden-sm">
+                {{!-- <div class="element element-search hidden-xs hidden-sm">
                   <a class="zoa-icon search-toggle">
                     <i class="fa fa-2x fa-search"></i>
                   </a>
-                </div>
+                </div> --}}
+
               </div>
             </div>
           </div>

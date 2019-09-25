@@ -55,3 +55,4 @@ export { default as productList } from './view/productList.js';
 export { userDemandSend } from './view/productUserDemand';
 export { userDemandList } from './view/productUserDemand';
 export { userDemandReply } from './view/productUserDemand';
+export { emailSubscribe } from './view/subscription';

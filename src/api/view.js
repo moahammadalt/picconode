@@ -8,6 +8,7 @@ import {
   wishlistItemCreate,
   wishlistItemDelete,
   wishlistGet,
+  emailSubscribe,
 } from "services";
 
 export default router => {
@@ -73,5 +74,9 @@ export default router => {
 
   router.post(publicApi.wishlistItemDelete.url, (...arg) => {
     serviceHandler(...arg, wishlistItemDelete);
+  });
+
+  router.post(publicApi.emailSubscription.url, (...arg) => {
+    serviceHandler(...arg, emailSubscribe);
   });
 };
