@@ -3,7 +3,7 @@ import path from 'path';
 import hbs from 'hbs';
 
 import config from 'config';
-import { getSinglurQueryParams } from 'config/filter';
+import { getSinglurQueryParams, getFilteredQueryParamObj } from 'config/filter';
 
 export default new (class hbsViews {
   constructor() {
@@ -38,7 +38,7 @@ export default new (class hbsViews {
 
     hbs.registerHelper('getHref', function(query, key, value) {
       
-      let newQuery = {...query} || {};
+      let newQuery = getFilteredQueryParamObj({ ...query }, key) || {};
       
       if(newQuery[key] && !singlurParams.includes(key)) {
         const keysArr = newQuery[key].split(',');

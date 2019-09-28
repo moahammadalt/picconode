@@ -175,3 +175,10 @@ CREATE TABLE `subscription` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*END*/
+
+/*Added 28/09/2019*/
+ALTER TABLE `product` 
+ADD COLUMN `category_tag_id` int(11) NULL,
+ADD KEY `FK_product_category_tag_id` (`category_tag_id`),
+ADD CONSTRAINT `FK_product_category_tag_id` FOREIGN KEY (`category_tag_id`) REFERENCES `category` (`id`);
+/*END*/

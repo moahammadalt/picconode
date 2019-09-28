@@ -29,6 +29,17 @@
         {{/each}}
       </ul>
     </div>
+
+    <div class="shop-element right">
+
+      <span>Showing 1-11 of 11 results</span>
+      <!--<span>Showing 1-12 of 40 results</span>-->
+      <div class="view-mode view-group">
+        <a class="grid-icon col2 active"><i class="zoa-icon-view-3"></i></a>
+        <a class="list-icon list"><i class="fa fa-circle" aria-hidden="true"></i></a>
+      </div>
+
+    </div>
   </div>
 
   <div class="tab-content">
@@ -49,18 +60,35 @@
             </div>
           </div>
 
+          {{#ifCond data.filterHasCategories '===' true}}
           {{#each data.categoriesHash.data}}
           {{#ifCond @key '===' ../data.query.category}}
           <div class="widget-filter filter-category-type">
             <h3>Categories</h3>
             <ul class="nav-home5 js-menubar">
               {{#each children}}
-              <li class="level1 {{#ifCond ../../data.query.type '===' slug}}active{{/ifCond}}"><a href="{{getHref ../../data.query 'type' slug}}" title="">{{name}}<span>{{productsCount}}</span></a></li>
+              <li
+                class="level1 {{#ifCond ../../data.query.type '===' slug}}active{{/ifCond}} {{#ifCond children.length '>' 0}}dropdown{{/ifCond}}">
+                <a href="{{getHref ../../data.query 'type' slug}}" title="">
+                  {{name}}
+                  <span>{{productsCount}}</span>
+                </a>
+                {{#ifCond children.length '>' 0}}
+                <span class="icon-sub-menu up-icon"></span>
+                <ul class="menu-level1 js-open-menu" style="display: block;">
+                  {{#each children}}
+                  <li class="level2 {{#ifCond ../../../data.query.tag '===' slug}}active{{/ifCond}}"><a href="{{getHref ../../../data.query 'tag' slug}}" title="">{{name}}<span>{{productsCount}}</span></a></li>
+                  {{/each}}
+                </ul>
+                {{/ifCond}}
+              </li>
               {{/each}}
             </ul>
           </div>
           {{/ifCond}}
           {{/each}}
+          {{/ifCond}}
+
 
           <div class="widget-filter filter-cate filter-color margin-5">
             <h3>COLOR</h3>
@@ -154,7 +182,8 @@
                     <h3 class="product-title">
                       <a href="/{{slug}}" target="_blank">{{name}}</a>
                     </h3>
-                    <a class="" title="remove item"> <span data-wishlist-slug="{{slug}}" class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span></a>
+                    <a class="" title="remove item"> <span data-wishlist-slug="{{slug}}"
+                        class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span></a>
                   </div>
                   <div class="product-price">
                     <span>${{price}}</span>
@@ -189,9 +218,9 @@
 <script>
 
 
-$(function () {
+  $(function () {
 
-  var productListHash = createHash({{{ json data.productList }}}, 'id').data;
+    var productListHash = createHash({{{ json data.productList }}}, 'id').data;
   var queryParams = getQueryParameters();
   var colorParams = queryParams.color && queryParams.color.split(',');
   var sizeParams = queryParams.size && queryParams.size.split(',');
@@ -275,10 +304,10 @@ $(function () {
     var _thisElm = $(this);
     var productSlug = _thisElm.attr('data-wishlist-slug');
     var isAlreadyWishlisted = _thisElm.hasClass('fa-heart');
-    
+
     $.ajax({
       type: 'POST',
-      url: '/wishlist/'+ (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') +'',
+      url: '/wishlist/' + (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') + '',
       contentType: "application/json",
       data: JSON.stringify({
         slug: productSlug,

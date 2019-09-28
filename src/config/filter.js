@@ -5,17 +5,22 @@ export const maxPrice = 4000;
 export const getValidQueryParams = ({
   availablesColorsSlugs,
   availablesSizesSlugs,
-  categoriesHash
+  flattenCategoriesHash
 } = {}) => [
   {
     param: 'category',
     isSingle: true,
-    validate: val => categoriesHash.keys().includes(val)
+    validate: val => flattenCategoriesHash.keys().includes(val)
   },
   {
     param: 'type',
     isSingle: true,
-    validate: val => true
+    validate: val => flattenCategoriesHash.keys().includes(val)
+  },
+  {
+    param: 'tag',
+    isSingle: true,
+    validate: val => flattenCategoriesHash.keys().includes(val)
   },
   {
     param: 'price',
@@ -50,3 +55,37 @@ export const getSinglurQueryParams = () =>
   getValidQueryParams()
     .filter(({ isSingle }) => isSingle)
     .map(({ param }) => param);
+
+export const getFilterFieldsObjNames = () =>  getValidQueryParams().reduce((obj, { param }) => {
+  obj[param] = true;
+  return obj
+}, {});
+
+export const getFilteredQueryParamObj = (queryObj, key) => {
+
+  if(key === 'category') {
+    delete queryObj.type;
+    delete queryObj.tag;
+  }
+
+  if(key === 'type') {
+    delete queryObj.category;
+    delete queryObj.tag;
+  }
+
+  if(key === 'tag') {
+    delete queryObj.category;
+    delete queryObj.type;
+  }
+
+  if(queryObj.type) {
+    delete queryObj.category;
+  }
+
+  if(queryObj.tag) {
+    delete queryObj.category;
+    delete queryObj.type;
+  }
+
+  return { ...queryObj };
+}

@@ -4,8 +4,10 @@ import { categoryListGet, wishlistGet } from 'services';
 import { getWishListSlugsSession } from 'session/wishlist';
 
 export default async (req) => {
+
+  const flattenCategoriesList = await categoryListGet();
   
-  const categoriesList = getParentChildArr(await categoryListGet());
+  const categoriesList = getParentChildArr(flattenCategoriesList);
 
   const wishlistItemsLength = getWishListSlugsSession(req).length;
 
@@ -20,6 +22,7 @@ export default async (req) => {
     categoriesHash: createHash(categoriesList, 'slug'),
     wishlistItemsLength,
     ...wishlistProducts,
+    flattenCategoriesHash: createHash(flattenCategoriesList, 'slug'),
     wishlistHeaderProducts: (wishlistProducts && wishlistProducts.wishlistProducts.length > 2) ? wishlistProducts.wishlistProducts.slice(0, 2) : wishlistProducts.wishlistProducts,
   }
 };

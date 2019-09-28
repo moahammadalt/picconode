@@ -8,23 +8,24 @@ import {
 
 
 export default async (req) => {
-	
-	const productSizes = req.body.sizes;
-	const productColors = req.body.colors;
-	let mainImage = req.body.main_image;
-	delete req.body.sizes;
-	delete req.body.colors;
-	delete req.body.images;
-	req.body.main_image = mainImage && mainImage.image_name;
-	
-	const productResponse = await insert({
-		table: 'product',
-		fields: [ ...Object.keys(req.body), 'admin_id' ],
-		values: [ ...Object.values(req.body), req.adminUser.id ],
-		data: req.body,
-	});
+	let productResponse;
 
 	try {
+		const productSizes = req.body.sizes;
+		const productColors = req.body.colors;
+		let mainImage = req.body.main_image;
+		delete req.body.sizes;
+		delete req.body.colors;
+		delete req.body.images;
+		req.body.main_image = mainImage && mainImage.image_name;
+		
+		productResponse = await insert({
+			table: 'product',
+			fields: [ ...Object.keys(req.body), 'admin_id' ],
+			values: [ ...Object.values(req.body), req.adminUser.id ],
+			data: req.body,
+		});
+
 		if(mainImage) {
 			const mainImageCreated = await productImageCreate({
 				...req,

@@ -30,10 +30,19 @@ export default async (req) => {
 			if(productItem.main_image) {
 				const mainImageObj = productImages.find(productImageObj => productImageObj.product_id === productItem.id && productImageObj.image_name === productItem.main_image);
 				productItem.main_image = mainImageObj;
-			} 
+			}
+
+			if(productItem.category_id && categories[productItem.category_id]) {
+				productItem['category_slug'] = categories[productItem.category_id].slug;
+			}
+
+			if(productItem.category_type_id && categories[productItem.category_type_id]) {
+				productItem['category_type_slug'] = categories[productItem.category_type_id].slug;
+			}
 			
-			productItem['category_slug'] = categories[productItem.category_id].slug;
-			productItem['category_type_slug'] = categories[productItem.category_type_id].slug;
+			if(productItem.category_tag_id && categories[productItem.category_tag_id]) {
+				productItem['category_tag_slug'] = categories[productItem.category_tag_id].slug;
+			}
 			
 			let productSizeItemArr = productSizeList.filter(productSizeItem => productSizeItem.product_id === productItem.id);
 

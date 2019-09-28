@@ -27,4 +27,8 @@ a{
 .filter-category-type .level1.active a{
   color: #f3bd1c;
 }
+
+.filter-category-type .level2.active a{
+  color: #f3bd1c !important;
+}
 /*Mohammad styles ends*/
