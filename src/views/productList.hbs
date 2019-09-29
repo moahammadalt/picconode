@@ -32,7 +32,7 @@
 
     <div class="shop-element right">
 
-      <span>Showing 1-11 of 11 results</span>
+      <span>Showing {{getProductsPaginationLimit data}} of {{data.productListCount}} results</span>
       <!--<span>Showing 1-12 of 40 results</span>-->
       <div class="view-mode view-group">
         <a class="grid-icon col2 active"><i class="zoa-icon-view-3"></i></a>
@@ -77,7 +77,9 @@
                 <span class="icon-sub-menu up-icon"></span>
                 <ul class="menu-level1 js-open-menu" style="display: block;">
                   {{#each children}}
-                  <li class="level2 {{#ifCond ../../../data.query.tag '===' slug}}active{{/ifCond}}"><a href="{{getHref ../../../data.query 'tag' slug}}" title="">{{name}}<span>{{productsCount}}</span></a></li>
+                  <li class="level2 {{#ifCond ../../../data.query.tag '===' slug}}active{{/ifCond}}"><a
+                      href="{{getHref ../../../data.query 'tag' slug}}"
+                      title="">{{name}}<span>{{productsCount}}</span></a></li>
                   {{/each}}
                 </ul>
                 {{/ifCond}}
@@ -183,8 +185,10 @@
                       <a href="/{{slug}}" target="_blank">{{name}}</a>
                     </h3>
                     {{#ifCond stock_status '===' 1}}
-                    <a class="" title="{{#ifCond isWishlisted '===' undefined}}add to wishlist{{else}}remove item{{/ifCond}}">
-                      <span data-wishlist-slug="{{slug}}" class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span>
+                    <a class=""
+                      title="{{#ifCond isWishlisted '===' undefined}}add to wishlist{{else}}remove item{{/ifCond}}">
+                      <span data-wishlist-slug="{{slug}}"
+                        class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span>
                     </a>
                     {{/ifCond}}
                   </div>
@@ -210,6 +214,19 @@
               {{/each}}
 
             </div>
+            {{getProductsPagination data }}
+            {{!-- <div class="text-center">
+              <ul class="pagination">
+                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">...</a></li>
+                <li><a href="#">8</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+
+              </ul>
+            </div> --}}
           </div>
         </div>
       </div>

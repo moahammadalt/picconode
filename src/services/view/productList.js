@@ -8,8 +8,9 @@ import {
 import { getWishListSlugsSession } from 'session/wishlist';
 import { getViewdProductsSlugs } from 'session/viewedProducts';
 import { validateFilterQuery } from './utils';
+import { getFilterFieldsObjNames } from 'utils/filter';
 import { createHash } from 'globals/helpers';
-import { getFilterFieldsObjNames } from 'config/filter';
+import { defaultLimit, defaultPage } from 'config/filter';
 
 export default async req => {
 
@@ -19,12 +20,14 @@ export default async req => {
     
     const clorListHashObj = createHash(await colorListGet(), 'slug');
     const sizeListHashObj = createHash(await sizeListGet(), 'slug');
-    const productListCount = (await select({
-      count: true,
-      table: 'product'
-    }))[0].rowsCount;
+    let productListCount;
 
     let recentViewedProducts = [];
+
+    const page = req.query.page || defaultPage;
+    const limit = req.query.limit || defaultLimit;
+    delete req.query.page;
+    delete req.query.limit;
 
     // TODO: move this to a middleware
     validateFilterQuery({
@@ -35,14 +38,13 @@ export default async req => {
     });
 
     const filterHasCategories = !!(req.query.category || req.query.type || req.query.tag);
-    
 
     let productList = await productListGet({
       ...req,
       query: {
         ...req.query,
-        orderBy: req.query.orderBy ? req.query.orderBy : 'date_created',
-        sort: req.query.sort ? req.query.sort : 'DESC'
+        orderBy:  req.query.orderBy || 'date_created',
+        sort: req.query.sort || 'DESC',
       }
     });
 
@@ -105,7 +107,7 @@ export default async req => {
 
         return product;
       })
-      .filter(product => {
+      .filter((product) => {
         let filter = {...filterFieldsObj};
 
         if (req.query.type) {
@@ -161,6 +163,16 @@ export default async req => {
         return product;
       });
 
+    productListCount = productList.length;
+
+    productList = productList.filter((product, index) => {
+      const fromIndex = (page * limit) - limit;
+      const toIndex = (page * limit) - 1;
+
+      let inSearchPaginationLimit = (index >= fromIndex) && (index <= toIndex);
+      return inSearchPaginationLimit;
+    });
+
     // prepare recent products
     let tmpProductsArr = [];
     for (const slug of getViewdProductsSlugs(req)) {
@@ -188,7 +200,11 @@ export default async req => {
       productListCount,
       productList,
       requestedURl: req.protocol + '://' + req.get('host') + req.originalUrl,
-      query: req.query,
+      query: {
+        ...req.query,
+        ...(page !== defaultPage && { page }),
+        ...(limit !== defaultLimit && { limit }),
+      },
       recentViewedProducts,
       colorList: Object.values(clorListHashObj.data),
       sizeList: Object.values(sizeListHashObj.data)

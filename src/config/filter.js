@@ -2,11 +2,25 @@ export const lowPrice = 0;
 
 export const maxPrice = 4000;
 
+export const defaultPage = 1;
+
+export const defaultLimit = 3;
+
 export const getValidQueryParams = ({
   availablesColorsSlugs,
   availablesSizesSlugs,
   flattenCategoriesHash
 } = {}) => [
+  {
+    param: 'page',
+    isSingle: true,
+    validate: val => !isNaN(val)
+  },
+  {
+    param: 'limit',
+    isSingle: true,
+    validate: val => !isNaN(val)
+  },
   {
     param: 'category',
     isSingle: true,
@@ -50,42 +64,3 @@ export const getValidQueryParams = ({
     }
   }
 ];
-
-export const getSinglurQueryParams = () =>
-  getValidQueryParams()
-    .filter(({ isSingle }) => isSingle)
-    .map(({ param }) => param);
-
-export const getFilterFieldsObjNames = () =>  getValidQueryParams().reduce((obj, { param }) => {
-  obj[param] = true;
-  return obj
-}, {});
-
-export const getFilteredQueryParamObj = (queryObj, key) => {
-
-  if(key === 'category') {
-    delete queryObj.type;
-    delete queryObj.tag;
-  }
-
-  if(key === 'type') {
-    delete queryObj.category;
-    delete queryObj.tag;
-  }
-
-  if(key === 'tag') {
-    delete queryObj.category;
-    delete queryObj.type;
-  }
-
-  if(queryObj.type) {
-    delete queryObj.category;
-  }
-
-  if(queryObj.tag) {
-    delete queryObj.category;
-    delete queryObj.type;
-  }
-
-  return { ...queryObj };
-}

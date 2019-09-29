@@ -3,7 +3,7 @@ import path from 'path';
 import hbs from 'hbs';
 
 import config from 'config';
-import { getSinglurQueryParams, getFilteredQueryParamObj } from 'config/filter';
+import { getFilterHref, getProductsPagination, getProductsPaginationLimit } from 'utils/filter';
 
 export default new (class hbsViews {
   constructor() {
@@ -19,8 +19,6 @@ export default new (class hbsViews {
     const partialsPath = viewsPath + 'partials';
 
     const filenames = fs.readdirSync(partialsPath);
-
-    const singlurParams = getSinglurQueryParams();
 
     filenames.forEach(filename => {
       const matches = /^([^.]+).hbs$/.exec(filename);
@@ -38,28 +36,7 @@ export default new (class hbsViews {
 
     hbs.registerHelper('getHref', function(query, key, value) {
       
-      let newQuery = getFilteredQueryParamObj({ ...query }, key) || {};
-      
-      if(newQuery[key] && !singlurParams.includes(key)) {
-        const keysArr = newQuery[key].split(',');
-
-        var index = keysArr.indexOf(value);
-        if (index > -1) {
-          keysArr.splice(index, 1);
-        }
-        else{
-          keysArr.push(value);
-        }
-        newQuery[key] = keysArr.map(keyItem => keyItem).join(',');
-      }
-      else{
-        newQuery[key] = value;
-      }
-
-      var queryString = '/products/?' + Object.keys(newQuery).filter(keyParams => newQuery[keyParams]).map(keyParams => keyParams + '=' + newQuery[keyParams]).join('&');
-      
-      return queryString;
-
+      return getFilterHref(query, key, value);
     });
 
     hbs.registerHelper('ifCond', function(v1, operator, v2, options) {
@@ -106,5 +83,15 @@ export default new (class hbsViews {
 
       return new hbs.SafeString(str);
     });
+
+    hbs.registerHelper('getProductsPaginationLimit', function(data) {
+      return getProductsPaginationLimit(data);
+
+    });
+
+    hbs.registerHelper('getProductsPagination', function(data) {
+      return getProductsPagination(data);
+    });
+    
   }
 })();
