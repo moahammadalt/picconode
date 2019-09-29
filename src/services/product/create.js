@@ -70,6 +70,7 @@ export default async (req) => {
 						body: {
 							'product_id': productResponse.id,
 							'color_id': productColorObject.id,
+							'product_color_code': productColorObject.product_color_code,
 							'amount': productColorObject.amount,
 						}
 					});
@@ -102,6 +103,7 @@ export default async (req) => {
 		};
 	}
 	catch (err) {
+		console.log('err: ', err);
 		await productDelete({
 			params: {
 				'slug': productResponse.slug

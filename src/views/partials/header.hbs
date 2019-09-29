@@ -119,8 +119,8 @@
                   <span>${{price}}</span>
                 </div>
               </div>
-              <div data-wishlist-slug="{{slug}}" class="product-remove wishlist-product">
-                <a class="btn-del" title="remove item"><i class="ion-ios-close-empty"></i></a>
+              <div class="product-remove">
+                <a data-wishlist-slug="{{slug}}" class="btn-del wishlist-product-remove" title="remove item"><i class="ion-ios-close-empty"></i></a>
               </div>
             </div>
             {{/each}}
@@ -264,7 +264,7 @@
 <script>
   $(function () {
 
-    $('.wishlist-product').click(function () {
+    $('.wishlist-product-remove').click(function () {
       var _thisElm = $(this);
       var productSlug = _thisElm.attr('data-wishlist-slug');
 

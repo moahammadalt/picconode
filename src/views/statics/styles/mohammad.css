@@ -31,4 +31,11 @@ a{
 .filter-category-type .level2.active a{
   color: #f3bd1c !important;
 }
+
+.padding-bottom-15 {
+  padding-bottom: 15px; }
+
+.single-product-detail .single-product-info .single-product-button-group .element-button .zoa-wishlist.active {
+          color: #fff;
+          background: #f3bd1c; }
 /*Mohammad styles ends*/

@@ -193,4 +193,7 @@ ADD COLUMN `stock_status` TINYINT(1) NOT NULL DEFAULT 1;
 ALTER TABLE `product_color` 
 ADD COLUMN `product_color_code` VARCHAR(50) NULL,
 ADD UNIQUE KEY `product_color_code` (`product_color_code`);
+
+ALTER TABLE `product_price` 
+ADD COLUMN `size_price` INT(6) NULL;
 /*END*/

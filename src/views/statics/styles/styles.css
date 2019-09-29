@@ -19028,6 +19028,9 @@ width: 195px;
 .size-group .first-input {
 	margin-left: 0 !important;
 }
+.size-group input:first-child {
+  margin-left: 0 !important;
+}
 
 .empty {
 	border: none !important;

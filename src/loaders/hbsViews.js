@@ -86,12 +86,14 @@ export default new (class hbsViews {
 
     hbs.registerHelper('getProductsPaginationLimit', function(data) {
       return getProductsPaginationLimit(data);
-
     });
 
     hbs.registerHelper('getProductsPagination', function(data) {
       return getProductsPagination(data);
     });
-    
+
+    hbs.registerHelper('getInch', function(val) {
+      return Math.round(Number(val) / 2.54);
+    });
   }
 })();

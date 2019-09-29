@@ -53,9 +53,9 @@
   <h1 class="submenu">Product Page</h1>
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a href="category/{{data.product.category.slug}}">{{data.product.category.name}}</a></li>
+    <li><a href="products/?category={{data.product.category.slug}}">{{data.product.category.name}}</a></li>
     <li><a
-        href="category/{{data.product.category.slug}}/{{data.product.category_type.slug}}">{{data.product.category_type.name}}</a>
+        href="products/?type={{data.product.category_type.slug}}">{{data.product.category_type.name}}</a>
     </li>
   </ul>
 </div>
@@ -118,11 +118,9 @@
             </div>
           </div>
 
-
-
           <div class="product-details-to-choose">
             <div class="product-price">
-              <span>${{data.product.price}}</span>
+              <span class="product-main-price">${{data.product.price}}</span>
             </div>
 
             <div>
@@ -163,19 +161,26 @@
                           <form action="">
 
                             {{#each data.product.sizes}}
-                            <input type="radio" name="size" value="{{size_slug}}"
-                              {{#ifCond @index '===' 0}}checked{{/ifCond}} data-size-name="{{size_name}}" />
+                            <input type="radio" name="size" value="{{size_slug}}" data-size-name="{{size_name}}" data-size-price="{{size_price}}" />
                             <span class="select-size">{{size_slug}}{{#ifCond size_details '!==' null}}/{{size_details}}{{/ifCond}}</span>
                             {{/each}}
 
                             {{#each data.product.sizes}}
-                            <div class="text size-details {{#ifCond @index '===' 0}}active{{else}}hidden{{/ifCond}}"
+                            <div class="text size-details hidden"
                               data-size-details-slug="{{size_slug}}">
                               <table class="size-details">
+                                <tr>
+                                  <th class="first-th">TITLE </th>
+                                  <td class="first-td">Cm / In</td>
+                                </tr>
                                 {{#ifCond height '>' 0}}
                                 <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                <tr>
                                   <th>Height: </th>
-                                  <td>{{height}} cm</td>
+                                  <td>{{height}} / {{getInch height}}</td>
                                 </tr>
                                 <tr>
                                   <th></th>
@@ -186,7 +191,7 @@
                                 {{#ifCond chest '>' 0}}
                                 <tr>
                                   <th>Chest circumference: </th>
-                                  <td>{{chest}} cm</td>
+                                  <td>{{chest}} / {{getInch chest}}</td>
                                 </tr>
                                 <tr>
                                   <th></th>
@@ -197,14 +202,22 @@
                                 {{#ifCond hips '>' 0}}
                                 <tr>
                                   <th>Hips: </th>
-                                  <td>{{hips}} cm</td>
+                                  <td>{{hips}} / {{getInch hips}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
                                 </tr>
                                 {{/ifCond}}
 
                                 {{#ifCond waistline '>' 0}}
                                 <tr>
                                   <th>Waistline: </th>
-                                  <td>{{waistline}} cm</td>
+                                  <td>{{waistline}} / {{getInch waistline}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
                                 </tr>
                                 {{/ifCond}}
                               </table>
@@ -216,8 +229,7 @@
                       </div>
                     </div>
                     {{!-- <div class="col-md-4">
-                      <h6 class="chosen-size">Chosen size : <span
-                          class="chosen-size-name capitalize">{{data.product.sizes.[0].size_name}}</span></h6>
+                      <h6 class="chosen-size hidden">Chosen size : <span class="chosen-size-name capitalize">{{data.product.sizes.[0].size_name}}</span></h6>
                     </div> --}}
                   </div>
 
@@ -230,18 +242,17 @@
                     <button class="zoa-btn btn-message hover-white js-user">SEND MESSAGE</button>
                   </div>
                 </div>
+              </div>
 
-                <div class="spec">
-                  <div class="details mg-bottom-30">
-                    <h4>Details</h4>
-                    <p>{{data.product.details}}</p>
-                  </div>
+              <div class="spec">
+                <div class="details mg-bottom-30">
+                  <h4>Details</h4>
+                  <p>{{data.product.details}}</p>
+                </div>
 
-                  <div class="description">
-                    <h4>Description</h4>
-                    <p>{{data.product.description}}</p>
-                  </div>
-
+                <div class="description">
+                  <h4>Description</h4>
+                  <p>{{data.product.description}}</p>
                 </div>
 
               </div>
@@ -360,8 +371,11 @@
 
     var sizeSlug = this.value;
     var sizeName = $(this).attr('data-size-name');
+    var sizePrice = $(this).attr('data-size-price');
 
+    //$('.chosen-size').removeClass('hidden');
     //$('.chosen-size-name').text(sizeName);
+    sizePrice && $('.product-main-price').text(sizePrice);
     $('.size-details.active').removeClass('active').addClass('hidden');
     $('.size-details[data-size-details-slug=' + sizeSlug + ']').addClass('active').removeClass('hidden');
   });

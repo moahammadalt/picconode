@@ -4,7 +4,7 @@ export const maxPrice = 4000;
 
 export const defaultPage = 1;
 
-export const defaultLimit = 3;
+export const defaultLimit = 12;
 
 export const getValidQueryParams = ({
   availablesColorsSlugs,
