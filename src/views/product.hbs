@@ -1,5 +1,53 @@
 {{> header }}
 
+<!-- Account -->
+<div class="account-form-wrapper">
+  <div class="container">
+    <div class="search-results-wrapper">
+      <div class="btn-search-close">
+        <i class="ion-ios-close-empty black"></i>
+      </div>
+    </div>
+    <div class="account-wrapper">
+      <div class="send-message">
+        <h3>Have a Question ?
+          Send us a message</h3>
+      </div>
+
+      <div class="tab-content">
+        <div id="login" class="tab-pane fade in active">
+          <div class="row">
+            <div class="col-md-6 col col-login">
+              <form method="post" class="form-customer form-register">
+                <div class="form-group">
+                  <label for="exampleInputEmail2">E-mail</label>
+                  <input type="email" class="form-control form-account" id="user-email">
+                </div>
+                <div class="form-group">
+                  <label for="zoaname2">Name</label>
+                  <input type="text" class="form-control form-account" id="user-name">
+                </div>
+                <div class="form-group">
+                  <label for="comment">Message</label>
+                  <textarea name="text" type="text" class="feedback-input form-control" id="user-message"></textarea>
+                </div>
+                <div class="btn-button-group mg-top-30 mg-bottom-15">
+                  <button type="submit" class="zoa-btn btn-login hover-white">Send</button>
+                </div>
+              </form>
+              <p id="succes-message" class="hidden" style="color: #008c8c">Your message have been send successfuly. Thank You.</p>
+              <p id="failure-message" class="hidden" style="color: red">An error has been occured. Try again.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- End Account -->
+
 <!-- Content -->
 <div class=" container-fluid text-center breadcrumb-about">
   <h1 class="submenu">Product Page</h1>
@@ -43,15 +91,24 @@
         <div class="single-product-info product-info product-grid-v2">
           <div class="row">
             <div class="col-12">
-              <div class="col-md-10">
+              <div class="col-md-10 padding-bottom-15">
                 <h3 class="product-title"><a>{{data.product.name}}</a> </h3>
+                <div class="row">
+                  <div class="col-12">
+                  <div class="col-md-3"><span class="chosen-color-code">{{data.product.colors.[0].product_color_code}}</span></div>
+                    <div class="col-md-9 title-sec">
+                      <h4>instock</h4>
+                    </div>
+                  </div>
+                </div>
 
               </div>
               <div class="col-md-2 single-product-detail-mob">
                 <div class="single-product-button-group">
                   <div class="flex align-items-center element-button">
 
-                    <a data-wishlist-slug="{{data.product.slug}}" class="wishlist-product zoa-btn zoa-wishlist {{#ifCond data.product.isWishlisted '===' true}}active{{/ifCond}}">
+                    <a data-wishlist-slug="{{data.product.slug}}"
+                      class="wishlist-product zoa-btn zoa-wishlist {{#ifCond data.product.isWishlisted '===' true}}active{{/ifCond}}">
                       <i class="zoa-icon-heart"></i>
                     </a>
                   </div>
@@ -68,14 +125,6 @@
               <span>${{data.product.price}}</span>
             </div>
 
-            {{#ifCond data.product.amount '>' 0}}
-            <div class="product-countdown ">
-              <span> Available:</span>
-              <h4> instock</h4> <span> Status:</span>
-              <h3>Only <span>{{data.product.amount}}</span> left</h3>
-            </div>
-            {{/ifCond}}
-
             <div>
               <div class="colors bd-bottom">
                 <h4>Available Colors</h4>
@@ -87,8 +136,7 @@
                         <div class="size-group">
                           <div class="color-group1">
                             {{#each data.product.colors}}
-                            <a data-color-slug={{color_slug}} data-color-name={{color_name}}
-                              class="circle color-option {{color_name}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
+                            <a data-color-slug="{{color_slug}}" data-color-name="{{color_name}}" data-color-code="{{product_color_code}}" class="circle color-option {{color_name}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
                             {{/each}}
                           </div>
                         </div>
@@ -96,8 +144,10 @@
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <h6 class="chosen-color">Chosen Color : <span
-                          class="chosen-color-name capitalize">{{data.product.colors.[0].color_name}}</span></h6>
+                      <h6 class="chosen-color">
+                        Chosen Color : <span
+                          class="chosen-color-name capitalize">{{data.product.colors.[0].color_name}}</span>
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -107,20 +157,20 @@
                 <h4>Available Sizes</h4>
                 <div class="row">
                   <div class="col-12">
-                    <div class="col-md-8 size-choices">
+                    <div class="col-md-12 size-choices">
                       <div class="product-size">
                         <div class="size-group">
                           <form action="">
 
                             {{#each data.product.sizes}}
                             <input type="radio" name="size" value="{{size_slug}}"
-                              {{#ifCond @index '===' 0}}checked{{/ifCond}} data-size-name={{size_name}} />
-                            <span class="select-size">{{size_slug}}</span>
+                              {{#ifCond @index '===' 0}}checked{{/ifCond}} data-size-name="{{size_name}}" />
+                            <span class="select-size">{{size_slug}}{{#ifCond size_details '!==' null}}/{{size_details}}{{/ifCond}}</span>
                             {{/each}}
 
                             {{#each data.product.sizes}}
                             <div class="text size-details {{#ifCond @index '===' 0}}active{{else}}hidden{{/ifCond}}"
-                              data-size-details-slug={{size_slug}}>
+                              data-size-details-slug="{{size_slug}}">
                               <table class="size-details">
                                 {{#ifCond height '>' 0}}
                                 <tr>
@@ -165,10 +215,10 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    {{!-- <div class="col-md-4">
                       <h6 class="chosen-size">Chosen size : <span
                           class="chosen-size-name capitalize">{{data.product.sizes.[0].size_name}}</span></h6>
-                    </div>
+                    </div> --}}
                   </div>
 
                 </div>
@@ -177,72 +227,45 @@
               <div class="clear bd-bottom">
                 <div class="row">
                   <div class="col-md-6">
-                    <a href="#popup1" class="zoa-btn btn-message">
-                      SEND MESSAGE
-                    </a></div>
-                </div>
-
-                <div id="popup1" class="overlay">
-                  <div class="popup">
-                    <h4>Send us a message</h4>
-                    <a class="close" href="#">&times;</a>
-                    <div class="content">
-                      <form method="post" class="form-customer form-login">
-                        <div class="form-group">
-                          <label for="user-email">E-mail *</label>
-                          <input type="email" class="form-control form-account" id="user-email" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="user-name">Name</label>
-                          <input type="text" class="form-control form-account" id="user-name" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="user-message">Message</label>
-                          <textarea name="text" type="text" class="feedback-input form-control" id="user-message" required></textarea>
-
-                        </div>
-                        <div class="btn-button-group mg-top-30 mg-bottom-15">
-                          <button type="submit" class="zoa-btn btn-login hover-white">Send</button>
-                        </div>
-                      </form>
-
-                    </div>
+                    <button class="zoa-btn btn-message hover-white js-user">SEND MESSAGE</button>
                   </div>
                 </div>
 
+                <div class="spec">
+                  <div class="details mg-bottom-30">
+                    <h4>Details</h4>
+                    <p>{{data.product.details}}</p>
+                  </div>
+
+                  <div class="description">
+                    <h4>Description</h4>
+                    <p>{{data.product.description}}</p>
+                  </div>
+
+                </div>
+
               </div>
 
-              <div class="spec">
-                <div class="details mg-bottom-30">
-                  <h4>Details</h4>
-                  <p>{{data.product.details}}</p>
+              <div class="product-social">
+                <label>Share:</label>
+                <div class="social">
+                  <a target="_blank" href="http://pinterest.com/pin/create/link/?url={{data.product.link}}"><i
+                      class="fa fa-pinterest"></i></a>
+                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{data.product.link}}"><i
+                      class="fa fa-facebook"></i></a>
+                  <a target="_blank" href="http://twitter.com/home?status={{data.product.link}}"><i
+                      class="fa fa-twitter"></i></a>
                 </div>
-
-                <div class="description">
-                  <h4>Description</h4>
-                  <p>{{data.product.description}}</p>
-                </div>
-
               </div>
 
             </div>
-
-            <div class="product-social">
-              <label>Share:</label>
-              <div class="social"> 
-                <a target="_blank" href="http://pinterest.com/pin/create/link/?url={{data.product.link}}"><i class="fa fa-pinterest"></i></a>
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{data.product.link}}"><i class="fa fa-facebook"></i></a>
-                <a target="_blank" href="http://twitter.com/home?status={{data.product.link}}"><i class="fa fa-twitter"></i></a>
-              </div>
-            </div>
-
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
 <div class="container container-content you-may-like">
@@ -254,8 +277,10 @@
       <div id="{{id}}" class="product-item">
         <div class="product-img">
           <a target="_blank" href="/{{slug}}">
-            <img src="{{colors.[0].images.[0].image_link}}" alt="" class="img-responsive wp-post-image product-first-image">
-            <img src="{{colors.[0].images.[1].image_link}}" alt="" class="img-responsive image-effect product-second-image"></a>
+            <img src="{{colors.[0].images.[0].image_link}}" alt=""
+              class="img-responsive wp-post-image product-first-image">
+            <img src="{{colors.[0].images.[1].image_link}}" alt=""
+              class="img-responsive image-effect product-second-image"></a>
           <div class="product-button-group ">
 
             <div class="quick-view">
@@ -275,7 +300,8 @@
           </div>
           <div class="color-group">
             {{#each colors}}
-            <div class="other-product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}" data-other-product-color="{{color_slug}}"></div>
+            <div class="other-product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"
+              data-other-product-color="{{color_slug}}"></div>
             {{/each}}
           </div>
         </div>
@@ -291,106 +317,122 @@
 
   $(function () {
 
-    var productListHash = createHash({{{json data.productListItems}}}, 'id').data;
+    var productListHash = createHash({{{ json data.productListItems }}}, 'id').data;
 
-    $('.color-option').click(function () {
-      var selectedElm = $(this);
-      var isActive = selectedElm.hasClass('active');
-      if (isActive) {
-        return;
+  function hideResponseMessage() {
+    setTimeout(function() {
+      $('#succes-message').addClass('hidden');
+      $('#failure-message').addClass('hidden');
+    }, 10000);
+  }
+
+  $('.color-option').click(function () {
+    var selectedElm = $(this);
+    var isActive = selectedElm.hasClass('active');
+    if (isActive) {
+      return;
+    }
+
+    var selectedColorSlug = selectedElm.attr('data-color-slug');
+    var chosenColorText = $('.chosen-color-name');
+    var chosenColorCode = $('.chosen-color-code');
+    var prevActiveElm = $('.color-option.active');
+    var prevActiveElmColorSlug = prevActiveElm.attr('data-color-slug');
+
+    // change active color state
+    prevActiveElm.removeClass('active');
+    selectedElm.addClass('active');
+
+    //change chosen color text
+    chosenColorText.text(selectedElm.attr('data-color-name'));
+    chosenColorCode.text(selectedElm.attr('data-color-code'));
+
+    //change color images wrapper
+    $('.product-color-images[data-color-images-slug=' + prevActiveElmColorSlug + ']').removeClass('active').addClass('hidden');
+    $('.product-color-images[data-color-images-slug=' + selectedColorSlug + ']').removeClass('hidden').addClass('active');
+
+
+    $('.js-product-slider-normal, .js-click-product-normal').slick('refresh');
+
+  });
+
+  $('input[type=radio][name=size]').change(function () {
+
+    var sizeSlug = this.value;
+    var sizeName = $(this).attr('data-size-name');
+
+    //$('.chosen-size-name').text(sizeName);
+    $('.size-details.active').removeClass('active').addClass('hidden');
+    $('.size-details[data-size-details-slug=' + sizeSlug + ']').addClass('active').removeClass('hidden');
+  });
+
+  $('.other-product-color').click(function () {
+    var selectedElm = $(this);
+    var selectedColor = $(this).attr('data-other-product-color');
+    var isActive = $(this).hasClass('active');
+    if (isActive) {
+      return;
+    }
+    var productId = $(this).closest('.product-item').attr('id');
+    var activeElm = $('#' + productId + ' .other-product-color.active');
+    activeElm.removeClass('active');
+    selectedElm.addClass('active');
+
+    var selectedProductColorImages = productListHash[productId].colors.find(color => color.color_slug === selectedColor).images;
+    var productFirstImage = $('#' + productId + ' .product-first-image');
+    var productSecondImage = $('#' + productId + ' .product-second-image');
+    selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].image_link);
+    selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].image_link);
+  });
+
+  $('.form-customer').submit(function (event) {
+    event.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: `/productUserDemand`,
+      contentType: "application/json",
+      data: JSON.stringify({
+        name: $('#user-name').val(),
+        email: $('#user-email').val(),
+        message: $('#user-message').val(),
+        product_id: $('.single-product-detail').attr('data-product-id')
+      }),
+      success: function () {
+        $('#user-name').val('');
+        $('#user-email').val('');
+        $('#user-message').val('');
+
+        $('#succes-message').removeClass('hidden');
+        hideResponseMessage();
+
+        parent.location.hash = '';
+      },
+      error: function() {
+        $('#failure-message').removeClass('hidden');
+        hideResponseMessage();
       }
-
-      var selectedColorSlug = selectedElm.attr('data-color-slug');
-      var chosenColorText = $('.chosen-color-name');
-      var prevActiveElm = $('.color-option.active');
-      var prevActiveElmColorSlug = prevActiveElm.attr('data-color-slug');
-
-      // change active color state
-      prevActiveElm.removeClass('active');
-      selectedElm.addClass('active');
-
-      //change chosen color text
-      chosenColorText.text(selectedElm.attr('data-color-name'));
-
-      //change color images wrapper
-      $('.product-color-images[data-color-images-slug=' + prevActiveElmColorSlug + ']').removeClass('active').addClass('hidden');
-      $('.product-color-images[data-color-images-slug=' + selectedColorSlug + ']').removeClass('hidden').addClass('active');
-
-
-      $('.js-product-slider-normal, .js-click-product-normal').slick('refresh');
-
     });
 
-    $('input[type=radio][name=size]').change(function () {
+  });
 
-      var sizeSlug = this.value;
-      var sizeName = $(this).attr('data-size-name');
+  $('.wishlist-product').click(function () {
+    var _thisElm = $(this);
+    var productSlug = _thisElm.attr('data-wishlist-slug');
+    var isAlreadyWishlisted = _thisElm.hasClass('active');
 
-      $('.chosen-size-name').text(sizeName);
-      $('.size-details.active').removeClass('active').addClass('hidden');
-      $('.size-details[data-size-details-slug=' + sizeSlug + ']').addClass('active').removeClass('hidden');
-    });
-
-    $('.other-product-color').click(function() {
-      var selectedElm = $(this);
-      var selectedColor = $(this).attr('data-other-product-color');
-      var isActive = $(this).hasClass('active');
-      if(isActive) {
-        return;
+    $.ajax({
+      type: 'POST',
+      url: '/wishlist/' + (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') + '',
+      contentType: "application/json",
+      data: JSON.stringify({
+        slug: productSlug,
+      }),
+      success: function (data) {
+        window.location.reload();
       }
-      var productId = $(this).closest('.product-item').attr('id');
-      var activeElm = $('#'+ productId +' .other-product-color.active');
-      activeElm.removeClass('active');
-      selectedElm.addClass('active');
-
-      var selectedProductColorImages = productListHash[productId].colors.find(color => color.color_slug === selectedColor).images;
-      var productFirstImage = $('#'+ productId +' .product-first-image');
-      var productSecondImage = $('#'+ productId +' .product-second-image');
-      selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].image_link);
-      selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].image_link);
     });
-
-    $('.form-customer').submit(function( event ) {
-      event.preventDefault();
-
-      $.ajax({
-        type: 'POST',
-        url: `/productUserDemand`,
-        contentType: "application/json",
-        data: JSON.stringify({
-          name: $('#user-name').val(),
-          email: $('#user-email').val(),
-          message: $('#user-message').val(),
-          product_id: $('.single-product-detail').attr('data-product-id')
-        }),
-        success: function () {
-          $('#user-name').val('');
-          $('#user-email').val('');
-          $('#user-message').val('');
-
-          parent.location.hash = '';
-        }
-      });
-      
-    });
-
-    $('.wishlist-product').click(function() {
-      var _thisElm = $(this);
-      var productSlug = _thisElm.attr('data-wishlist-slug');
-      var isAlreadyWishlisted = _thisElm.hasClass('active');
-      
-      $.ajax({
-        type: 'POST',
-        url: '/wishlist/'+ (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') +'',
-        contentType: "application/json",
-        data: JSON.stringify({
-          slug: productSlug,
-        }),
-        success: function (data) {
-          window.location.reload();
-        }
-      });
-    });
+  });
 
 
   });

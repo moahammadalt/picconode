@@ -105,11 +105,11 @@
 $(function () {
 
   function hideResponseMessage() {
-      setTimeout(function() {
-        $('#succes-message').addClass('hidden');
-        $('#failure-message').addClass('hidden');
-      }, 10000);
-    }
+    setTimeout(function() {
+      $('#succes-message').addClass('hidden');
+      $('#failure-message').addClass('hidden');
+    }, 10000);
+  }
 
   $('.form-customer').submit(function( event ) {
     event.preventDefault();
