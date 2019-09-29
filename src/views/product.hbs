@@ -144,6 +144,13 @@
                                 </tr>
                                 {{/ifCond}}
 
+                                {{#ifCond hips '>' 0}}
+                                <tr>
+                                  <th>Hips: </th>
+                                  <td>{{hips}} cm</td>
+                                </tr>
+                                {{/ifCond}}
+
                                 {{#ifCond waistline '>' 0}}
                                 <tr>
                                   <th>Waistline: </th>
@@ -370,7 +377,6 @@
     $('.wishlist-product').click(function() {
       var _thisElm = $(this);
       var productSlug = _thisElm.attr('data-wishlist-slug');
-      console.log('productSlug: ', productSlug);
       var isAlreadyWishlisted = _thisElm.hasClass('active');
       
       $.ajax({
@@ -381,9 +387,7 @@
           slug: productSlug,
         }),
         success: function (data) {
-          console.log('data: ', data);
-          _thisElm.removeClass(isAlreadyWishlisted ? 'active' : '');
-          _thisElm.addClass(isAlreadyWishlisted ? '' : 'active');
+          window.location.reload();
         }
       });
     });

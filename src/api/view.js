@@ -1,5 +1,6 @@
 import routes from "config/routes";
 import { viewServiceHandler, serviceHandler } from "utils/service";
+import { viewsPath } from 'globals/constants';
 
 import {
   productItem,
@@ -16,7 +17,7 @@ export default router => {
 
   router.get(publicApi.notFound.url, (...arg) => {
     const res = arg[1];
-    res.render(publicApi.notFound.path);
+    res.render(viewsPath + publicApi.notFound.path);
   });
 
   router.get(publicApi.home.url, async (req, res, next) => {

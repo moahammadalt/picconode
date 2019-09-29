@@ -30,12 +30,19 @@ export default async req => {
       return;
     }    
   }
+
+  let productItem = productItemArr[0];
+
+  if(productItem.stock_status === 0) {
+    throw {
+      errorRedirectPath: routes.publicApi.productNotFound.path,
+      errorMessage: errorMessages.outOfStock,
+    }
+  }
   
   let categories = createHash(await categoryListGet(), 'id').data;
   let sizes = createHash(await sizeListGet(), 'id').data;
   let colors = createHash(await colorListGet(), 'id').data;
-  
-  let productItem = productItemArr[0];
 
   const productImages = await productImageGet({
     ...req,

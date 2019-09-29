@@ -119,8 +119,8 @@
                   <span>${{price}}</span>
                 </div>
               </div>
-              <div class="product-remove">
-                <a class="btn-del" title="remove item" target="_blank"><i class="ion-ios-close-empty"></i></a>
+              <div data-wishlist-slug="{{slug}}" class="product-remove wishlist-product">
+                <a class="btn-del" title="remove item"><i class="ion-ios-close-empty"></i></a>
               </div>
             </div>
             {{/each}}
@@ -260,3 +260,25 @@
         </div>
       </div>
     </header>
+
+<script>
+  $(function () {
+
+    $('.wishlist-product').click(function () {
+      var _thisElm = $(this);
+      var productSlug = _thisElm.attr('data-wishlist-slug');
+
+      $.ajax({
+        type: 'POST',
+        url: '/wishlist/itemDelete',
+        contentType: "application/json",
+        data: JSON.stringify({
+          slug: productSlug,
+        }),
+        success: function (data) {
+          window.location.reload();
+        }
+      });
+    });
+  });
+</script>

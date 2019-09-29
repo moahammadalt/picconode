@@ -90,6 +90,8 @@
             <button type="submit" class="zoa-btn btn-login hover-white">SEND MESSENGE</button>
           </div>
         </form>
+        <p id="succes-message" class="hidden">Your message have been send successfuly. Thank You.</p>
+        <p id="failure-message" class="hidden" style="color: red">An error has been occured. Try again.</p>
       </div>
       <div class="col-md-6 maps1">
         <div id="googleMap"></div>
@@ -101,6 +103,14 @@
 
 <script>
 $(function () {
+
+  function hideResponseMessage() {
+      setTimeout(function() {
+        $('#succes-message').addClass('hidden');
+        $('#failure-message').addClass('hidden');
+      }, 10000);
+    }
+
   $('.form-customer').submit(function( event ) {
     event.preventDefault();
 
@@ -122,7 +132,14 @@ $(function () {
         $('#user-subject').val('');
         $('#user-message').val('');
 
+        $('#succes-message').removeClass('hidden');
+        hideResponseMessage();
+
         parent.location.hash = '';
+      },
+      error: function() {
+        $('#failure-message').removeClass('hidden');
+        hideResponseMessage();
       }
     });
     

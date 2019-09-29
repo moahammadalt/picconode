@@ -7,7 +7,8 @@ export const responseStatuses = {
 };
 
 export const errorMessages = {
-	notFound: 'NOT_FOUND',
+	notFound: 'Product not found',
+	outOfStock: 'This product is out of stock',
 	GenericError: 'GENERIC_ERROR',
 };
 

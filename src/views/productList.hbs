@@ -182,8 +182,11 @@
                     <h3 class="product-title">
                       <a href="/{{slug}}" target="_blank">{{name}}</a>
                     </h3>
-                    <a class="" title="remove item"> <span data-wishlist-slug="{{slug}}"
-                        class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span></a>
+                    {{#ifCond stock_status '===' 1}}
+                    <a class="" title="{{#ifCond isWishlisted '===' undefined}}add to wishlist{{else}}remove item{{/ifCond}}">
+                      <span data-wishlist-slug="{{slug}}" class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span>
+                    </a>
+                    {{/ifCond}}
                   </div>
                   <div class="product-price">
                     <span>${{price}}</span>
@@ -313,9 +316,7 @@
         slug: productSlug,
       }),
       success: function (data) {
-        console.log('data: ', data);
-        _thisElm.removeClass(isAlreadyWishlisted ? 'fa-heart' : 'fa-heart-o');
-        _thisElm.addClass(isAlreadyWishlisted ? 'fa-heart-o' : 'fa-heart');
+        window.location.reload();
       }
     });
   });

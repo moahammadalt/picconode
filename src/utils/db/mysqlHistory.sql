@@ -14,7 +14,7 @@ CREATE TABLE `category` (
   `admin_id` int(30) NOT NULL,
   `name` varchar(50) NULL,
   `slug` varchar(50) NOT NULL,
-  `parent_id` int(30) DEFAULT NULL,
+  `parent_id` int(30) NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -67,7 +67,7 @@ CREATE TABLE `product` (
   `amount` int(7) NULL,
   `price` int(6) NULL,
   `currency` enum('SYP', 'USD', 'EUR') DEFAULT 'SYP',
-  `main_image` varchar(300) DEFAULT NULL,
+  `main_image` varchar(300) NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -181,4 +181,16 @@ ALTER TABLE `product`
 ADD COLUMN `category_tag_id` int(11) NULL,
 ADD KEY `FK_product_category_tag_id` (`category_tag_id`),
 ADD CONSTRAINT `FK_product_category_tag_id` FOREIGN KEY (`category_tag_id`) REFERENCES `category` (`id`);
+/*END*/
+
+/*Added 29/09/2019*/
+ALTER TABLE `product_size`
+ADD COLUMN `hips` VARCHAR(50) NULL;
+
+ALTER TABLE `product`
+ADD COLUMN `stock_status` TINYINT(1) NOT NULL DEFAULT 1;
+
+ALTER TABLE `product_color` 
+ADD COLUMN `product_color_code` VARCHAR(50) NULL,
+ADD UNIQUE KEY `product_color_code` (`product_color_code`);
 /*END*/

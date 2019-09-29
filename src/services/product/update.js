@@ -105,7 +105,8 @@ export default async (req) => {
               'size_details': reqProductSizeObj.details,
               'height': reqProductSizeObj.height,
 							'chest': reqProductSizeObj.chest,
-							'waistline': reqProductSizeObj.waistline,
+              'waistline': reqProductSizeObj.waistline,
+              'hips': reqProductSizeObj.hips,
 							'amount': reqProductSizeObj.amount,
 						}
           });
@@ -120,6 +121,7 @@ export default async (req) => {
                 'height': reqProductSizeObj.height,
                 'chest': reqProductSizeObj.chest,
                 'waistline': reqProductSizeObj.waistline,
+                'hips': reqProductSizeObj.hips,
                 'amount': reqProductSizeObj.amount,
               }
             });

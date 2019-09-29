@@ -1,6 +1,5 @@
 import { responseStatuses, errorMessages, viewsPath } from 'globals/constants';
 import { sendClientAlarm } from 'globals/helpers';
-import routes from "config/routes";
 import { headerView } from 'services';
 
 export const serviceHandler = async (req, res, next, service) => {
@@ -37,11 +36,13 @@ export const viewServiceHandler = async ({req, res, next, viewPathUrl, service})
 		
   } catch (err) {
     if(err) {
+      console.log('err: ', err);
       if(err.errorRedirectPath) {
-        res.render(viewsPath + err.errorRedirectPath);
-      }
-      else if(err.errorMessage === errorMessages.notFound) {
-        res.redirect(routes.publicApi.notFound.url);
+        res.render(viewsPath + err.errorRedirectPath, {
+          data: {
+            errorMessage: err.errorMessage || errorMessages.GenericError
+          },
+        });
       }
       else{
         res.send(sendClientAlarm(err.errorMessage));
