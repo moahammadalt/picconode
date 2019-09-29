@@ -95,5 +95,9 @@ export default new (class hbsViews {
     hbs.registerHelper('getInch', function(val) {
       return Math.round(Number(val) / 2.54);
     });
+
+    hbs.registerHelper('getSafeString', function(str) {
+      return new hbs.SafeString(str);
+    });
   }
 })();
