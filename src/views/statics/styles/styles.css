@@ -4522,7 +4522,7 @@ tbody.collapse.in {
       font-size: 13px; }
   .breadcrumb > .active {
     font-weight: 600;
-color: #f3bd1c;}
+color: #f9e03a !important;}
     .breadcrumb > .active a {
       color: #222;
       font-weight: 600; }

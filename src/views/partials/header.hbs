@@ -100,7 +100,7 @@
       </div>
       <div class="wishlist-inside">
 
-        <div class="wishlist-bottom">
+        <div class="wishlist-bottom" style="bottom: {{#ifCond data.wishlistHeaderProducts.length '===' 1}}18%{{else}}0%{{/ifCond}};">
           {{#ifCond data.wishlistHeaderProducts.length '>' 0}}
           <p>Items you like most.</p>
           <div class="view">

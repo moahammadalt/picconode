@@ -4,13 +4,24 @@ import { getWishListSlugsSession } from 'session/wishlist';
 
 export default async (req) => {
 
-  const productItem = await productItemGet(req);
+  let productItem = await productItemGet(req);
   req.query = {
     limit: 10,
   }
   const productListItems = (await productListGet(req)).filter(({ id })=> id !== productItem.id);
 
   const productsWishlistSlugs = getWishListSlugsSession(req);
+
+  // colros sort
+  const defaultColorIndex = productItem.colors.findIndex(
+    color => productItem.default_color_id === color.color_id
+  );
+  const defaultColorObj = productItem.colors[defaultColorIndex];
+  if (!!defaultColorObj) {
+    productItem.colors.splice(defaultColorIndex, 1);
+    productItem.colors.unshift(defaultColorObj);
+  }
+
 
   if(productsWishlistSlugs.includes(productItem.slug)) {
     productItem['isWishlisted'] = true;

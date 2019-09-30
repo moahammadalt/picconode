@@ -57,6 +57,7 @@
     <li><a
         href="products/?type={{data.product.category_type.slug}}">{{data.product.category_type.name}}</a>
     </li>
+    <li class="active">{{data.product.name}}</li>
   </ul>
 </div>
 
@@ -179,19 +180,19 @@
                                   <td class="empty"></td>
                                 </tr>
                                 <tr>
-                                  <th>Height: </th>
-                                  <td>{{height}} / {{getInch height}}</td>
+                                  <th>Chest: </th>
+                                  <td>{{chest}} / {{getInch chest}}</td>
                                 </tr>
                                 <tr>
                                   <th></th>
                                   <td class="empty"></td>
                                 </tr>
                                 {{/ifCond}}
-
+                                
                                 {{#ifCond chest '>' 0}}
                                 <tr>
-                                  <th>Chest circumference: </th>
-                                  <td>{{chest}} / {{getInch chest}}</td>
+                                  <th>Waist: </th>
+                                  <td>{{waistline}} / {{getInch waistline}}</td>
                                 </tr>
                                 <tr>
                                   <th></th>
@@ -212,8 +213,8 @@
 
                                 {{#ifCond waistline '>' 0}}
                                 <tr>
-                                  <th>Waistline: </th>
-                                  <td>{{waistline}} / {{getInch waistline}}</td>
+                                  <th>Height: </th>
+                                  <td>{{height}} / {{getInch height}}</td>
                                 </tr>
                                 <tr>
                                   <th></th>
@@ -223,14 +224,12 @@
                               </table>
                             </div>
                             {{/each}}
-
+                          
+                            <div id="chosen-size-name" class="text-right chosen-size-margin hidden"><h6 class="chosen-size">Chosen size : <span id="chosen-size-text">{{data.product.sizes.[0].size_name}}</span></h6> </div>
                           </form>
                         </div>
                       </div>
                     </div>
-                    {{!-- <div class="col-md-4">
-                      <h6 class="chosen-size hidden">Chosen size : <span class="chosen-size-name capitalize">{{data.product.sizes.[0].size_name}}</span></h6>
-                    </div> --}}
                   </div>
 
                 </div>
@@ -373,8 +372,9 @@
     var sizeName = $(this).attr('data-size-name');
     var sizePrice = $(this).attr('data-size-price');
 
-    //$('.chosen-size').removeClass('hidden');
-    //$('.chosen-size-name').text(sizeName);
+    $('#chosen-size-name').removeClass('hidden');
+    $('#chosen-size-text').text(sizeName);
+    
     sizePrice && $('.product-main-price').text(sizePrice);
     $('.size-details.active').removeClass('active').addClass('hidden');
     $('.size-details[data-size-details-slug=' + sizeSlug + ']').addClass('active').removeClass('hidden');
