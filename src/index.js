@@ -1,8 +1,6 @@
 
-import { expressServer, DBCon, hbsViews } from 'loaders';
+import { expressServer, hbsViews } from 'loaders';
 
 expressServer.connect();
 
 hbsViews.initialize();
-
-DBCon.connect();

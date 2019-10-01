@@ -13,6 +13,7 @@ import {
 } from 'services';
 
 export default async req => {
+  // TODO: fix- static files also hit this function and making sql request to fetch a product
 
   let productItemArr = await select({
     table: 'product',

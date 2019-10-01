@@ -29,7 +29,7 @@ export default async req => {
     }
     await imageFile.mv(imagesPath + imageFileName);
 
-    const fullImagePath = config.IS_PROD == 1 ? (config.PROD_PUBLIC_IMAGES_PATH + imageFileName) : ((req.headers && req.headers.host) ? (req.headers.host + imagesPath + imageFileName) : null);
+    const fullImagePath = config.PUBLIC_IMAGES_LINK + imageFileName;
 
     return {
       image_link: fullImagePath,

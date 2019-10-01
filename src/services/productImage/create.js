@@ -13,7 +13,7 @@ export default async (req) => {
 		data: req.body,
 	});
 
-	const fullImagePath = config.IS_PROD == 1 ? (config.PROD_PUBLIC_IMAGES_PATH + response.image_name) : ((req.headers && req.headers.host) ? (req.headers.host + imagesPath + response.image_name) : null);
+	const fullImagePath = config.PUBLIC_IMAGES_LINK + response.image_name;
 
 	return {
 		...req.body,

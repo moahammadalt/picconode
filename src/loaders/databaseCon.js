@@ -20,17 +20,15 @@ export default new (class databaseCon {
       database: config.DB.name
     });
 
+    this.con.connect(err => {
+      if (err) throw err;
+      console.log("DB Connected!");
+    });
+
     eventHandler.emit(events.DBConnectionCreated, this.con);
 
     this.con.query = promisify(this.con.query);
 
     return this.con;
-  }
-
-  connect() {
-    this.con.connect(err => {
-      if (err) throw err;
-      console.log("Connected!");
-    });
   }
 })();

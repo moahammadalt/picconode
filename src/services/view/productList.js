@@ -88,20 +88,26 @@ export default async req => {
         // add product category type count
         const categoryTypeIndex = categoriesListHash[product.category_slug].children.findIndex(({ slug }) => slug === product.category_type_slug);
 
-        if(categoriesListHash[product.category_slug].children[categoryTypeIndex]) {
-          if(!categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount) {
-            categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount = 0;
-          }
-          categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount += 1;
-
-          // add product category tag count
-          if(product.category_tag_slug) {
-            const categoryTagIndex = categoriesListHash[product.category_slug].children[categoryTypeIndex].children.findIndex(({ slug }) => slug === product.category_tag_slug);
-
-            if(!categoriesListHash[product.category_slug].children[categoryTypeIndex].children[categoryTagIndex].productsCount) {
-              categoriesListHash[product.category_slug].children[categoryTypeIndex].children[categoryTagIndex].productsCount = 0;
+        if(categoryTypeIndex > -1) {
+          if(categoriesListHash[product.category_slug].children[categoryTypeIndex]) {
+          
+            if(!categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount) {
+              categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount = 0;
             }
-            categoriesListHash[product.category_slug].children[categoryTypeIndex].children[categoryTagIndex].productsCount += 1;
+            categoriesListHash[product.category_slug].children[categoryTypeIndex].productsCount += 1;
+  
+            // add product category tag count
+            if(product.category_tag_slug) {
+              const categoryTagIndex = categoriesListHash[product.category_slug].children[categoryTypeIndex].children.findIndex(({ slug }) => slug === product.category_tag_slug);
+  
+              if(categoryTagIndex > -1) {
+                if(!categoriesListHash[product.category_slug].children[categoryTypeIndex].children[categoryTagIndex].productsCount) {
+                  categoriesListHash[product.category_slug].children[categoryTypeIndex].children[categoryTagIndex].productsCount = 0;
+                }
+  
+                categoriesListHash[product.category_slug].children[categoryTypeIndex].children[categoryTagIndex].productsCount += 1;
+              }
+            }
           }
         }
 
@@ -155,6 +161,14 @@ export default async req => {
           product.colors.unshift(defaultColorObj);
         }
 
+        //remove product color if it is not in the filter colors array
+        if(req.query.color) {
+          const allFilteredColors = req.query.color.split(',');
+          const allAvailableColors = clorListHashObj.keys();
+          const filteredColors = allFilteredColors.filter(value => allAvailableColors.includes(value));
+          product.colors = product.colors.filter(({ color_slug }) => filteredColors.includes(color_slug));
+        }
+        
         //handle if product in wishlist
         if(productsWishlistSlugs.includes(product.slug)) {
           product['isWishlisted'] = true;
