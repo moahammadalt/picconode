@@ -1,41 +1,67 @@
-/*Mohammad styles*/
-.color-group .circle.orange, .single-product-detail .single-product-info .size-group .circle.red {
-  background: orange; }
-.color-group .circle.green, .single-product-detail .single-product-info .size-group .circle.green {
-    background: green; }
-.color-group .circle.purple, .single-product-detail .single-product-info .size-group .circle.purple {
-      background: purple; }
+.color-group .circle.orange,
+.single-product-detail .single-product-info .size-group .circle.red {
+	background: orange;
+}
 
-.color-group .circle.gold, .single-product-detail .single-product-info .size-group .circle.gold {
-        background: gold; }
+.color-group .circle.green,
+.single-product-detail .single-product-info .size-group .circle.green {
+	background: green;
+}
+
+.color-group .circle.purple,
+.single-product-detail .single-product-info .size-group .circle.purple {
+	background: purple;
+}
+
+.color-group .circle.gold,
+.single-product-detail .single-product-info .size-group .circle.gold {
+	background: gold;
+}
 
 .widget-filter.filter-color ul li a.grey:before {
-          background: #707070; }
-    
-.color-group .circle.grey, .single-product-detail .single-product-info .size-group .circle.grey {
-          background: #707070; }
-
-
-.capitalize{
-  text-transform: capitalize;
+	background: #707070;
 }
 
-a{
-  cursor: pointer;
+.color-group .circle.grey,
+.single-product-detail .single-product-info .size-group .circle.grey {
+	background: #707070;
 }
 
-.filter-category-type .level1.active a{
-  color: #f3bd1c;
+.widget-filter.filter-color ul li a.jeans:before {
+	background: #707070;
 }
 
-.filter-category-type .level2.active a{
-  color: #f3bd1c !important;
+.color-group .circle.jeans,
+.single-product-detail .single-product-info .size-group .circle.jeans {
+	background: #3E546F;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+a {
+	cursor: pointer;
+}
+
+.filter-category-type .level1.active a {
+	color: #f3bd1c;
+}
+
+.filter-category-type .level2.active a {
+	color: #f3bd1c !important;
 }
 
 .padding-bottom-15 {
-  padding-bottom: 15px; }
+	padding-bottom: 15px;
+}
 
 .single-product-detail .single-product-info .single-product-button-group .element-button .zoa-wishlist.active {
-          color: #fff;
-          background: #f3bd1c; }
-/*Mohammad styles ends*/
+	color: #fff;
+	background: #f3bd1c;
+}
+
+.product-error {
+	text-align: center;
+	padding: 200px 0;
+}

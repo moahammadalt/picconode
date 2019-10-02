@@ -173,6 +173,9 @@ export default async req => {
         if(productsWishlistSlugs.includes(product.slug)) {
           product['isWishlisted'] = true;
         }
+
+        //handle product price
+        product['price'] = product.price || (product.sizes[0] && product.sizes[0].size_price);
         
         return product;
       });

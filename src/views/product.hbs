@@ -174,7 +174,7 @@
                                   <th class="first-th">TITLE </th>
                                   <td class="first-td">Cm / In</td>
                                 </tr>
-                                {{#ifCond height '>' 0}}
+                                {{#ifCond chest '>' 0}}
                                 <tr>
                                   <th></th>
                                   <td class="empty"></td>
@@ -189,7 +189,7 @@
                                 </tr>
                                 {{/ifCond}}
                                 
-                                {{#ifCond chest '>' 0}}
+                                {{#ifCond waistline '>' 0}}
                                 <tr>
                                   <th>Waist: </th>
                                   <td>{{waistline}} / {{getInch waistline}}</td>
@@ -211,7 +211,7 @@
                                 </tr>
                                 {{/ifCond}}
 
-                                {{#ifCond waistline '>' 0}}
+                                {{#ifCond height '>' 0}}
                                 <tr>
                                   <th>Height: </th>
                                   <td>{{height}} / {{getInch height}}</td>
@@ -224,10 +224,11 @@
                               </table>
                             </div>
                             {{/each}}
-                          
-                            <div id="chosen-size-name" class="text-right chosen-size-margin hidden"><h6 class="chosen-size">Chosen size : <span id="chosen-size-text">{{data.product.sizes.[0].size_name}}</span></h6> </div>
                           </form>
                         </div>
+
+                        <div id="chosen-size-name" class="text-right chosen-size-margin hidden"><h6 class="chosen-size">Chosen size : <span id="chosen-size-text">{{data.product.sizes.[0].size_name}}</span></h6> </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -375,7 +376,7 @@
     $('#chosen-size-name').removeClass('hidden');
     $('#chosen-size-text').text(sizeName);
     
-    sizePrice && $('.product-main-price').text(sizePrice);
+    sizePrice && $('.product-main-price').text('$' + sizePrice);
     $('.size-details.active').removeClass('active').addClass('hidden');
     $('.size-details[data-size-details-slug=' + sizeSlug + ']').addClass('active').removeClass('hidden');
   });

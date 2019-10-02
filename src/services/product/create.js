@@ -52,6 +52,7 @@ export default async (req) => {
 							'chest': productSizeObject.chest,
 							'waistline': productSizeObject.waistline,
 							'hips': productSizeObject.hips,
+							'size_price': productSizeObject.size_price,
 							'amount': productSizeObject.amount,
 						}
 					});

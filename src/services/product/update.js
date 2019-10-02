@@ -26,6 +26,8 @@ export default async (req) => {
   delete req.body.images;
   delete req.body.category_name;
   delete req.body.category_type_name;
+  delete req.body.category_tag_name;
+  delete req.body.link;
 
   if(reqProductMainImage) {
     req.body.main_image = reqProductMainImage.image_name;
@@ -107,6 +109,7 @@ export default async (req) => {
 							'chest': reqProductSizeObj.chest,
               'waistline': reqProductSizeObj.waistline,
               'hips': reqProductSizeObj.hips,
+              'size_price': reqProductSizeObj.size_price,
 							'amount': reqProductSizeObj.amount,
 						}
           });
@@ -122,6 +125,7 @@ export default async (req) => {
                 'chest': reqProductSizeObj.chest,
                 'waistline': reqProductSizeObj.waistline,
                 'hips': reqProductSizeObj.hips,
+                'size_price': reqProductSizeObj.size_price,
                 'amount': reqProductSizeObj.amount,
               }
             });
@@ -226,11 +230,14 @@ export default async (req) => {
     };
   }
   catch (err) {
+    console.log('err: ', err);
     productBeforUpdate.main_image = productBeforUpdate.main_image && productBeforUpdate.main_image.image_name;
     delete productBeforUpdate.category;
     delete productBeforUpdate.category_type;
+    delete productBeforUpdate.category_tag;
     delete productBeforUpdate.colors;
     delete productBeforUpdate.sizes;
+    delete productBeforUpdate.link;
     await update({
       table: "product",
       fields: Object.keys(productBeforUpdate),
