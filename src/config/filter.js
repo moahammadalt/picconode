@@ -1,6 +1,6 @@
-export const lowPrice = 0;
+export const lowPrice = 29;
 
-export const maxPrice = 4000;
+export const maxPrice = 199;
 
 export const defaultPage = 1;
 

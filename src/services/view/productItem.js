@@ -1,16 +1,31 @@
-import { productItemGet, productListGet } from 'services';
+import { productItemGet, productListGet, colorListGet, } from 'services';
 import { handleViewedProductsSession } from 'session/viewedProducts';
 import { getWishListSlugsSession } from 'session/wishlist';
+
+import { createHash } from 'globals/helpers';
 
 export default async (req) => {
 
   let productItem = await productItemGet(req);
   req.query = {
+    ...req.query,
     limit: 10,
-  }
+  };
   const productListItems = (await productListGet(req)).filter(({ id })=> id !== productItem.id);
 
   const productsWishlistSlugs = getWishListSlugsSession(req);
+
+  //make the default color the same of the last queried color
+  const filteredColor = req.query.color;
+  if(filteredColor) {
+    const colorListHashObj = createHash(await colorListGet(), 'slug');
+    const productHasQueriedColor = colorListHashObj.data[filteredColor] && productItem.colors.some(({ color_slug }) => color_slug === filteredColor);
+
+    if(productHasQueriedColor) {
+      const firstQueriedColorID = colorListHashObj.data[filteredColor].id;
+      productItem.default_color_id = firstQueriedColorID;
+    }
+  }
 
   // colros sort
   const defaultColorIndex = productItem.colors.findIndex(
@@ -27,7 +42,8 @@ export default async (req) => {
     productItem['isWishlisted'] = true;
   }
 
-  productItem['price'] = productItem.price || (productItem.sizes[0] && productItem.sizes[0].size_price);
+  /*  //handle product price
+  productItem['price'] = productItem.price || (productItem.sizes[0] && productItem.sizes[0].size_price); */
 
   handleViewedProductsSession(req);
   

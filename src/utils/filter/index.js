@@ -152,8 +152,10 @@ export const getProductsPagination = data => {
 };
 
 export const getProductsPaginationLimit = data => {
+  const productCount = data.productListCount;
   const page = data.query.page || defaultPage;
   const limit = data.query.limit || defaultLimit;
+  const toCount = (page * limit) > productCount ? productCount : (page * limit);
 
-  return `${page * limit - (limit - 1)} - ${page * limit}`;
+  return `${page * limit - (limit - 1)} - ${toCount}`;
 };

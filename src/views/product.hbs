@@ -121,7 +121,7 @@
 
           <div class="product-details-to-choose">
             <div class="product-price">
-              <span class="product-main-price">${{data.product.price}}</span>
+              <span class="product-main-price">{{#ifCond data.product.price '!==' null}}${{/ifCond}}{{data.product.price}}</span>
             </div>
 
             <div>

@@ -167,7 +167,7 @@
               {{#each data.productList}}
               <div id="{{id}}" class="col-xs-6 col-sm-4 col-md-4 col-lg-4 product-item">
                 <div class="product-img">
-                  <a href="/{{slug}}" target="_blank">
+                  <a class="product-link" href="/{{slug}}/?color={{default_color_slug}}" target="_blank">
                     <img src="{{colors.[0].images.[0].image_link}}" alt=""
                       class="img-responsive wp-post-image product-first-image">
                     <img src="{{colors.[0].images.[1].image_link}}" alt=""
@@ -175,14 +175,14 @@
                   </a>
                   <div class="product-button-group ">
                     <div class="quick-view">
-                      <a href="/{{slug}}" target="_blank">View </a>
+                      <a class="product-link" href="/{{slug}}/?color={{default_color_slug}}" target="_blank">View </a>
                     </div>
                   </div>
                 </div>
                 <div class="product-info ">
                   <div class="title-heart">
                     <h3 class="product-title">
-                      <a href="/{{slug}}" target="_blank">{{name}}</a>
+                      <a class="product-link" href="/{{slug}}/?color={{default_color_slug}}" target="_blank">{{name}}</a>
                     </h3>
                     {{#ifCond stock_status '===' 1}}
                     <a class=""
@@ -193,7 +193,7 @@
                     {{/ifCond}}
                   </div>
                   <div class="product-price">
-                    <span>${{price}}</span>
+                    <span>{{#ifCond price '!==' null}}${{/ifCond}}{{price}}</span>
                   </div>
                   <div class="color-group">
                     {{#each colors}}
@@ -240,7 +240,7 @@
 
   $(function () {
 
-    var productListHash = createHash({{{ json data.productList }}}, 'id').data;
+  var productListHash = createHash({{{ json data.productList }}}, 'id').data;
   var queryParams = getQueryParameters();
   var colorParams = queryParams.color && queryParams.color.split(',');
   var sizeParams = queryParams.size && queryParams.size.split(',');
@@ -262,12 +262,15 @@
     var productSecondImage = $('#' + productId + ' .product-second-image');
     selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].image_link);
     selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].image_link);
+
+    var selectedProductSlug = productListHash[productId].slug;
+    $('#' + productId + ' .product-link').attr('href', '/' + selectedProductSlug + '/?color=' + selectedColor)
   });
 
 
   var currentPrice = getParameterByName('price');
-  var maxPriceFilter = 4000;
-  var lowPriceFilter = 0;
+  var maxPriceFilter = 199;
+  var lowPriceFilter = 29;
   var startPrice;
   var endPrice;
   if (!currentPrice) {
