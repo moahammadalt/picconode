@@ -65,3 +65,8 @@ a {
 	text-align: center;
 	padding: 200px 0;
 }
+
+.spec p span {
+	writing-mode: vertical-rl;
+	letter-spacing: -8px;
+}

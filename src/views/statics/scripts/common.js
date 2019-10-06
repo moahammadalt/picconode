@@ -94,4 +94,11 @@ $(function() {
       }
     });
   });
+  
+  $('.menu-footer .menu .menu-elm').each(function () {
+    var pageUrl = $(this).attr('data-page');
+    if (pageUrl === window.location.pathname.replace(/\//g, '')) {
+      $(this).addClass('active');
+    }
+  });
 });

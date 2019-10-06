@@ -37,7 +37,21 @@ export default {
 	},
 	PUBLIC_VIEW_PATH: '/src/views/',
 	PUBLIC_IMAGES_PATH: '/src/public/images/',
+	PUBLIC_THUMBNAIL_IMAGES_PATH: '/src/public/imagesThumbnail/',
+	PUBLIC_SMALL_IMAGES_PATH: '/src/public/imagesSmall/',
 	PUBLIC_IMAGES_LINK: '/images/',
+	PUBLIC_THUMBNAIL_IMAGES_LINK: '/imagesThumbnail/',
+	PUBLIC_SMALL_IMAGES_LINK: '/imagesSmall/',
 	PUBLIC_STATIC_PATH: 'src/public/',
+	THUMBNAIL_IMAGE_PREFIX: 'thumbnail_',
+	SMALL_IMAGE_PREFIX: 'small_',
+	THUMBNAIL_IMAGE_SIZE_CONVERSION: {
+		width: 6.5211,
+		height: 6.7,
+	},
+	SMALL_IMAGE_SIZE_CONVERSION: {
+		width: 1.538,
+		height: 1.34,
+	},
 	SESSION_SECRET: process.env.SESSION_SECRET,
 };

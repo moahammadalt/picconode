@@ -9,20 +9,35 @@ import {
 	categoryListGet,
 	productImageGetList,
 } from 'services';
+import { getWishListSlugsSession } from 'session/wishlist';
 
 export default async (req) => {
 	try {
 		let productList = await select({
 			table: 'product',
 			...req.query,
+			orderBy: 'id',
+			sort: 'ASC',
 		});
 
-		const productImageList = await productImageGetList(req);
+		const productImageList = await productImageGetList({
+			...req,
+			query: {
+				orderBy: 'id',
+				sort: 'ASC',
+			}
+		});
+
 		const productSizeList = await productSizeListGet();
 		const productColorList = await productColorListGet();
 		const categories = createHash(await categoryListGet(), 'id').data;
 		const sizes = createHash(await sizeListGet(), 'id').data;
-		const colors = createHash(await colorListGet(), 'id').data;
+		const allColorsList = await colorListGet();
+		const colors = createHash(allColorsList, 'id').data;
+    const colorListHashObj = createHash(allColorsList, 'slug');
+		const colorListHashIDsObj = createHash(allColorsList, 'id');
+		
+		const productsWishlistSlugs = getWishListSlugsSession(req);
 
 		return productList.map(productItem => {
 			const productImages = productImageList.filter(productImageItem => productImageItem.product_id === productItem.id)
@@ -61,6 +76,41 @@ export default async (req) => {
 				return productColorItem;
 			});
 			//productItem['colors'] = productItem['colors'].reverse();
+
+			//make the default color the same of the last queried color
+			if(req.query.color) {
+				const allFilteredColors = req.query.color.split(',');
+				const lastQueriedColorSlug = allFilteredColors[allFilteredColors.length - 1];
+				const lastQueriedColorID = colorListHashObj.data[lastQueriedColorSlug].id;
+				const productHasQueriedColor = productItem.colors.some(({ color_id }) => color_id === lastQueriedColorID);
+				if(productHasQueriedColor) {
+					productItem.default_color_id = lastQueriedColorID;
+				}
+			}
+
+			// colros sort
+			const defaultColorIndex = productItem.colors.findIndex(
+				color => productItem.default_color_id === color.color_id
+			);
+			const defaultColorObj = productItem.colors[defaultColorIndex];
+			if (!!defaultColorObj) {
+				productItem.colors.splice(defaultColorIndex, 1);
+				productItem.colors.unshift(defaultColorObj);
+			}
+
+			// set default color
+			if(!productItem.default_color_id && productItem.colors[0]) {
+				productItem.default_color_id = productItem.colors[0].color_id;
+			}
+			if(productItem.default_color_id) {
+				productItem.default_color_slug = colorListHashIDsObj.data[productItem.default_color_id].slug;
+			}
+
+			//handle if product in wishlist
+			if(productsWishlistSlugs.includes(productItem.slug)) {
+				productItem['isWishlisted'] = true;
+			}
+
 			return productItem;
 		});
 	}

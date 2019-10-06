@@ -151,51 +151,11 @@ export default async req => {
         }
 
         return filter.type && filter.tag && filter.price && filter.color && filter.size;
-      })
-      .map(product => {
-        
-        //make the default color the same of the last queried color
-        if(req.query.color) {
-          const allFilteredColors = req.query.color.split(',');
-          const lastQueriedColorSlug = allFilteredColors[allFilteredColors.length - 1];
-          const lastQueriedColorID = colorListHashObj.data[lastQueriedColorSlug].id;
-          const productHasQueriedColor = product.colors.some(({ color_id }) => color_id === lastQueriedColorID);
-          if(productHasQueriedColor) {
-            product.default_color_id = lastQueriedColorID;
-          }
-        }
-
-        // colros sort
-        const defaultColorIndex = product.colors.findIndex(
-          color => product.default_color_id === color.color_id
-        );
-        const defaultColorObj = product.colors[defaultColorIndex];
-        if (!!defaultColorObj) {
-          product.colors.splice(defaultColorIndex, 1);
-          product.colors.unshift(defaultColorObj);
-        }
-        
-        //handle if product in wishlist
-        if(productsWishlistSlugs.includes(product.slug)) {
-          product['isWishlisted'] = true;
-        }
-
-        if(!product.default_color_id && product.colors[0]) {
-          product.default_color_id = product.colors[0].color_id;
-        }
-
-        if(product.default_color_id) {
-          product.default_color_slug = colorListHashIDsObj.data[product.default_color_id].slug;
-        }
-
-        /* //handle product price
-        product['price'] = product.price || (product.sizes[0] && product.sizes[0].size_price); */
-        
-        return product;
       });
 
     productListCount = productList.length;
-
+    
+    // only filter the products that in view pagination limit
     productList = productList.filter((product, index) => {
       const fromIndex = (page * limit) - limit;
       const toIndex = (page * limit) - 1;

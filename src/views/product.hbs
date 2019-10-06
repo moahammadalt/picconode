@@ -79,7 +79,7 @@
             {{#each images}}
             <div class="product-col">
               <div class="img {{#ifCond @index '===' 0}}active{{/ifCond}}">
-                <img src="{{image_link}}" alt="photo" class="img-responsive {{@index}}">
+                <img src="{{thumbnail_image_link}}" alt="photo" class="img-responsive {{@index}}">
                 <div class="bg"></div>
               </div>
             </div>
@@ -121,7 +121,7 @@
 
           <div class="product-details-to-choose">
             <div class="product-price">
-              <span class="product-main-price">{{#ifCond data.product.price '!==' null}}${{/ifCond}}{{data.product.price}}</span>
+              {{#ifCond data.product.price '!==' null}}<span class="product-main-price">${{data.product.price}}</span>{{/ifCond}}
             </div>
 
             <div>
@@ -288,9 +288,9 @@
       <div id="{{id}}" class="product-item">
         <div class="product-img">
           <a target="_blank" href="/{{slug}}">
-            <img src="{{colors.[0].images.[0].image_link}}" alt=""
+            <img src="{{colors.[0].images.[0].small_image_link}}" alt=""
               class="img-responsive wp-post-image product-first-image">
-            <img src="{{colors.[0].images.[1].image_link}}" alt=""
+            <img src="{{colors.[0].images.[1].small_image_link}}" alt=""
               class="img-responsive image-effect product-second-image"></a>
           <div class="product-button-group ">
 
@@ -307,7 +307,7 @@
             <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
           </div>
           <div class="product-price">
-            <span>${{price}}</span>
+            {{#ifCond price '!==' null}}<span>${{price}}</span>{{/ifCond}}
           </div>
           <div class="color-group">
             {{#each colors}}
@@ -389,15 +389,15 @@
       return;
     }
     var productId = $(this).closest('.product-item').attr('id');
-    var activeElm = $('#' + productId + ' .other-product-color.active');
+    var activeElm = $('.owl-item.active #' + productId + ' .other-product-color.active');
     activeElm.removeClass('active');
     selectedElm.addClass('active');
 
     var selectedProductColorImages = productListHash[productId].colors.find(color => color.color_slug === selectedColor).images;
-    var productFirstImage = $('#' + productId + ' .product-first-image');
-    var productSecondImage = $('#' + productId + ' .product-second-image');
-    selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].image_link);
-    selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].image_link);
+    var productFirstImage = $('.owl-item.active #' + productId + ' .product-first-image');
+    var productSecondImage = $('.owl-item.active #' + productId + ' .product-second-image');
+    selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].small_image_link);
+    selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].small_image_link);
   });
 
   $('.form-customer').submit(function (event) {

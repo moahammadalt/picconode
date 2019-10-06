@@ -7,7 +7,7 @@ export default async (req) => {
 
   const flattenCategoriesList = await categoryListGet();
   
-  const categoriesList = getParentChildArr(flattenCategoriesList);
+  const categoriesList = getParentChildArr(flattenCategoriesList).reverse();
 
   const wishlistItemsLength = getWishListSlugsSession(req).length;
 

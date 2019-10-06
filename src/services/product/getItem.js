@@ -50,7 +50,11 @@ export default async req => {
     body: {
       'product_id': productItem.id
     },
-    key: 'product_id'
+    key: 'product_id',
+    query: {
+      orderBy: 'id',
+      sort: 'ASC',
+    }
   });
 
   if(productItem.main_image) {
@@ -60,13 +64,13 @@ export default async req => {
 
   let productSizeItemArr = await productSizeItemGet({
     body: {
-      product_id: productItemArr[0].id
+      product_id: productItem.id
     }
   });
 
   let productColorItemArr = await productColorItemGet({
     body: {
-      product_id: productItemArr[0].id
+      product_id: productItem.id
     }
   });
   
@@ -100,7 +104,7 @@ export default async req => {
   productItem['colors'] = productColorItemArr.map(productColorItem => {
     productColorItem['color_name'] = colors[productColorItem.color_id].name;
     productColorItem['color_slug'] = colors[productColorItem.color_id].slug;
-    productColorItem['images'] = productImages.filter(productImageObj => productColorItem.product_id === productImageObj.product_id && productColorItem.id === productImageObj.product_color_id);
+    productColorItem['images'] = productImages.filter(productImageObj =>  productColorItem.id === productImageObj.product_color_id);
     return productColorItem;
   });
 

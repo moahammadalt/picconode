@@ -7,9 +7,11 @@ import { createHash } from 'globals/helpers';
 export default async (req) => {
 
   let productItem = await productItemGet(req);
+
   req.query = {
     ...req.query,
     limit: 10,
+    condition: `category_id = ${productItem.category_id}`,
   };
   const productListItems = (await productListGet(req)).filter(({ id })=> id !== productItem.id);
 

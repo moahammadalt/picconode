@@ -4,8 +4,8 @@ export const handleViewedProductsSession = req => {
   }
 
   if (!req.session.viewedProducts.includes(req.params.slug)) {
-    if (req.session.viewedProducts.length === 20) {
-      req.session.viewedProducts.shift();
+    if (req.session.viewedProducts.length === 2) {
+      req.session.viewedProducts.shift(req.params.slug);
     }
     req.session.viewedProducts.push(req.params.slug);
   }
