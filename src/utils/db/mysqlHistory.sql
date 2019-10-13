@@ -197,3 +197,10 @@ ADD UNIQUE KEY `product_color_code` (`product_color_code`);
 ALTER TABLE `product_price` 
 ADD COLUMN `size_price` INT(6) NULL;
 /*END*/
+
+/*Added 13/10/2019*/
+ALTER TABLE `product`
+ADD COLUMN `is_best` TINYINT(1) NOT NULL DEFAULT 0;
+
+ALTER TABLE `product_color` DROP INDEX `product_color_code`;
+/*END*/

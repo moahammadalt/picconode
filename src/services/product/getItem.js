@@ -108,5 +108,8 @@ export default async req => {
     return productColorItem;
   });
 
+  // handle product price
+  productItem['price'] = productItem.price || (productItem.sizes[0] && productItem.sizes[0].size_price);
+
   return productItem;
 };

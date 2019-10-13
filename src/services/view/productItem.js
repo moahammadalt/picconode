@@ -44,9 +44,6 @@ export default async (req) => {
     productItem['isWishlisted'] = true;
   }
 
-  /*  //handle product price
-  productItem['price'] = productItem.price || (productItem.sizes[0] && productItem.sizes[0].size_price); */
-
   handleViewedProductsSession(req);
   
   return {

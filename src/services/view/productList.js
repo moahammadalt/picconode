@@ -5,7 +5,6 @@ import {
   sizeListGet,
   productItemGet,
 } from 'services';
-import { getWishListSlugsSession } from 'session/wishlist';
 import { getViewdProductsSlugs } from 'session/viewedProducts';
 import { validateFilterQuery } from './utils';
 import { getFilterFieldsObjNames } from 'utils/filter';
@@ -49,8 +48,6 @@ export default async req => {
         sort: req.query.sort || 'DESC',
       }
     });
-
-    const productsWishlistSlugs = getWishListSlugsSession(req);
 
     const filterFieldsObj = getFilterFieldsObjNames();
 
