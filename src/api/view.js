@@ -10,6 +10,7 @@ import {
   wishlistItemDelete,
   wishlistGet,
   emailSubscribe,
+  homeGet,
 } from "services";
 
 export default router => {
@@ -24,6 +25,7 @@ export default router => {
     await viewServiceHandler({
       req, res, next,
       viewPathUrl: publicApi.home.path,
+      service: homeGet,
     });
   });
 

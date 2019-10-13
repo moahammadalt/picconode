@@ -49,6 +49,7 @@ export { default as wishlistGet } from './wishlist/get';
 
 export { default as ImageUpload } from './uploads/uploadImage';
 
+export { default as homeGet } from './view/homeGet.js';
 export { default as headerView } from './view/header';
 export { default as productItem } from './view/productItem.js';
 export { default as productList } from './view/productList.js';

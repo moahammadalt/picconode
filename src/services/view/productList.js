@@ -19,7 +19,6 @@ export default async req => {
 
     const allColorsList = await colorListGet();
     const colorListHashObj = createHash(allColorsList, 'slug');
-    const colorListHashIDsObj = createHash(allColorsList, 'id');
     const sizeListHashObj = createHash(await sizeListGet(), 'slug');
     let productListCount;
 

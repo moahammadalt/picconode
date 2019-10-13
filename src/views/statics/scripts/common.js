@@ -101,4 +101,23 @@ $(function() {
       $(this).addClass('active');
     }
   });
+
+  $('.wishlist-product').click(function () {
+    var _thisElm = $(this);
+    var productSlug = _thisElm.attr('data-wishlist-slug');
+    var isAlreadyWishlisted = _thisElm.hasClass('fa-heart');
+
+    $.ajax({
+      type: 'POST',
+      url: '/wishlist/' + (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') + '',
+      contentType: "application/json",
+      data: JSON.stringify({
+        slug: productSlug,
+      }),
+      success: function (data) {
+        window.location.reload();
+      }
+    });
+  });
+  
 });

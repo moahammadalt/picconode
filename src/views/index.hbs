@@ -101,66 +101,50 @@
 		</div>
 		<div class="row">
 
-
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 product-item">
+			{{#each data.bestProductsList}}
+			<div id="{{id}}" class="col-xs-12 col-sm-12 col-md-3 col-lg-3 {{#ifCond stock_status '===' 1}}product-item{{/ifCond}}">
 				<div class="product-img">
-					<a href="product-details.html" target="_blank"><img src="./statics/images/product/product_8_first.jpg" alt=""
-							class="img-responsive wp-post-image">
-						<img src="./statics/images/product/product_8_second.jpg" alt="" class="img-responsive image-effect"></a>
+					<a class="product-link" {{#ifCond stock_status '===' 1}}href="/{{slug}}/?color={{default_color_slug}}"{{/ifCond}} target="_blank">
+						<img src="{{colors.[0].images.[0].small_image_link}}" alt=""
+							class="img-responsive wp-post-image product-first-image">
+						<img src="{{colors.[0].images.[1].small_image_link}}" alt=""
+							class="img-responsive image-effect product-second-image">
+					</a>
 					<div class="product-button-group ">
 						<div class="quick-view">
-							<a href="product-details.html">MORE DETAILS </a>
+							<a href="/{{slug}}/?color={{default_color_slug}}">MORE DETAILS </a>
 						</div>
 					</div>
 				</div>
 				<div class="product-info ">
 					<div class="title-heart">
 						<h3 class="product-title">
-							<a href="">Women Pant</a>
+							<a href="/{{slug}}/?color={{default_color_slug}}">{{name}}</a>
 						</h3>
-						<a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
+						{{#ifCond stock_status '===' 1}}
+						<a class=""
+							title="{{#ifCond isWishlisted '===' undefined}}add to wishlist{{else}}remove item{{/ifCond}}">
+							<span data-wishlist-slug="{{slug}}"
+								class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span>
+						</a>
+						{{/ifCond}}
+
 					</div>
 
 					<div class="product-price">
-						<span>$125</span>
+						{{#ifCond price '!==' null}}{{#ifCond stock_status '===' 1}}<span>${{price}}</span>{{/ifCond}}{{/ifCond}}
+						{{#ifCond stock_status '!==' 1}}<span class="sold">SOLD OUT</span>{{/ifCond}}
 					</div>
 					<div class="color-group">
-						<a href="#" class="circle gray"></a>
-						<a href="#" class="circle black active"></a>
+						{{#each colors}}
+						<a class="product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"
+							data-product-color="{{color_slug}}"></a>
+						{{/each}}
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 product-item">
-				<div class="product-img">
-					<a href="product-details.html" target="_blank"><img src="./statics/images/product/product_4_first.jpg" alt=""
-							class="img-responsive wp-post-image">
-						<img src="./statics/images/product/product_4_second.jpg" alt="" class="img-responsive image-effect"></a>
-					<div class="product-button-group ">
-
-						<div class="quick-view">
-							<a href="product-details.html">MORE DETAILS </a>
-						</div>
-					</div>
-				</div>
-				<div class="product-info ">
-					<div class="title-heart">
-						<h3 class="product-title">
-							<a href="">Girl Scirt</a>
-						</h3>
-						<a class="" title="remove item"> <span class="fa fa-heart"></span></a>
-					</div>
-
-					<div class="product-price">
-						<span>$120</span>
-					</div>
-					<div class="color-group">
-						<a href="#" class="circle gray"></a>
-						<a href="#" class="circle black active"></a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 product-item">
+			{{/each}}
+			{{!-- <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 product-item">
 				<div class="product-img">
 					<a href="product-details.html" target="_blank"><img src="./statics/images/product/product_10_first.jpg" alt=""
 							class="img-responsive wp-post-image">
@@ -191,36 +175,7 @@
 
 					</div>
 				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 product-item">
-				<div class="product-img">
-					<a href="product-details.html" target="_blank"><img src="./statics/images/product/product_6_first.jpg" alt=""
-							class="img-responsive wp-post-image">
-						<img src="./statics/images/product/product_6_second.jpg" alt="" class="img-responsive image-effect"></a>
-					<div class="product-button-group ">
-
-						<div class="quick-view">
-							<a href="product-details.html">MORE DETAILS </a>
-						</div>
-					</div>
-				</div>
-				<div class="product-info text-left">
-					<div class="title-heart">
-						<h3 class="product-title">
-							<a href="">Women Pant</a>
-						</h3>
-						<a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
-					</div>
-					<div class="product-price">
-						<span class="sold">SOLD OUT</span>
-					</div>
-					<div class="color-group">
-						<a href="#" class="circle gray"></a>
-						<a href="#" class="circle black active"></a>
-
-					</div>
-				</div>
-			</div>
+			</div> --}}
 		</div>
 	</div>
 </div>
@@ -249,5 +204,38 @@
 		</div>
 	</div>
 </div>
+
+<script>
+
+
+  $(function () {
+
+  var productListHash = createHash({{{ json data.bestProductsList }}}, 'id').data;
+
+  $('.product-color').click(function () {
+    var selectedElm = $(this);
+    var selectedColor = $(this).attr('data-product-color');
+    var isActive = $(this).hasClass('active');
+    if (isActive) {
+      return;
+    }
+    var productId = $(this).closest('.product-item').attr('id');
+    var activeElm = $('#' + productId + ' .product-color.active');
+    activeElm.removeClass('active');
+    selectedElm.addClass('active');
+
+    var selectedProductColorImages = productListHash[productId].colors.find(color => color.color_slug === selectedColor).images;
+    var productFirstImage = $('#' + productId + ' .product-first-image');
+    var productSecondImage = $('#' + productId + ' .product-second-image');
+    selectedProductColorImages[0] && productFirstImage.attr('src', selectedProductColorImages[0].small_image_link);
+    selectedProductColorImages[1] && productSecondImage.attr('src', selectedProductColorImages[1].small_image_link);
+
+    var selectedProductSlug = productListHash[productId].slug;
+    $('#' + productId + ' .product-link').attr('href', '/' + selectedProductSlug + '/?color=' + selectedColor)
+  });
+
+});
+
+</script>
 
 {{> footer }}

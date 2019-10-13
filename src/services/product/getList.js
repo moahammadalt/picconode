@@ -18,6 +18,7 @@ export default async (req) => {
 			...req.query,
 			orderBy: 'id',
 			sort: 'ASC',
+			condition: req.condition,
 		});
 
 		const productImageList = await productImageGetList({
