@@ -11,4 +11,8 @@ export const handleViewedProductsSession = req => {
   }
 };
 
-export const getViewdProductsSlugs = req => req.session.viewedProducts || [];
+export const getViewdProductsSlugs = req => {
+  if(!req.session.userToken) return [];
+  
+  return req.session.viewedProducts || []
+};

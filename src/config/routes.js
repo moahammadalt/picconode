@@ -167,5 +167,24 @@ export default {
 			path: '/notFound.hbs',
 			type: 'GET',
 		},
+		emailUserRegister: {
+			url: '/emailRegisteration',
+			bodyParams: ['email', 'name', 'password'],
+			type: 'POST',
+		},
+		emailUserLogIn: {
+			url: '/emailLogIn',
+			bodyParams: ['email', 'password'],
+			type: 'POST',
+		},
+		emailUserLogOut: {
+			url: '/emailLogOut',
+			type: 'POST',
+		},
+		emailUserRegisterVerification: {
+			url: '/emailUserRegisterVerification/:token',
+			path: '/userLoginVerification.hbs',
+			type: 'GET',
+		},
   }
 };

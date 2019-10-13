@@ -100,7 +100,8 @@
       </div>
       <div class="wishlist-inside">
 
-        <div class="wishlist-bottom" style="bottom: {{#ifCond data.wishlistHeaderProducts.length '===' 1}}18%{{else}}0%{{/ifCond}};">
+        <div class="wishlist-bottom"
+          style="bottom: {{#ifCond data.wishlistHeaderProducts.length '===' 1}}18%{{else}}0%{{/ifCond}};">
           {{#ifCond data.wishlistHeaderProducts.length '>' 0}}
           <p>Items you like most.</p>
           <div class="view">
@@ -120,7 +121,8 @@
                 </div>
               </div>
               <div class="product-remove">
-                <a data-wishlist-slug="{{slug}}" class="btn-del wishlist-product-remove" title="remove item"><i class="ion-ios-close-empty"></i></a>
+                <a data-wishlist-slug="{{slug}}" class="btn-del wishlist-product-remove" title="remove item"><i
+                    class="ion-ios-close-empty"></i></a>
               </div>
             </div>
             {{/each}}
@@ -161,6 +163,214 @@
     </div>
   </div> --}}
   <!-- End search form -->
+
+  <!-- Account -->
+  <div class="account-form-wrapper login-form-wrapper">
+    <div class="container">
+      <div class="search-results-wrapper">
+        <div class="btn-search-close">
+          <i class="ion-ios-close-empty black"></i>
+        </div>
+      </div>
+      <div class="account-wrapper">
+        <ul class="account-tab text-center">
+          <li class="active"><a data-toggle="tab" href="#login">Login</a></li>
+          <li><a data-toggle="tab" href="#register">Register</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="login" class="tab-pane fade in active">
+            <div class="row">
+              <div class="col-md-4 col col-login">
+                <form id="loginForm" method="post" class="form-customer form-register">
+                  <div class="form-group">
+                    <label for="loginUserEmail">E-mail *</label>
+                    <input type="email" class="form-control form-account" id="loginUserEmail" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="loginUserPassword">Password *</label>
+                    <input type="password" class="form-control form-account" id="loginUserPassword" required>
+                  </div>
+                  {{!-- <div class="flex justify-content-between mg-30">
+                    <div class="checkbox">
+                      <input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe"
+                        name="RememberMe" type="checkbox" value="true" />
+                      <input name="RememberMe" type="hidden" value="false" />
+                      <label for="RememberMe" class="rememberme">Remember me</label>
+                    </div>
+                    <!-- <span class="text-note no-mg" onclick="showForgotPassword()">Forgot Password?</span>-->
+                    <a data-toggle="tab" href="#forgot" class="text-note no-mg">Forgot Password?</a>
+                    <!--  <button class="text-note no-mg">Forgot Password?</button>-->
+
+                  </div> --}}
+                  <div class="btn-button-group mg-top-30 mg-bottom-15">
+                    <button type="submit" class="zoa-btn btn-login hover-white">Sign In</button>
+                  </div>
+                </form>
+                <p id="login-failure-message" class="hidden" style="color: red"></p>
+                {{!-- <div class="padding-bottom-10 padding-top-10">
+                                	 <p class="or">OR</p>
+                                </div>
+                                <div class="social-group-button">
+                                    <a href="" class="google button">
+                                        <div class="slide">
+                                            <p>
+                                                Connect with Google
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-google">
+                                    </i>
+                                        </div>
+                                    </a>
+                                    <a href="" class="facebook button">
+                                        <div class="slide">
+                                            <p>
+                                                Connect with Facebook
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-facebook">
+                                    </i>
+                                        </div>
+                                    </a>
+                                </div> --}}
+                <!-- <span class="text-note" padding-bottom-30>Don’t have an account? <a data-toggle="tab" href="#register">Register!</a></span>-->
+              </div>
+              <!--<div class="col-md-4 col-left-40">
+                                <form method="post" class="form-customer form-reset">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail5">E-mail *</label>
+                                        <input type="email" class="form-control form-account" id="exampleInputEmail5">
+                                    </div>
+                                    <div class="btn-button-group mg-top-30 mg-bottom-15">
+                                        <button type="submit" class="zoa-btn btn-login hover-white">Reset Password</button>
+                                    </div>
+                                </form>
+                            </div>-->
+            </div>
+          </div>
+          <div id="register" class="tab-pane fade">
+            <div class="row">
+              <div class="col-md-4 col-login">
+                <form id="registrationForm" method="post" class="form-customer form-login">
+                  <div class="form-group">
+                    <label for="registrationUserEmail">E-mail *</label>
+                    <input type="email" class="form-control form-account" id="registrationUserEmail" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="registrationUserName">Name *</label>
+                    <input type="text" class="form-control form-account" id="registrationUserName" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="registrationUserPassword">Password *</label>
+                    <input type="password" class="form-control form-account" id="registrationUserPassword" required>
+                  </div>
+                  <div class="btn-button-group mg-top-30 mg-bottom-15">
+                    <button type="submit" class="zoa-btn btn-login hover-white">Sign Up</button>
+                  </div>
+                </form>
+                <p id="registration-succes-message" class="hidden" style="color: #008c8c">Your message have been send successfuly. Thank You.</p>
+                <p id="registration-failure-message" class="hidden" style="color: red">An error has been occured. Try again.</p>
+                {{!-- <div class="padding-bottom-10 padding-top-10">
+                                	 <p class="or">OR</p>
+                                </div>
+                               
+                                <div class="social-group-button">
+                                    <a href="" class="google button">
+                                        <div class="slide">
+                                            <p>
+                                                Connect with Google
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-google">
+                                    </i>
+                                        </div>
+                                    </a>
+                                    <a href="" class="facebook button">
+                                        <div class="slide">
+                                            <p>
+                                                Connect with Facebook
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-facebook">
+                                    </i>
+                                        </div>
+                                    </a>
+                                </div> --}}
+                <!--  <span class="text-note padding-bottom-30">Already have an account? <a data-toggle="tab" href="#login">Sign In!</a></span>-->
+              </div>
+
+            </div>
+          </div>
+
+
+          <div id="forgot" class="tab-pane fade">
+            <div class="row">
+              <div class="col-md-4 col col-login">
+                <span class="text-note padding-bottom-30">Forgot your password?<br>
+                  Don't worry just enter your email to receive a code </span>
+              </div>
+              <div class="col-md-4 col-center">
+                <form class="form-customer form-reset">
+                  <div class="form-group">
+                    <label for="exampleInputEmail5">E-mail *</label>
+                    <input type="email" class="form-control form-account" id="exampleInputEmail5">
+                  </div>
+                  <div class="btn-button-group mg-top-30 mg-bottom-15">
+                    <button type="submit" class="zoa-btn btn-login hover-white">Get Code</button>
+                  </div>
+                  <div class="form-group">
+                    <span> Please check your email for the code. If you didn't receive an email click <a
+                        class="resend-mail" href="#">here</a></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail5">Enter Code *</label>
+                    <input type="code" class="form-control form-account" id="exampleInputCode5">
+                  </div>
+                  <div class="btn-button-group mg-top-30 mg-bottom-15">
+                    <a data-toggle="tab" href="#reset"><button type="submit" class="zoa-btn btn-login hover-white">Reset
+                        Password</button></a>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <div id="reset" class="tab-pane fade">
+            <div class="row">
+              <div class="col-md-4 col col-login">
+                <span class="text-note padding-bottom-30">Create new password</span>
+              </div>
+              <div class="col-md-4 col-center">
+                <form method="post" class="form-customer form-reset">
+                  <div class="form-group">
+                    <label for="exampleInputPassword2">New Password *</label>
+                    <input type="password" class="form-control form-account" id="exampleInputPassword2">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword2">Confirm Password *</label>
+                    <input type="password" class="form-control form-account" id="exampleInputPassword2">
+                  </div>
+                  <div class="btn-button-group mg-top-30 mg-bottom-15">
+                    <button type="submit" class="zoa-btn btn-login hover-white">Create</button>
+                  </div>
+                  <div class="form-group">
+                    <span> Your password was created successfuly. You can now <a class="resend-mail"
+                        href="#">Login</a></span>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- End Account -->
 
   <!--  Wrappage Start -->
   <div class="wrappage">
@@ -214,8 +424,7 @@
                         <a href="/products/?category={{slug}}" class="submenu">{{name}}</a>
                         <ul class="menu-level-2">
                           {{#each children}}
-                          <li class="level3"><a href="/products/?type={{slug}}"
-                              title="">{{name}}</a></li>
+                          <li class="level3"><a href="/products/?type={{slug}}" title="">{{name}}</a></li>
                           {{/each}}
                         </ul>
                       </li>
@@ -237,48 +446,126 @@
                     <li class="level2"><a href="#" title="It">Italian</a></li>
                   </ul>
                 </li> --}}
+                {{#ifCond data.user '!==' undefined}}
+                <li id="log-out" class="level1">Log out</li>
+                {{else}}
+                <li id="log-in-modal-btn" class="level1 js-user-login login-button"><i class="fa fa-unlock-alt"></i>Login</li>
+                {{/ifCond}}
+
+                
               </ul>
+              {{#ifCond data.user '!==' undefined}}
               <div class="topbar-left">
-
-
                 <div class="element element-wishlist">
                   <a class="zoa-icon icon-wishlist">
                     <i class="fa fa-heart-o wishlist"></i>
                     <span class="count cart-count">{{data.wishlistItemsLength}}</span>
                   </a>
                 </div>
-
                 {{!-- <div class="element element-search hidden-xs hidden-sm">
                   <a class="zoa-icon search-toggle">
                     <i class="fa fa-2x fa-search"></i>
                   </a>
                 </div> --}}
-
               </div>
+              {{/ifCond}}
             </div>
           </div>
         </div>
       </div>
     </header>
 
-<script>
-  $(function () {
+    <script>
+      $(function () {
 
-    $('.wishlist-product-remove').click(function () {
-      var _thisElm = $(this);
-      var productSlug = _thisElm.attr('data-wishlist-slug');
+        var user = {{{ json data.user }}};
 
-      $.ajax({
-        type: 'POST',
-        url: '/wishlist/itemDelete',
-        contentType: "application/json",
-        data: JSON.stringify({
-          slug: productSlug,
-        }),
-        success: function (data) {
-          window.location.reload();
-        }
+        $('.wishlist-product-remove').click(function () {
+          if(!user) {
+            alert('please login first');
+            return;
+          }
+          var _thisElm = $(this);
+          var productSlug = _thisElm.attr('data-wishlist-slug');
+
+          $.ajax({
+            type: 'POST',
+            url: '/wishlist/itemDelete',
+            contentType: "application/json",
+            data: JSON.stringify({
+              slug: productSlug,
+            }),
+            success: function (data) {
+              window.location.reload();
+            }
+          });
+        });
+
+        $('#registrationForm').submit(function (event) {
+          event.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: `/emailRegisteration`,
+            contentType: "application/json",
+            data: JSON.stringify({
+              name: $('#registrationUserName').val(),
+              email: $('#registrationUserEmail').val(),
+              password: $('#registrationUserPassword').val(),
+            }),
+            success: function (data) {             
+              alert('verification link has been sent to your email!');
+            },
+            error: function (data) {
+              $('#registration-failure-message').removeClass('hidden');
+              $('#registration-failure-message').text(data.responseJSON.errorMessage || 'some error happened!');
+              setTimeout(function() {
+                $('#registration-failure-message').addClass('hidden');
+              }, 10000);
+            }
+          });
+
+        });
+
+        $('#log-out').click(function () {
+          $.ajax({
+            type: 'POST',
+            url: `/emailLogOut`,
+            contentType: "application/json",
+            data: JSON.stringify({}),
+            success: function (data) {             
+              window.location.reload();
+            },
+            error: function (data) {
+
+            }
+          });
+        });
+
+        
+        $('#loginForm').submit(function (event) {
+          event.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: `/emailLogIn`,
+            contentType: "application/json",
+            data: JSON.stringify({
+              email: $('#loginUserEmail').val(),
+              password: $('#loginUserPassword').val(),
+            }),
+            success: function (data) {             
+              window.location.reload();
+            },
+            error: function (data) {
+              $('#login-failure-message').removeClass('hidden');
+              $('#login-failure-message').text(data.responseJSON.errorMessage || 'some error happened!');
+              setTimeout(function() {
+                $('#login-failure-message').addClass('hidden');
+              }, 10000);
+            }
+          });
+
+        });
       });
-    });
-  });
-</script>
+    </script>

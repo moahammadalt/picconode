@@ -31,7 +31,7 @@ export default new (class hbsViews {
     });
 
     hbs.registerHelper('json', function(context) {
-      return JSON.stringify(context, null, 2);
+      return JSON.stringify(context, null, 2) || 'null';
     });
 
     hbs.registerHelper('getHref', function(query, key, value) {

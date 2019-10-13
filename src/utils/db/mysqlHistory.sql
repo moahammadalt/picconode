@@ -203,4 +203,16 @@ ALTER TABLE `product`
 ADD COLUMN `is_best` TINYINT(1) NOT NULL DEFAULT 0;
 
 ALTER TABLE `product_color` DROP INDEX `product_color_code`;
+
+CREATE TABLE `email_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `verified` TINYINT(1) NOT NULL DEFAULT 0,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*END*/

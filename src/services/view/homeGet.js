@@ -13,8 +13,6 @@ export default async req => {
       condition: `is_best=1`,
     });
 
-    console.log('bestProductsList', bestProductsList.length);
-
     return { bestProductsList };
     
   }

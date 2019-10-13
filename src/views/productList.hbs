@@ -245,6 +245,7 @@
   var queryParams = getQueryParameters();
   var colorParams = queryParams.color && queryParams.color.split(',');
   var sizeParams = queryParams.size && queryParams.size.split(',');
+  var user = {{{ json data.user }}};
 
   $('.product-color').click(function () {
     var selectedElm = $(this);
@@ -322,6 +323,29 @@
     if (queryParams.size && sizeParams.includes(sizeSlug)) {
       $(this).addClass('active');
     }
+  });
+
+  $('.wishlist-product').click(function () {
+    if(!user) {
+      alert('please login first');
+      return;
+    }
+    
+    var _thisElm = $(this);
+    var productSlug = _thisElm.attr('data-wishlist-slug');
+    var isAlreadyWishlisted = _thisElm.hasClass('fa-heart');
+
+    $.ajax({
+      type: 'POST',
+      url: '/wishlist/' + (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') + '',
+      contentType: "application/json",
+      data: JSON.stringify({
+        slug: productSlug,
+      }),
+      success: function (data) {
+        window.location.reload();
+      }
+    });
   });
 
 });

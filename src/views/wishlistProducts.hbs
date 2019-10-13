@@ -75,6 +75,7 @@
 $(function () {
 
   var productListHash = createHash({{{json data.wishlistProducts}}}, 'id').data;
+  var user = {{{ json data.user }}};
 
   $('.other-product-color').click(function() {
     var selectedElm = $(this);
@@ -96,6 +97,11 @@ $(function () {
   });
 
   $('.wishlist-product').click(function () {
+    if(!user) {
+      alert('please login first');
+      return;
+    }
+    
     var _thisElm = $(this);
     var productSlug = _thisElm.attr('data-wishlist-slug');
 

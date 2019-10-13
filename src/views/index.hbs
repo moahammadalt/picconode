@@ -211,7 +211,8 @@
   $(function () {
 
   var productListHash = createHash({{{ json data.bestProductsList }}}, 'id').data;
-
+	var user = {{{ json data.user }}};
+	
   $('.product-color').click(function () {
     var selectedElm = $(this);
     var selectedColor = $(this).attr('data-product-color');
@@ -232,6 +233,29 @@
 
     var selectedProductSlug = productListHash[productId].slug;
     $('#' + productId + ' .product-link').attr('href', '/' + selectedProductSlug + '/?color=' + selectedColor)
+  });
+
+	$('.wishlist-product').click(function () {
+    if(!user) {
+      alert('please login first');
+      return;
+    }
+    
+    var _thisElm = $(this);
+    var productSlug = _thisElm.attr('data-wishlist-slug');
+    var isAlreadyWishlisted = _thisElm.hasClass('fa-heart');
+
+    $.ajax({
+      type: 'POST',
+      url: '/wishlist/' + (isAlreadyWishlisted ? 'itemDelete' : 'itemCreate') + '',
+      contentType: "application/json",
+      data: JSON.stringify({
+        slug: productSlug,
+      }),
+      success: function (data) {
+        window.location.reload();
+      }
+    });
   });
 
 });

@@ -4,6 +4,10 @@ export const checkValue = (value, key) => {
 	return ((!value && value !== false) || /^\s*$/.test(value)) ? false : true;
 };
 
+export const isEmail = (email) => /^[a-z0-9._%+-]+@.+\..+/.test(email);
+
+export const isName = (name) => /^(?=.{2,150}$).*/.test(name);
+
 export const sendClientAlarm = (msg) => {
 
 	return `

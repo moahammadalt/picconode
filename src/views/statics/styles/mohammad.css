@@ -70,3 +70,76 @@ a {
 	writing-mode: vertical-rl;
 	letter-spacing: -8px;
 }
+
+.widget-filter.filter-color ul li a.beig:before {
+	background: #F5E3D4;
+}
+.color-group .circle.beig,
+.single-product-detail .single-product-info .size-group .circle.beig {
+	background: #F5E3D4;
+}
+
+.widget-filter.filter-color ul li a.black-white:before {
+	display:inline-block;
+  border-top:30px solid #ffffff;
+  border-right:30px solid #000000;
+}
+.color-group .circle.black-white,
+.single-product-detail .single-product-info .size-group .circle.black-white {
+	display:inline-block;
+  border-top:30px solid #ffffff;
+  border-right:30px solid #000000;
+}
+
+.widget-filter.filter-color ul li a.yellow-red:before {
+	display:inline-block;
+  border-top:30px solid #E9C16E;
+  border-right:30px solid #62182B;
+}
+.color-group .circle.yellow-red,
+.single-product-detail .single-product-info .size-group .circle.yellow-red {
+	display:inline-block;
+  border-top:30px solid #E9C16E;
+	border-right:30px solid #62182B;
+}
+
+.widget-filter.filter-color ul li a.brown:before {
+	background: #634635;
+}
+.color-group .circle.brown,
+.single-product-detail .single-product-info .size-group .circle.brown {
+	background: #634635;
+}
+
+.widget-filter.filter-color ul li a.grey-blue:before {
+	display:inline-block;
+  border-top:30px solid #6C6B73;
+  border-right:30px solid #6E7294;
+}
+.color-group .circle.grey-blue,
+.single-product-detail .single-product-info .size-group .circle.grey-blue {
+	display:inline-block;
+  border-top:30px solid #6C6B73;
+	border-right:30px solid #6E7294;
+}
+
+.widget-filter.filter-color ul li a.dark-blue:before {
+	background: #062754;
+}
+.color-group .circle.dark-blue,
+.single-product-detail .single-product-info .size-group .circle.dark-blue {
+	background: #062754;
+}
+
+.widget-filter.filter-color ul li a.yellow-brown:before {
+	display:inline-block;
+  border-top:30px solid #A7938A;
+  border-right:30px solid #f0bc3e;
+}
+.color-group .circle.yellow-brown,
+.single-product-detail .single-product-info .size-group .circle.yellow-brown {
+	display:inline-block;
+  border-top:30px solid #A7938A;
+	border-right:30px solid #f0bc3e;
+}
+

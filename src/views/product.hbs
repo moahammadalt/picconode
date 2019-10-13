@@ -329,6 +329,7 @@
   $(function () {
 
     var productListHash = createHash({{{ json data.productListItems }}}, 'id').data;
+    var user = {{{ json data.user }}};
 
   function hideResponseMessage() {
     setTimeout(function() {
@@ -432,6 +433,11 @@
   });
 
   $('.wishlist-product').click(function () {
+    if(!user) {
+      alert('please login first');
+      return;
+    }
+
     var _thisElm = $(this);
     var productSlug = _thisElm.attr('data-wishlist-slug');
     var isAlreadyWishlisted = _thisElm.hasClass('active');

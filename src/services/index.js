@@ -57,3 +57,8 @@ export { userDemandSend } from './view/productUserDemand';
 export { userDemandList } from './view/productUserDemand';
 export { userDemandReply } from './view/productUserDemand';
 export { emailSubscribe } from './view/subscription';
+
+export { default as emailUserRegister } from './emailUser/register';
+export { default as emailUserVerification } from './emailUser/emailVerification';
+export { default as emailUserLogOut } from './emailUser/logOut';
+export { default as emailUserLogIn } from './emailUser/logIn';

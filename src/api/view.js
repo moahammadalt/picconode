@@ -11,6 +11,10 @@ import {
   wishlistGet,
   emailSubscribe,
   homeGet,
+  emailUserRegister,
+  emailUserVerification,
+  emailUserLogOut,
+  emailUserLogIn,
 } from "services";
 
 export default router => {
@@ -59,6 +63,14 @@ export default router => {
     });
   });
 
+  router.get(publicApi.emailUserRegisterVerification.url, async (req, res, next) => {
+    await viewServiceHandler({
+      req, res, next,
+      viewPathUrl: publicApi.emailUserRegisterVerification.path,
+      service: emailUserVerification,
+    });
+  });
+
   router.get(publicApi.product.url, async (req, res, next) => {
     await viewServiceHandler({
       req, res, next,
@@ -81,5 +93,17 @@ export default router => {
 
   router.post(publicApi.emailSubscription.url, (...arg) => {
     serviceHandler(...arg, emailSubscribe);
+  });
+
+  router.post(publicApi.emailUserRegister.url, (...arg) => {
+    serviceHandler(...arg, emailUserRegister);
+  });
+
+  router.post(publicApi.emailUserLogOut.url, (...arg) => {
+    serviceHandler(...arg, emailUserLogOut);
+  });
+
+  router.post(publicApi.emailUserLogIn.url, (...arg) => {
+    serviceHandler(...arg, emailUserLogIn);
   });
 };

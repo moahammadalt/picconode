@@ -1,4 +1,6 @@
 export const saveWishlistProduct = req => {
+  if(!req.session.userToken) return;
+
   if (!req.session.productsWishlistSlugs) {
     req.session.productsWishlistSlugs = [];
   }
@@ -10,6 +12,8 @@ export const saveWishlistProduct = req => {
 };
 
 export const deleteWishlistSessionItem = req => {
+  if(!req.session.userToken) return;
+
   if(req.session.productsWishlistSlugs && req.session.productsWishlistSlugs.includes(req.body.slug)) {
     const slugIndex = req.session.productsWishlistSlugs.findIndex(slug => slug === req.body.slug);
     req.session.productsWishlistSlugs.splice(slugIndex, 1);
@@ -20,4 +24,8 @@ export const deleteWishlistSessionItem = req => {
   }
 };
 
-export const getWishListSlugsSession = req => req.session.productsWishlistSlugs ? req.session.productsWishlistSlugs.reverse() : [];
+export const getWishListSlugsSession = req => {
+  if(!req.session.userToken) return [];
+  
+  return req.session.productsWishlistSlugs ? req.session.productsWishlistSlugs.reverse() : [];
+};

@@ -37,11 +37,12 @@ export default new (class expressServer {
 
       this.app.use(session({
         secret: config.SESSION_SECRET,
-        resave: true,
+        resave: false,
         store: sessionStore,
         saveUninitialized: true,
         cookie: {
           expires: false,
+          maxAge: 86400 * 30 * 1000, // means after one month
         }
       }));
 

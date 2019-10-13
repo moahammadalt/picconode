@@ -1,15 +1,26 @@
-import { createHash } from 'globals/helpers';
-import { getParentChildArr } from 'globals/helpers';
+import JWT from "utils/jwt";
+
+import { getParentChildArr, createHash, checkValue } from 'globals/helpers';
 import { categoryListGet, wishlistGet } from 'services';
 import { getWishListSlugsSession } from 'session/wishlist';
+import { getLoggedInUserTokenSession } from 'session/user';
 
 export default async (req) => {
 
+  let user;
+  
   const flattenCategoriesList = await categoryListGet();
   
   const categoriesList = getParentChildArr(flattenCategoriesList).reverse();
 
-  const wishlistItemsLength = getWishListSlugsSession(req).length;
+  const wishlistItemsLength = getWishListSlugsSession(req) ? getWishListSlugsSession(req).length : 0;
+
+  const userToken = getLoggedInUserTokenSession(req);
+
+  if(checkValue(userToken)) {
+    user = await JWT.verify(userToken);
+  }
+  
 
   const wishlistProducts = await wishlistGet({
     ...req,
@@ -22,6 +33,7 @@ export default async (req) => {
     categoriesHash: createHash(categoriesList, 'slug'),
     wishlistItemsLength,
     ...wishlistProducts,
+    user,
     flattenCategoriesHash: createHash(flattenCategoriesList, 'slug'),
     wishlistHeaderProducts: (wishlistProducts && wishlistProducts.wishlistProducts.length > 2) ? wishlistProducts.wishlistProducts.slice(0, 2) : wishlistProducts.wishlistProducts,
   }
