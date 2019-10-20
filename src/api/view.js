@@ -15,6 +15,8 @@ import {
   emailUserVerification,
   emailUserLogOut,
   emailUserLogIn,
+  emailUserForgottenPasswordSend,
+  emailUserForgottenPasswordReset,
 } from "services";
 
 export default router => {
@@ -105,5 +107,13 @@ export default router => {
 
   router.post(publicApi.emailUserLogIn.url, (...arg) => {
     serviceHandler(...arg, emailUserLogIn);
+  });
+
+  router.post(publicApi.emailUserForgottenPasswordSend.url, (...arg) => {
+    serviceHandler(...arg, emailUserForgottenPasswordSend);
+  });
+
+  router.post(publicApi.emailUserForgottenPasswordReset.url, (...arg) => {
+    serviceHandler(...arg, emailUserForgottenPasswordReset);
   });
 };

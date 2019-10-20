@@ -62,3 +62,5 @@ export { default as emailUserRegister } from './emailUser/register';
 export { default as emailUserVerification } from './emailUser/emailVerification';
 export { default as emailUserLogOut } from './emailUser/logOut';
 export { default as emailUserLogIn } from './emailUser/logIn';
+export { default as emailUserForgottenPasswordSend } from './emailUser/forgottenPasswordEmailSending';
+export { default as emailUserForgottenPasswordReset } from './emailUser/forgottenPasswordReset';

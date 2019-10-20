@@ -186,5 +186,15 @@ export default {
 			path: '/userLoginVerification.hbs',
 			type: 'GET',
 		},
+		emailUserForgottenPasswordSend: {
+			url: '/resetEmailForgottenPassword',
+			bodyParams: ['email'],
+			type: 'POST',
+		},
+		emailUserForgottenPasswordReset: {
+			url: '/resetForgottenPassword',
+			bodyParams: ['email', 'resetCode', 'newPassword'],
+			type: 'POST',
+		},	
   }
 };

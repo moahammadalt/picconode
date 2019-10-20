@@ -42,7 +42,7 @@ export default new (class expressServer {
         saveUninitialized: false,
         cookie: {
           expires: false,
-          maxAge: 86400 * 30 * 1000, // means after one month
+          maxAge: 86400 * 150 * 1000, // means after one month
         }
       }));
 

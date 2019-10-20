@@ -190,18 +190,17 @@
                     <label for="loginUserPassword">Password *</label>
                     <input type="password" class="form-control form-account" id="loginUserPassword" required>
                   </div>
-                  {{!-- <div class="flex justify-content-between mg-30">
+                  <div class="flex justify-content-between mg-30">
                     <div class="checkbox">
-                      <input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe"
-                        name="RememberMe" type="checkbox" value="true" />
-                      <input name="RememberMe" type="hidden" value="false" />
+                      <input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" />
+                      <input name="RememberMe" type="hidden" value="true" />
                       <label for="RememberMe" class="rememberme">Remember me</label>
                     </div>
                     <!-- <span class="text-note no-mg" onclick="showForgotPassword()">Forgot Password?</span>-->
                     <a data-toggle="tab" href="#forgot" class="text-note no-mg">Forgot Password?</a>
                     <!--  <button class="text-note no-mg">Forgot Password?</button>-->
 
-                  </div> --}}
+                  </div>
                   <div class="btn-button-group mg-top-30 mg-bottom-15">
                     <button type="submit" class="zoa-btn btn-login hover-white">Sign In</button>
                   </div>
@@ -308,30 +307,49 @@
 
           <div id="forgot" class="tab-pane fade">
             <div class="row">
-              <div class="col-md-4 col col-login">
-                <span class="text-note padding-bottom-30">Forgot your password?<br>
-                  Don't worry just enter your email to receive a code </span>
-              </div>
               <div class="col-md-4 col-center">
-                <form class="form-customer form-reset">
+                <form id="userForgottenPassword" class="form-customer form-reset">
                   <div class="form-group">
-                    <label for="exampleInputEmail5">E-mail *</label>
-                    <input type="email" class="form-control form-account" id="exampleInputEmail5">
+                    <span class="text-note padding-bottom-30">Forgot your password?<br>
+                      Don't worry just enter your email to receive a password reset code </span>
+                  </div>
+                  <div class="form-group">
+                    <label for="userForgottenEmail">E-mail *</label>
+                    <input type="email" class="form-control form-account" id="userForgottenEmail" required>
                   </div>
                   <div class="btn-button-group mg-top-30 mg-bottom-15">
                     <button type="submit" class="zoa-btn btn-login hover-white">Get Code</button>
                   </div>
                   <div class="form-group">
-                    <span> Please check your email for the code. If you didn't receive an email click <a
-                        class="resend-mail" href="#">here</a></span>
+                    <span id="forgottenPasswordResponseMessage"></span>
                   </div>
-                  <div class="form-group">
+                  {{!-- <div class="form-group">
                     <label for="exampleInputEmail5">Enter Code *</label>
                     <input type="code" class="form-control form-account" id="exampleInputCode5">
                   </div>
                   <div class="btn-button-group mg-top-30 mg-bottom-15">
                     <a data-toggle="tab" href="#reset"><button type="submit" class="zoa-btn btn-login hover-white">Reset
                         Password</button></a>
+                  </div> --}}
+                </form>
+
+                <form id="userForgottenPasswordReset" class="form-customer form-reset hidden">
+                  <div class="form-group">
+                    <label for="userForgottenCode">Enter the recived code</label>
+                    <input type="text" class="form-control form-account" id="userForgottenCode" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="userForgottenNewPassword">Enter new password</label>
+                    <input type="password" class="form-control form-account" id="userForgottenNewPassword" required>
+                  </div>
+                  <div class="btn-button-group mg-top-30 mg-bottom-15">
+                    <button type="submit" class="zoa-btn btn-login hover-white">Reset Password</button>
+                  </div>
+                  <div class="form-group">
+                    <span id="resetforgottenPasswordResponseMessage"></span>
+                  </div>
+                  <div class="form-group">
+                    <span id="forgottenPasswordResetResponseMessage"></span>
                   </div>
                 </form>
 
@@ -565,5 +583,66 @@
           });
 
         });
+
+        $('#userForgottenPassword').submit(function (event) {
+          event.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: `/resetEmailForgottenPassword`,
+            contentType: "application/json",
+            data: JSON.stringify({
+              email: $('#userForgottenEmail').val(),
+            }),
+            success: function (data) {             
+              console.log('data: ', data);
+              $('#userForgottenPasswordReset').removeClass('hidden');
+              $('#userForgottenPassword').addClass('hidden');
+              setTimeout(function() {
+                $('#userForgottenPassword').removeClass('hidden');
+                $('#userForgottenPasswordReset').addClass('hidden');
+              }, 60 * 1000 * 5);
+            },
+            error: function (data) {
+              $('#forgottenPasswordResponseMessage').text(data.responseJSON.errorMessage || 'some error happened!');
+              $('#forgottenPasswordResponseMessage').removeClass('hidden');
+              setTimeout(function() {
+                $('#forgottenPasswordResponseMessage').addClass('hidden');
+              }, 10000);
+            }
+          });
+
+        });
+
+        $('#userForgottenPasswordReset').submit(function (event) {
+          event.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: `/resetForgottenPassword`,
+            contentType: "application/json",
+            data: JSON.stringify({
+              email: $('#userForgottenEmail').val(),
+              resetCode: $('#userForgottenCode').val(),
+              newPassword: $('#userForgottenNewPassword').val(),
+            }),
+            success: function (data) {             
+              $('#forgottenPasswordResetResponseMessage').text('your password has been sent');
+              setTimeout(function() {
+                window.location.reload();
+              }, 3000);
+              
+            },
+            error: function (data) {
+              $('#forgottenPasswordResetResponseMessage').text(data.responseJSON.errorMessage || 'some error happened!');
+              $('#forgottenPasswordResetResponseMessage').removeClass('hidden');
+              setTimeout(function() {
+                $('#forgottenPasswordResetResponseMessage').addClass('hidden');
+              }, 10000);
+            }
+          });
+
+        });
+        
       });
     </script>
