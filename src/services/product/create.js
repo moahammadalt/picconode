@@ -1,4 +1,4 @@
-import { insert } from 'utils/db';
+import { insert, update } from 'utils/db';
 import {
 	productDelete,
 	productSizeCreate,
@@ -25,6 +25,14 @@ export default async (req) => {
 			values: [ ...Object.values(req.body), req.adminUser.id ],
 			data: req.body,
 		});
+
+		// update sort_index with the new id
+		await update({
+      table: 'product',
+      fields: ['sort_index'],
+      values: [productResponse.id],
+      condition: `id = '${productResponse.id}'`,
+    });
 
 		if(mainImage) {
 			const mainImageCreated = await productImageCreate({

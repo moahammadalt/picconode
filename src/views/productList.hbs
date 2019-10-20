@@ -51,11 +51,12 @@
             <span>Filter</span><i class="icon_close ion-close"></i>
           </div>
           <div class="widget-filter filter-price">
-            <div class="pri" style="border-bottom: 1px solid #f3bd1c">
+            <div class="pri" style="border-bottom: 1px solid #fff193">
               <h4>FILTER BY PRICE</h4>
               <div id="slider-3"></div>
               <p class="range-p">
                 <label for="price">Range:</label>
+                <span>€{{price}}</span>
                 <input type="text" id="price"></p>
             </div>
           </div>
@@ -193,7 +194,7 @@
                     {{/ifCond}}
                   </div>
                   <div class="product-price">
-                    {{#ifCond price '!==' null}}{{#ifCond stock_status '===' 1}}<span>${{price}}</span>{{/ifCond}}{{/ifCond}}
+                    {{#ifCond price '!==' null}}{{#ifCond stock_status '===' 1}}<span>€{{price}}</span>{{/ifCond}}{{/ifCond}}
                     {{#ifCond stock_status '!==' 1}}<span class="sold">SOLD OUT</span>{{/ifCond}}
                   </div>
                   <div class="color-group">
@@ -203,9 +204,9 @@
                     {{/each}}
                   </div>
                   <div class="product-bottom-group">
-                    <a href="#" class="zoa-btn zoa-quickview">
+                    <!--<a href="#" class="zoa-btn zoa-quickview">
                       <span class="zoa-icon-quick-view"></span>
-                    </a>
+                    </a>-->
                     <a href="#" class="zoa-btn zoa-wishlist">
                       <span class="zoa-icon-heart"></span>
                     </a>

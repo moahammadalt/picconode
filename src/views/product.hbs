@@ -36,7 +36,7 @@
                 </div>
               </form>
               <p id="succes-message" class="hidden" style="color: #008c8c">Your message have been send successfuly. Thank You.</p>
-              <p id="failure-message" class="hidden" style="color: red">An error has been occured. Try again.</p>
+              <p id="failure-message" class="hidden" style="color: #be0707">An error has been occured. Try again.</p>
             </div>
           </div>
         </div>
@@ -96,10 +96,8 @@
                 <h3 class="product-title"><a>{{data.product.name}}</a> </h3>
                 <div class="row">
                   <div class="col-12">
-                  <div class="col-md-3"><span class="chosen-color-code">{{data.product.colors.[0].product_color_code}}</span></div>
-                    <div class="col-md-9 title-sec">
-                      <h4>instock</h4>
-                    </div>
+                  <div class="col-md-4"><span class="chosen-color-code">{{data.product.colors.[0].product_color_code}}</span></div>
+                    <div class="col-md-8 title-sec product-instock"><span></span><h4> instock</h4> </div>
                   </div>
                 </div>
 
@@ -121,7 +119,7 @@
 
           <div class="product-details-to-choose">
             <div class="product-price">
-              {{#ifCond data.product.price '!==' null}}<span class="product-main-price">${{data.product.price}}</span>{{/ifCond}}
+              {{#ifCond data.product.price '!==' null}}<span class="product-main-price">€{{data.product.price}}</span>{{/ifCond}}
             </div>
 
             <div>
@@ -129,20 +127,20 @@
                 <h4>Available Colors</h4>
                 <div class="row">
                   <div class="col-12">
-                    <div class="col-md-8 color-choices">
+                    <div class="col-md-7 color-choices">
                       <div class="product-size">
 
                         <div class="size-group">
                           <div class="color-group1">
                             {{#each data.product.colors}}
-                            <a data-color-slug="{{color_slug}}" data-color-name="{{color_name}}" data-color-code="{{product_color_code}}" class="circle color-option {{color_name}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
+                            <a data-color-slug="{{color_slug}}" data-color-name="{{color_name}}" data-color-code="{{product_color_code}}" class="circle color-option {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
                             {{/each}}
                           </div>
                         </div>
 
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <h6 class="chosen-color">
                         Chosen Color : <span
                           class="chosen-color-name capitalize">{{data.product.colors.[0].color_name}}</span>
@@ -260,8 +258,8 @@
               <div class="product-social">
                 <label>Share:</label>
                 <div class="social">
-                  <a target="_blank" href="http://pinterest.com/pin/create/link/?url={{data.product.link}}"><i
-                      class="fa fa-pinterest"></i></a>
+                 <!-- <a target="_blank" href="http://pinterest.com/pin/create/link/?url={{data.product.link}}"><i
+                      class="fa fa-pinterest"></i></a>-->
                   <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{data.product.link}}"><i
                       class="fa fa-facebook"></i></a>
                   <a target="_blank" href="http://twitter.com/home?status={{data.product.link}}"><i
@@ -307,7 +305,7 @@
             <a class="" title="add to wishlist"> <span class="fa fa-heart-o"></span></a>
           </div>
           <div class="product-price">
-            {{#ifCond price '!==' null}}<span>${{price}}</span>{{/ifCond}}
+            {{#ifCond price '!==' null}}<span>€{{price}}</span>{{/ifCond}}
           </div>
           <div class="color-group">
             {{#each colors}}
@@ -377,7 +375,7 @@
     $('#chosen-size-name').removeClass('hidden');
     $('#chosen-size-text').text(sizeName);
     
-    sizePrice && $('.product-main-price').text('$' + sizePrice);
+    sizePrice && $('.product-main-price').text('€' + sizePrice);
     $('.size-details.active').removeClass('active').addClass('hidden');
     $('.size-details[data-size-details-slug=' + sizeSlug + ']').addClass('active').removeClass('hidden');
   });

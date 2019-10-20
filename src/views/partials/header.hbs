@@ -454,12 +454,11 @@
 
                 
               </ul>
-              {{#ifCond data.user '!==' undefined}}
               <div class="topbar-left">
                 <div class="element element-wishlist">
                   <a class="zoa-icon icon-wishlist">
                     <i class="fa fa-heart-o wishlist"></i>
-                    <span class="count cart-count">{{data.wishlistItemsLength}}</span>
+                    <span class="count cart-count">{{#ifCond data.user '!==' undefined}}{{data.wishlistItemsLength}}{{else}}0{{/ifCond}}</span>
                   </a>
                 </div>
                 {{!-- <div class="element element-search hidden-xs hidden-sm">
@@ -468,7 +467,6 @@
                   </a>
                 </div> --}}
               </div>
-              {{/ifCond}}
             </div>
           </div>
         </div>

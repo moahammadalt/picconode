@@ -132,7 +132,7 @@
 					</div>
 
 					<div class="product-price">
-						{{#ifCond price '!==' null}}{{#ifCond stock_status '===' 1}}<span>${{price}}</span>{{/ifCond}}{{/ifCond}}
+						{{#ifCond price '!==' null}}{{#ifCond stock_status '===' 1}}<span>€{{price}}</span>{{/ifCond}}{{/ifCond}}
 						{{#ifCond stock_status '!==' 1}}<span class="sold">SOLD OUT</span>{{/ifCond}}
 					</div>
 					<div class="color-group">

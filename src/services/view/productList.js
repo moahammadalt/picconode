@@ -43,8 +43,8 @@ export default async req => {
       ...req,
       query: {
         ...req.query,
-        orderBy:  req.query.orderBy || 'date_created',
-        sort: req.query.sort || 'DESC',
+        orderBy: 'sort_index',
+        sort: req.query.sort,
       }
     });
 
