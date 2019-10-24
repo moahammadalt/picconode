@@ -121,13 +121,24 @@
 						<h3 class="product-title">
 							<a href="/{{slug}}/?color={{default_color_slug}}">{{name}}</a>
 						</h3>
+						{{#ifCond ../data.user '!==' undefined}}
 						{{#ifCond stock_status '===' 1}}
 						<a class=""
 							title="{{#ifCond isWishlisted '===' undefined}}add to wishlist{{else}}remove item{{/ifCond}}">
 							<span data-wishlist-slug="{{slug}}"
 								class="fa fa-heart{{#ifCond isWishlisted '===' undefined}}-o{{/ifCond}} wishlist-product"></span>
 						</a>
-						{{/ifCond}}
+						{{/ifCond}}	
+						{{/ifCond}}	
+						
+
+						{{#ifCond ../data.user '===' undefined}}
+						<a class=""
+							title="add to wishlist">
+							<span data-wishlist-slug="{{slug}}"
+								class="fa fa-heart-o wishlist-product"></span>
+						</a>
+						{{/ifCond}}	
 
 					</div>
 

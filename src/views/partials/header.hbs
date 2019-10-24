@@ -45,13 +45,13 @@
         </div>
       </form> --}}
       <ul class="nav-home5 js-menubar">
-        <li class="level1">
+        <li class="level1 menu-elm" data-page="">
           <a href="/">Home</a>
         </li>
-        <li class="level1">
+        <li class="level1 menu-elm" data-page="about">
           <a href="/about">About Us</a>
         </li>
-        <li class="level1 active dropdown"><a href="/products">Shop</a>
+        <li class="level1 dropdown menu-elm" data-page="products"><a href="/products">Shop</a>
           <span class="icon-sub-menu"></span>
           <div class="menu-level1 js-open-menu">
             <ul class="level1">
@@ -69,8 +69,8 @@
             <div class="clearfix"></div>
           </div>
         </li>
-        <li class="level1">
-          <a href="#">Contact us</a>
+        <li class="level1 menu-elm" data-page="contact">
+          <a href="/contact">Contact us</a>
         </li>
       </ul>
       {{!-- <h4 class="mb-title">Languages</h4>
@@ -103,6 +103,7 @@
         <div class="wishlist-bottom"
           style="bottom: {{#ifCond data.wishlistHeaderProducts.length '===' 1}}18%{{else}}0%{{/ifCond}};">
           {{#ifCond data.wishlistHeaderProducts.length '>' 0}}
+          {{#ifCond data.user '!==' undefined}}
           <p>Items you like most.</p>
           <div class="view">
             {{#each data.wishlistHeaderProducts}}
@@ -136,6 +137,7 @@
           <div class="wishlist-button mg-top-30">
             <a class="zoa-btn checkout btn-wishlist-empty" href="/products" title="">Start Shopping</a>
           </div>
+          {{/ifCond}}
           {{/ifCond}}
 
         </div>
@@ -427,13 +429,13 @@
             </div>
             <div class="col-md-9 col-xs-4 col-sm-4 col2 flex justify-content-end padding-top-20">
               <ul class="nav navbar-nav js-menubar hidden-xs hidden-sm">
-                <li class="level1"><a href="/">Home</a>
+                <li class="level1 menu-elm" data-page=""><a href="/">Home</a>
 
                 </li>
-                <li class="level1"><a href="/about">About Us</a>
+                <li class="level1 menu-elm" data-page="about"><a href="/about">About Us</a>
 
                 </li>
-                <li class="level1 active dropdown"><a href="/products">Shop</a>
+                <li class="level1 dropdown menu-elm" data-page="products"><a href="/products">Shop</a>
                   <span class="plus js-plus-icon"></span>
                   <div class="menu-level-1 dropdown-menu style5">
                     <ul class="level1">
@@ -452,7 +454,7 @@
                   </div>
                 </li>
 
-                <li class="level1">
+                <li class="level1 menu-elm" data-page="contact">
                   <a href="/contact">Contact Us</a>
 
                 </li>
@@ -474,7 +476,7 @@
               </ul>
               <div class="topbar-left">
                 <div class="element element-wishlist">
-                  <a class="zoa-icon icon-wishlist">
+                  <a class="{{#ifCond data.user '!==' undefined}}zoa-icon icon-wishlist{{else}}wishlistInactive{{/ifCond}}">
                     <i class="fa fa-heart-o wishlist"></i>
                     <span class="count cart-count">{{#ifCond data.user '!==' undefined}}{{data.wishlistItemsLength}}{{else}}0{{/ifCond}}</span>
                   </a>
@@ -644,5 +646,9 @@
 
         });
         
+        $('.wishlistInactive').click(function() {
+          alert('Please login first to save items in your whishlist');
+        });
+      
       });
     </script>
