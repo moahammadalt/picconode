@@ -16,10 +16,7 @@ export default async req => {
     ...req,
     condition: `category_id = ${productItem.category_id}`
   }))
-    .filter(({ id }) => id !== productItem.id)
-    .sort(({ category_type_id }) =>
-      category_type_id === productItem.category_type_id ? -1 : 1
-    );
+    .filter(({ id }) => id !== productItem.id);
 
   const productsWishlistSlugs = getWishListSlugsSession(req);
 

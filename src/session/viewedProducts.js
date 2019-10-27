@@ -1,6 +1,6 @@
 export const handleViewedProductsSession = req => {
   if (!req.session.viewedProducts.includes(req.params.slug)) {
-    if (req.session.viewedProducts.length === 2) {
+    if (req.session.viewedProducts.length === 4) {
       req.session.viewedProducts.shift(req.params.slug);
     }
     req.session.viewedProducts.push(req.params.slug);
