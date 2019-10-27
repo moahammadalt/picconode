@@ -222,3 +222,9 @@ ALTER TABLE `product`
 ADD COLUMN `sort_index` INT(11) NULL,
 ADD UNIQUE KEY `sort_index` (`sort_index`);
 /*END*/
+
+
+/*Added 27/10/2019*/
+ALTER TABLE `product`
+ADD COLUMN `is_handmade` TINYINT(1) NOT NULL DEFAULT 0;
+/*END*/

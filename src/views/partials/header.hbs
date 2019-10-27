@@ -467,12 +467,10 @@
                   </ul>
                 </li> --}}
                 {{#ifCond data.user '!==' undefined}}
-                <li id="log-out" class="level1">Log out</li>
+                <li id="log-out" class="level1 login-button"><i class="fa fa-lock"></i> Logout</li>
                 {{else}}
-                <li id="log-in-modal-btn" class="level1 js-user-login login-button"><i class="fa fa-unlock-alt"></i>Login</li>
+                <li id="log-in-modal-btn" class="level1 js-user-login login-button"><i class="fa fa-unlock-alt"></i> Login</li>
                 {{/ifCond}}
-
-                
               </ul>
               <div class="topbar-left">
                 <div class="element element-wishlist">

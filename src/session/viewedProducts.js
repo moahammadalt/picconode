@@ -1,8 +1,4 @@
 export const handleViewedProductsSession = req => {
-  if (!req.session.viewedProducts) {
-    req.session.viewedProducts = [];
-  }
-
   if (!req.session.viewedProducts.includes(req.params.slug)) {
     if (req.session.viewedProducts.length === 2) {
       req.session.viewedProducts.shift(req.params.slug);
@@ -11,8 +7,4 @@ export const handleViewedProductsSession = req => {
   }
 };
 
-export const getViewdProductsSlugs = req => {
-  if(!req.session.userToken) return [];
-  
-  return req.session.viewedProducts || []
-};
+export const getViewdProductsSlugs = req => req.session.viewedProducts || [];

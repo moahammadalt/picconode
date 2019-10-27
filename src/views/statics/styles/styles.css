@@ -6986,19 +6986,19 @@ color: #007699;}
   max-width: 300px;
   height: 34px;
   border: none;
-  color: #222;
+  color: #fff193;
   padding-right: 40px; }
   .form_newsletter input::-webkit-input-placeholder {
-    color: #222;
+    color: #fff193;
     font-size: 12px; }
   .form_newsletter input:-moz-placeholder {
-    color: #222;
+    color: #fff193;
     font-size: 12px; }
   .form_newsletter input::-moz-placeholder {
-    color: #222;
+    color: #fff193;
     font-size: 12px; }
   .form_newsletter input:-ms-input-placeholder {
-    color: #222;
+    color: #fff193;
     font-size: 12px; }
 .form_newsletter .button_mini {
   width: 55px;
@@ -10015,8 +10015,10 @@ color: #007699;}
     .footer .subs-footer .form-newsletter .input-group {
       display: block; }
     .footer .subs-footer .form-newsletter .form-control {
+        margin-bottom: 4px;
       border: none;
-      border-bottom: 1px solid #6f6f6e;
+      color:#fff193;
+      border-bottom: 1px solid #fff193;
       height: 32px;
       min-height: 34px;
       text-align: center;
@@ -15680,8 +15682,8 @@ color: #333;}
 
 .ribbon {
   position: absolute;
-  left: 30px;
-  top: 30px;
+  left: 20px;
+  top: 20px;
   width: 50px;
   height: 25px;
   display: inline-block;
@@ -15702,7 +15704,10 @@ color: #333;}
     background: #222222; }
   .ribbon.zoa-trend {
     background: #6dcfd8; }
-
+  .ribbon svg {
+	width: 85px;
+    height: 70px;  }
+    
 .status {
   width: 100px;
   height: 100px;

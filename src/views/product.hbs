@@ -97,7 +97,10 @@
                 <div class="row">
                   <div class="col-12">
                   <div class="col-md-4"><span class="chosen-color-code">{{data.product.colors.[0].product_color_code}}</span></div>
-                    <div class="col-md-8 title-sec product-instock"><span></span><h4> instock</h4> </div>
+                    <div class="col-md-4 title-sec product-instock"><span></span><h4> instock</h4> </div>
+                    {{#ifCond data.product.is_handmade '===' 1}}
+                    <div class="col-md-4 title-sec product-instock"><span></span><h4> HandMade</h4> </div>
+                    {{/ifCond}}
                   </div>
                 </div>
 
