@@ -6,7 +6,6 @@ import { createHash } from 'globals/helpers';
 
 export default async req => {
   let productItem = await productItemGet(req);
-  console.log('productItem: ', productItem.category_id);
 
   req.query = {
     ...req.query,

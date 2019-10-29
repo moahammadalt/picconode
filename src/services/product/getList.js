@@ -79,7 +79,7 @@ export default async (req) => {
 			//productItem['colors'] = productItem['colors'].reverse();
 
 			//make the default color the same of the last queried color
-			if(req.query.color) {
+			if(req.query.color && req.originalUrl.includes('/products/')) {
 				const allFilteredColors = req.query.color.split(',');
 				const lastQueriedColorSlug = allFilteredColors[allFilteredColors.length - 1];
 				const lastQueriedColorID = colorListHashObj.data[lastQueriedColorSlug].id;
@@ -87,6 +87,14 @@ export default async (req) => {
 				if(productHasQueriedColor) {
 					productItem.default_color_id = lastQueriedColorID;
 				}
+			}
+
+			// set default color
+			if(!productItem.default_color_id && productItem.colors[0]) {
+				productItem.default_color_id = productItem.colors[0].color_id;
+			}
+			if(productItem.default_color_id) {
+				productItem.default_color_slug = colorListHashIDsObj.data[productItem.default_color_id].slug;
 			}
 
 			// colros sort
@@ -97,14 +105,6 @@ export default async (req) => {
 			if (!!defaultColorObj) {
 				productItem.colors.splice(defaultColorIndex, 1);
 				productItem.colors.unshift(defaultColorObj);
-			}
-
-			// set default color
-			if(!productItem.default_color_id && productItem.colors[0]) {
-				productItem.default_color_id = productItem.colors[0].color_id;
-			}
-			if(productItem.default_color_id) {
-				productItem.default_color_slug = colorListHashIDsObj.data[productItem.default_color_id].slug;
 			}
 
 			//handle if product in wishlist

@@ -57,10 +57,10 @@ export default async req => {
     }
   });
 
-  if(productItem.main_image) {
+  /* if(productItem.main_image) {
     const mainImageObj = productImages.find(productImageObj => productImageObj.product_id === productItem.id && productImageObj.image_name === productItem.main_image);
     productItem.main_image = mainImageObj;
-  }
+  } */
 
   let productSizeItemArr = await productSizeItemGet({
     body: {
@@ -107,6 +107,16 @@ export default async req => {
     productColorItem['images'] = productImages.filter(productImageObj =>  productColorItem.id === productImageObj.product_color_id);
     return productColorItem;
   });
+
+  // colros sort
+  const defaultColorIndex = productItem.colors.findIndex(
+    color => productItem.default_color_id === color.color_id
+  );
+  const defaultColorObj = productItem.colors[defaultColorIndex];
+  if (!!defaultColorObj) {
+    productItem.colors.splice(defaultColorIndex, 1);
+    productItem.colors.unshift(defaultColorObj);
+  }
 
   // handle product price
   productItem['price'] = productItem.price || (productItem.sizes[0] && productItem.sizes[0].size_price);

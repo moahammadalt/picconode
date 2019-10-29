@@ -35,7 +35,8 @@
                   <button type="submit" class="zoa-btn btn-login hover-white">Send</button>
                 </div>
               </form>
-              <p id="succes-message" class="hidden" style="color: #008c8c">Your message have been send successfuly. Thank You.</p>
+              <p id="succes-message" class="hidden" style="color: #008c8c">Your message have been send successfuly.
+                Thank You.</p>
               <p id="failure-message" class="hidden" style="color: #be0707">An error has been occured. Try again.</p>
             </div>
           </div>
@@ -54,8 +55,7 @@
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="products/?category={{data.product.category.slug}}">{{data.product.category.name}}</a></li>
-    <li><a
-        href="products/?type={{data.product.category_type.slug}}">{{data.product.category_type.name}}</a>
+    <li><a href="products/?type={{data.product.category_type.slug}}">{{data.product.category_type.name}}</a>
     </li>
     <li class="active">{{data.product.name}}</li>
   </ul>
@@ -96,10 +96,15 @@
                 <h3 class="product-title"><a>{{data.product.name}}</a> </h3>
                 <div class="row">
                   <div class="col-12">
-                  <div class="col-md-4"><span class="chosen-color-code">{{data.product.colors.[0].product_color_code}}</span></div>
-                    <div class="col-md-4 title-sec product-instock"><span></span><h4> instock</h4> </div>
+                    <div class="col-md-4"><span
+                        class="chosen-color-code">{{data.product.colors.[0].product_color_code}}</span></div>
+                    <div class="col-md-4 title-sec product-instock"><span></span>
+                      <h4> instock</h4>
+                    </div>
                     {{#ifCond data.product.is_handmade '===' 1}}
-                    <div class="col-md-4 title-sec product-instock"><span></span><h4> HandMade</h4> </div>
+                    <div class="col-md-4 title-sec product-instock"><span></span>
+                      <h4> HandMade</h4>
+                    </div>
                     {{/ifCond}}
                   </div>
                 </div>
@@ -122,7 +127,8 @@
 
           <div class="product-details-to-choose">
             <div class="product-price">
-              {{#ifCond data.product.price '!==' null}}<span class="product-main-price">€{{data.product.price}}</span>{{/ifCond}}
+              {{#ifCond data.product.price '!==' null}}<span
+                class="product-main-price">€{{data.product.price}}</span>{{/ifCond}}
             </div>
 
             <div>
@@ -136,7 +142,9 @@
                         <div class="size-group">
                           <div class="color-group1">
                             {{#each data.product.colors}}
-                            <a data-color-slug="{{color_slug}}" data-color-name="{{color_name}}" data-color-code="{{product_color_code}}" class="circle color-option {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
+                            <a data-color-slug="{{color_slug}}" data-color-name="{{color_name}}"
+                              data-color-code="{{product_color_code}}"
+                              class="circle color-option {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
                             {{/each}}
                           </div>
                         </div>
@@ -163,13 +171,14 @@
                           <form action="">
 
                             {{#each data.product.sizes}}
-                            <input type="radio" name="size" value="{{size_slug}}" data-size-name="{{size_name}}" data-size-price="{{size_price}}" />
-                            <span class="select-size">{{size_slug}}{{#ifCond size_details '!==' null}}/{{size_details}}{{/ifCond}}</span>
+                            <input type="radio" name="size" value="{{size_slug}}" data-size-name="{{size_name}}"
+                              data-size-price="{{size_price}}" />
+                            <span
+                              class="select-size">{{size_slug}}{{#ifCond size_details '!==' null}}/{{size_details}}{{/ifCond}}</span>
                             {{/each}}
 
                             {{#each data.product.sizes}}
-                            <div class="text size-details hidden"
-                              data-size-details-slug="{{size_slug}}">
+                            <div class="text size-details hidden" data-size-details-slug="{{size_slug}}">
                               <table class="size-details">
                                 <tr>
                                   <th class="first-th">TITLE </th>
@@ -189,7 +198,7 @@
                                   <td class="empty"></td>
                                 </tr>
                                 {{/ifCond}}
-                                
+
                                 {{#ifCond waistline '>' 0}}
                                 <tr>
                                   <th>Waist: </th>
@@ -228,8 +237,11 @@
                           </form>
                         </div>
 
-                        <div id="chosen-size-name" class="text-right chosen-size-margin hidden"><h6 class="chosen-size">Chosen size : <span id="chosen-size-text">{{data.product.sizes.[0].size_name}}</span></h6> </div>
-                        
+                        <div id="chosen-size-name" class="text-right chosen-size-margin hidden">
+                          <h6 class="chosen-size">Chosen size : <span
+                              id="chosen-size-text">{{data.product.sizes.[0].size_name}}</span></h6>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -261,7 +273,7 @@
               <div class="product-social">
                 <label>Share:</label>
                 <div class="social">
-                 <!-- <a target="_blank" href="http://pinterest.com/pin/create/link/?url={{data.product.link}}"><i
+                  <!-- <a target="_blank" href="http://pinterest.com/pin/create/link/?url={{data.product.link}}"><i
                       class="fa fa-pinterest"></i></a>-->
                   <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{data.product.link}}"><i
                       class="fa fa-facebook"></i></a>
@@ -293,6 +305,77 @@
               class="img-responsive wp-post-image product-first-image">
             <img src="{{colors.[0].images.[1].small_image_link}}" alt=""
               class="img-responsive image-effect product-second-image"></a>
+          {{#ifCond is_handmade '===' 1}}
+          <div class="ribbon">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 226.7 183.98">
+              <defs>
+                <style>
+                  .cls-1 {
+                    fill: #fff;
+                    stroke-miterlimit: 10;
+                    stroke-width: 4px;
+                  }
+
+                  .cls-1,
+                  .cls-3 {
+                    stroke: #2f8fac;
+                  }
+
+                  .cls-2,
+                  .cls-3 {
+                    fill: #2f8fac;
+                  }
+
+                  .cls-3 {
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-width: 3px;
+                  }
+                </style>
+              </defs>
+              <title>Asset 1</title>
+              <circle class="cls-1" cx="113.35" cy="92.78" r="81.35"></circle>
+              <path class="cls-2"
+                d="M51.57,103.84c7.28-4.15,10.77-9.94,7-13.06s-7,1.67-7,1.67h0s-3.28-4.79-7-1.67-.25,8.91,7,13.06Z">
+              </path>
+              <path class="cls-2"
+                d="M178.19,103.84c7.28-4.15,10.77-9.94,7-13.06s-7,1.67-7,1.67h0s-3.28-4.79-7-1.67-.25,8.91,7,13.06Z">
+              </path>
+              <path class="cls-3"
+                d="M92.66,34.17l3.58,8.34A.66.66,0,1,1,95,43l-1.58-3.67-5.23,2.25,1.58,3.67a.66.66,0,1,1-1.22.52L85,37.47a.65.65,0,0,1,.35-.87.63.63,0,0,1,.86.35l1.49,3.45,5.23-2.25L91.44,34.7a.66.66,0,0,1,.35-.87A.65.65,0,0,1,92.66,34.17Z">
+              </path>
+              <path class="cls-3"
+                d="M111,40a.69.69,0,0,1-.93-.18l-1.22-1.87a5.52,5.52,0,0,0-2.53.37,5.89,5.89,0,0,0-1.84,1.08,12.19,12.19,0,0,0-1.6,1.72.67.67,0,0,1-.82.29c-.32-.13-.34-.51-.25-.83l2.68-9.62a.68.68,0,0,1,.54-.48.65.65,0,0,1,.65.29l5.51,8.31A.68.68,0,0,1,111,40Zm-5.62-7.29-1.65,5.74A8.8,8.8,0,0,1,106,37.17a7.06,7.06,0,0,1,2.13-.46Z">
+              </path>
+              <path class="cls-3"
+                d="M125.29,40.88a.74.74,0,0,1-.73-.28L119.41,32l-1.1,7.17a.65.65,0,0,1-.75.55A.66.66,0,0,1,117,39l1.38-9a.66.66,0,0,1,1.21-.25l5.17,8.56,1.1-7.18a.66.66,0,1,1,1.31.2l-1.38,9A.57.57,0,0,1,125.29,40.88Z">
+              </path>
+              <path class="cls-3"
+                d="M134,44.68h0l-2.61-1.45a.67.67,0,0,1-.27-.91l4.42-7.92a.65.65,0,0,1,.4-.31.75.75,0,0,1,.51.06l2.65,1.48A5.46,5.46,0,0,1,140.72,37a5.86,5.86,0,0,1,.95,1.82,5.21,5.21,0,0,1-.42,4,4.79,4.79,0,0,1-1.35,1.52,5.13,5.13,0,0,1-1.82.88,5.5,5.5,0,0,1-4.06-.51Zm-1.39-2.31,2.06,1.16a4.28,4.28,0,0,0,1.51.47,3.92,3.92,0,0,0,1.53-.09,4.19,4.19,0,0,0,1.38-.66,3.33,3.33,0,0,0,1-1.1,3.56,3.56,0,0,0,.45-1.46,4.07,4.07,0,0,0-2.08-3.92l-2.06-1.15Z">
+              </path>
+              <path class="cls-3"
+                d="M100.14,152.89a.61.61,0,0,1-.46-.71l1.32-5.84-3.92,4.13a.57.57,0,0,1-.52.13.6.6,0,0,1-.42-.34l-1.77-5.42L93,150.68a.59.59,0,0,1-.7.45.61.61,0,0,1-.45-.71l1.8-7.95a.6.6,0,0,1,1.13-.11l2.12,6.56,4.73-5a.62.62,0,0,1,.71-.06.59.59,0,0,1,.26.64l-1.79,7.95A.6.6,0,0,1,100.14,152.89Z">
+              </path>
+              <path class="cls-3"
+                d="M114.28,154.06a.63.63,0,0,1-.78-.33l-.73-1.86a4.92,4.92,0,0,0-2.28-.15,5.34,5.34,0,0,0-1.81.62,10.12,10.12,0,0,0-1.72,1.21.62.62,0,0,1-.77.11c-.26-.18-.21-.51-.07-.78l4.11-7.94a.62.62,0,0,1,.57-.32.58.58,0,0,1,.51.37l3.3,8.29A.61.61,0,0,1,114.28,154.06Zm-3.59-7.43-2.5,4.74a7.6,7.6,0,0,1,2.16-.71,6.31,6.31,0,0,1,1.94,0Z">
+              </path>
+              <path class="cls-3"
+                d="M123,153.61h0l-2.67.24a.61.61,0,0,1-.66-.54l-.73-8.09a.58.58,0,0,1,.14-.43.63.63,0,0,1,.41-.21l2.7-.25a4.74,4.74,0,0,1,1.88.2,5.11,5.11,0,0,1,1.63.86,4.86,4.86,0,0,1,1.16,1.39,4.49,4.49,0,0,1,.54,1.78,4.11,4.11,0,0,1-.23,1.8,4.49,4.49,0,0,1-.9,1.57,4.94,4.94,0,0,1-1.44,1.14A5,5,0,0,1,123,153.61Zm-2.2-1,2.11-.19a3.71,3.71,0,0,0,1.36-.41,3.49,3.49,0,0,0,1.09-.85A3.86,3.86,0,0,0,126,150a3.08,3.08,0,0,0,.16-1.31,3.13,3.13,0,0,0-.4-1.3,3.66,3.66,0,0,0-.88-1,3.62,3.62,0,0,0-2.64-.81l-2.12.19Z">
+              </path>
+              <path class="cls-3"
+                d="M139.84,148.76a.57.57,0,0,1-.32.77l-5.22,2.18a.58.58,0,0,1-.77-.32l-3.13-7.49a.59.59,0,0,1,.32-.78l5.11-2.13a.59.59,0,0,1,.78.32.58.58,0,0,1-.32.77L131.72,144l1.1,2.63,4-1.68a.59.59,0,1,1,.46,1.09l-4,1.68,1.12,2.68,4.68-1.95A.58.58,0,0,1,139.84,148.76Z">
+              </path>
+              <path class="cls-2"
+                d="M58.32,63.15a6.94,6.94,0,0,0,6.47,4.42,6.87,6.87,0,0,0,3.51-1l9.24,6.49a39.3,39.3,0,0,1,2.52-3.73l-8.81-6.19c.07-.2.14-.39.2-.6a3.59,3.59,0,0,0,.21-1,8.26,8.26,0,0,0,.08-1,7,7,0,1,0-13.9,0c0,.15,0,.29,0,.43A3.52,3.52,0,0,0,58.32,63.15Z">
+              </path>
+              <path class="cls-2" d="M61.37,127.83l-3.53,5.23,7.45-2.48L81.06,119.5a37.52,37.52,0,0,1-2.66-3.63Z">
+              </path>
+              <path class="cls-2"
+                d="M146.31,115.9a40.29,40.29,0,0,0,.87-42.84l9.19-6.45a6.88,6.88,0,0,0,3.52,1,7,7,0,0,0,6.47-4.42,3.67,3.67,0,0,0,.46-2.1c0-.14,0-.28,0-.43a6.95,6.95,0,0,0-13.9,0,6.63,6.63,0,0,0,.08,1,3.57,3.57,0,0,0,.2,1,6.08,6.08,0,0,0,.21.6l-8.78,6.16a40.39,40.39,0,1,0-1,50.19l15.74,11.05,7.45,2.48-3.54-5.23ZM75.17,95.21c14.73,10.26,28.14,13.48,39.12,13.48a55.85,55.85,0,0,0,15.25-2.11,59.48,59.48,0,0,0,20.29-10.34,36.89,36.89,0,0,1-2.68,11.66A47.94,47.94,0,0,1,129,118c-11.3,3.36-29.42,4-51.86-12A37.23,37.23,0,0,1,75.17,95.21ZM148.61,84a49.44,49.44,0,0,1-6.23,4c-8.32-25.59-33.71-29.08-42.06-29.53A37.39,37.39,0,0,1,148.61,84Zm-17.83,8.94c-7.66-24.52-34.15-27.8-41.66-28.25a37.86,37.86,0,0,1,8.75-5.27c2.82,0,34.34.17,43.62,29.08A63.39,63.39,0,0,1,130.78,92.92ZM88,65.61c5.37.18,33.92,2.34,41.82,27.6a60.15,60.15,0,0,1-13.58,2.35c-7-19.76-30.4-21.39-35.44-21.51A37.54,37.54,0,0,1,88,65.61ZM80.2,75c3.22,0,27.73.77,35,20.58C104,96,90.77,93.38,76.41,84.15A37.3,37.3,0,0,1,80.2,75Zm-4,10.13c13.48,8.59,26,11.49,36.76,11.49A62.49,62.49,0,0,0,142.61,89l.1,0v0A49.78,49.78,0,0,0,148.88,85a37.86,37.86,0,0,1,1,8.77c0,.37,0,.74,0,1.11a58,58,0,0,1-20.64,10.71C116.94,109.11,97.6,109.88,75.14,94V93.8A37.2,37.2,0,0,1,76.15,85.17Zm36.38,46a37.45,37.45,0,0,1-34.74-23.58c14.67,10.11,27.5,13.28,37.78,13.28a48.15,48.15,0,0,0,13.8-2A49.83,49.83,0,0,0,146.23,110,37.45,37.45,0,0,1,112.53,131.19Z">
+              </path>
+            </svg>
+          </div>
+          {{/ifCond}}
           <div class="product-button-group ">
 
             <div class="quick-view">
@@ -330,10 +413,10 @@
   $(function () {
 
     var productListHash = createHash({{{ json data.productListItems }}}, 'id').data;
-    var user = {{{ json data.user }}};
+  var user = {{{ json data.user }}};
 
   function hideResponseMessage() {
-    setTimeout(function() {
+    setTimeout(function () {
       $('#succes-message').addClass('hidden');
       $('#failure-message').addClass('hidden');
     }, 10000);
@@ -359,12 +442,15 @@
     //change chosen color text
     chosenColorText.text(selectedElm.attr('data-color-name'));
     chosenColorCode.text(selectedElm.attr('data-color-code'));
-
+    
+    var selectedImagesParentElm = $('.product-color-images[data-color-images-slug=' + selectedColorSlug + ']');
+    
     //change color images wrapper
-    $('.product-color-images[data-color-images-slug=' + prevActiveElmColorSlug + ']').removeClass('active').addClass('hidden');
-    $('.product-color-images[data-color-images-slug=' + selectedColorSlug + ']').removeClass('hidden').addClass('active');
-
-
+    if(selectedImagesParentElm.find('.img-responsive').length > 0) {
+      $('.product-color-images[data-color-images-slug=' + prevActiveElmColorSlug + ']').removeClass('active').addClass('hidden');
+      selectedImagesParentElm.removeClass('hidden').addClass('active');
+    }
+    
     $('.js-product-slider-normal, .js-click-product-normal').slick('refresh');
 
   });
@@ -377,7 +463,7 @@
 
     $('#chosen-size-name').removeClass('hidden');
     $('#chosen-size-text').text(sizeName);
-    
+
     sizePrice && $('.product-main-price').text('€' + sizePrice);
     $('.size-details.active').removeClass('active').addClass('hidden');
     $('.size-details[data-size-details-slug=' + sizeSlug + ']').addClass('active').removeClass('hidden');
@@ -425,7 +511,7 @@
 
         parent.location.hash = '';
       },
-      error: function() {
+      error: function () {
         $('#failure-message').removeClass('hidden');
         hideResponseMessage();
       }
@@ -434,7 +520,7 @@
   });
 
   $('.wishlist-product').click(function () {
-    if(!user) {
+    if (!user) {
       alert('please login first');
       return;
     }

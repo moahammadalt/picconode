@@ -1,4 +1,3 @@
-import { select } from 'utils/db';
 import {
   productListGet,
   colorListGet,

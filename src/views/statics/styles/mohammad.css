@@ -71,6 +71,28 @@ a {
 	letter-spacing: -8px;
 }
 
+.color-group .yellow-beige.active:before,
+.single-product-detail .single-product-info .size-group .yellow-beige.active:before,
+.color-group .yellow-white.active:before,
+.single-product-detail .single-product-info .size-group .yellow-white.active:before,
+.color-group .yellow-choco.active:before,
+.single-product-detail .single-product-info .size-group .yellow-choco.active:before,
+.color-group .yellow-burgundy.active:before,
+.single-product-detail .single-product-info .size-group .yellow-burgundy.active:before,
+.color-group .grey-purple.active:before,
+.single-product-detail .single-product-info .size-group .grey-purple.active:before,
+.color-group .blue-green.active:before,
+.single-product-detail .single-product-info .size-group .blue-green.active:before
+ {
+position: absolute;
+    content: '';
+    left: -3px;
+    top: -32px;
+    right: -32px;
+    bottom: -2px;
+    border: 1px solid #f2dac0;
+}
+
 .widget-filter.filter-color ul li a.beig:before {
 	background: #F5E3D4;
 }
@@ -143,3 +165,107 @@ a {
 	border-right:30px solid #f0bc3e;
 }
 
+.widget-filter.filter-color ul li a.navy:before {
+	background: #000080;
+}
+.color-group .circle.navy,
+.single-product-detail .single-product-info .size-group .circle.navy {
+	background: #000080;
+}
+
+.widget-filter.filter-color ul li a.off-white:before {
+	background: #f5f2d0;
+}
+.color-group .circle.off-white,
+.single-product-detail .single-product-info .size-group .circle.off-white {
+	background: #f5f2d0;
+}
+
+.widget-filter.filter-color ul li a.dark-grey:before {
+	background: #a9a9a9;
+}
+.color-group .circle.dark-grey,
+.single-product-detail .single-product-info .size-group .circle.dark-grey {
+	background: #a9a9a9;
+}
+
+.widget-filter.filter-color ul li a.choco:before {
+	background: #3f000f;
+}
+.color-group .circle.choco,
+.single-product-detail .single-product-info .size-group .circle.choco {
+	background: #3f000f;
+}
+
+
+.widget-filter.filter-color ul li a.yellow-beige:before {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+  border-right:30px solid #F5F5DC;
+}
+.color-group .circle.yellow-beige,
+.single-product-detail .single-product-info .size-group .circle.yellow-beige {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+	border-right:30px solid #F5F5DC;
+}
+
+.widget-filter.filter-color ul li a.yellow-white:before {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+  border-right:30px solid #ffffff;
+}
+.color-group .circle.yellow-white,
+.single-product-detail .single-product-info .size-group .circle.yellow-white {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+	border-right:30px solid #ffffff;
+}
+
+.widget-filter.filter-color ul li a.yellow-choco:before {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+  border-right:30px solid #3f000f;
+}
+.color-group .circle.yellow-choco,
+.single-product-detail .single-product-info .size-group .circle.yellow-choco {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+	border-right:30px solid #3f000f;
+}
+
+.widget-filter.filter-color ul li a.yellow-burgundy:before {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+  border-right:30px solid #800020;
+}
+.color-group .circle.yellow-burgundy,
+.single-product-detail .single-product-info .size-group .circle.yellow-burgundy {
+	display:inline-block;
+  border-top:30px solid #ffd8b2;
+	border-right:30px solid #800020;
+}
+
+.widget-filter.filter-color ul li a.grey-purple:before {
+	display:inline-block;
+  border-top:30px solid #707070;
+  border-right:30px solid #6a0dad;
+}
+.color-group .circle.grey-purple,
+.single-product-detail .single-product-info .size-group .circle.grey-purple {
+	display:inline-block;
+  border-top:30px solid #707070;
+	border-right:30px solid #6a0dad;
+}
+
+.widget-filter.filter-color ul li a.blue-green:before {
+	display:inline-block;
+  border-top:30px solid #3d6385;
+  border-right:30px solid #008000;
+}
+.color-group .circle.blue-green,
+.single-product-detail .single-product-info .size-group .circle.blue-green {
+	display:inline-block;
+  border-top:30px solid #3d6385;
+	border-right:30px solid #008000;
+}
