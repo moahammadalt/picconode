@@ -1,10 +1,14 @@
 import React from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './static/styles/common.css';
+import './assets/sass/paper-dashboard.scss';
+import './assets/css/themify-icons.css';
+import './assets/css/common.css';
 
 function App() {
   return (
     <div className="wrapper">
+      <div className="notifications-wrapper"></div>
       <div
         data-background-color="black"
         data-active-color="success"
@@ -71,10 +75,7 @@ function App() {
               </a>
             </li>
           </ul>
-          <div
-            className="moving-arrow"/* 
-            style="transform: translate3d(0px, 0px, 0px);" */
-          ></div>
+          <div className="moving-arrow" ></div>
         </div>
       </div>
       <div className="main-panel">
@@ -146,7 +147,7 @@ function App() {
             </div>
           </div>
         </div>
-        <footer className="footer">
+        {/* <footer className="footer">
           <div className="container-fluid d-flex flex-wrap justify-content-between">
             <nav>
               <ul>
@@ -173,7 +174,7 @@ function App() {
               </a>
             </div>
           </div>
-        </footer>
+        </footer> */}
       </div>
     </div>
   );
