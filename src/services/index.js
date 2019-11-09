@@ -1,5 +1,6 @@
-export { default as adminRegistration } from './adminAuth/registration';
-export { default as adminLogin } from './adminAuth/login';
+export { default as adminRegistration } from './admin/registration';
+export { default as adminLogin } from './admin/login';
+export { default as adminDashboardRetrive } from './admin/dashboardRetrive';
 
 export { default as categoryCreate } from './category/create';
 export { default as categoryListGet } from './category/getList';

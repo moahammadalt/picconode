@@ -5,6 +5,7 @@ import fileUpload from 'express-fileupload';
 import path from 'path';
 import hbs from 'hbs';
 import mysqlSession from 'express-mysql-session';
+import cors from 'cors';
 
 import api from 'api';
 import { eventHandler, events } from 'eventsObj/eventHandler';
@@ -23,6 +24,9 @@ export default new (class expressServer {
     this.app = express();
     this.app.set('view engine', 'html');
     this.app.engine('html', hbs.__express);
+    if(!config.IS_PROD) {
+      this.app.use(cors());
+    }
     this.app.use(express.static(path.join(path.resolve('.'), config.PUBLIC_VIEW_PATH)));
     this.app.use(express.static(config.PUBLIC_STATIC_PATH));
     this.app.use(fileUpload());

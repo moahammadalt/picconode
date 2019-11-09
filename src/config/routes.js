@@ -10,6 +10,10 @@ export default {
 			type: 'POST',
 			bodyParams: ['userName', 'password'],
 		},
+		dashboardRetrive: {
+			url: '/adminAPI/dashboard-retrive',
+			type: 'GET',
+		},
 		categoryCreate: {
 			url: '/adminAPI/category/create',
 			type: 'POST',

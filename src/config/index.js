@@ -5,6 +5,7 @@ import fs from 'fs';
 export default {
 	PORT: process.env.PORT,
 	HOSTNAME: process.env.HOSTNAME,
+	IS_PROD: process.env.IS_PROD === 'true',
 	ADMIN: {
 		userName: process.env.ADMIN_USER_NAME,
 		password: process.env.ADMIN_PASSWORD,
