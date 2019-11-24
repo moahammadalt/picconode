@@ -53,10 +53,13 @@ export default async (req) => {
     });
   }
 
-  return await deleteRow({
+  const deletedRecord = await deleteRow({
     table: 'product',
     fields: 'slug',
     values: req.params.slug,
     data: req.body
   });
+
+  return { ...deletedRecord, deletedProductSlug: req.params.slug };
+  
 };
