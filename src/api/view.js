@@ -1,6 +1,7 @@
 import routes from "config/routes";
 import { viewServiceHandler, serviceHandler } from "utils/service";
 import { viewsPath } from 'globals/constants';
+import path from 'path';
 
 import {
   productItem,
@@ -21,6 +22,10 @@ import {
 
 export default router => {
   const { publicApi } = routes;
+
+  router.get(publicApi.dashboardFe.url, (req, res) => { 
+    res.render(viewsPath + publicApi.dashboardFe.path);
+  });
 
   router.get(publicApi.notFound.url, (...arg) => {
     const res = arg[1];

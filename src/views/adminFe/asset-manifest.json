@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "../adminFe/static/css/main.86a331b3.chunk.css",
+    "main.js": "../adminFe/static/js/main.d9f39ca8.chunk.js",
+    "main.js.map": "../adminFe/static/js/main.d9f39ca8.chunk.js.map",
+    "runtime-main.js": "../adminFe/static/js/runtime-main.e3c390b3.js",
+    "runtime-main.js.map": "../adminFe/static/js/runtime-main.e3c390b3.js.map",
+    "static/css/2.f605fb63.chunk.css": "../adminFe/static/css/2.f605fb63.chunk.css",
+    "static/js/2.ef1bbe6f.chunk.js": "../adminFe/static/js/2.ef1bbe6f.chunk.js",
+    "static/js/2.ef1bbe6f.chunk.js.map": "../adminFe/static/js/2.ef1bbe6f.chunk.js.map",
+    "index.html": "../adminFe/index.html",
+    "precache-manifest.f7766a8794e084f17c0f87eba85256aa.js": "../adminFe/precache-manifest.f7766a8794e084f17c0f87eba85256aa.js",
+    "service-worker.js": "../adminFe/service-worker.js",
+    "static/css/2.f605fb63.chunk.css.map": "../adminFe/static/css/2.f605fb63.chunk.css.map",
+    "static/css/main.86a331b3.chunk.css.map": "../adminFe/static/css/main.86a331b3.chunk.css.map",
+    "static/media/favicon.png": "../adminFe/static/media/favicon.39971fa2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e3c390b3.js",
+    "static/css/2.f605fb63.chunk.css",
+    "static/js/2.ef1bbe6f.chunk.js",
+    "static/css/main.86a331b3.chunk.css",
+    "static/js/main.d9f39ca8.chunk.js"
+  ]
+}

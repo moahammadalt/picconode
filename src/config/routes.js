@@ -200,5 +200,10 @@ export default {
 			bodyParams: ['email', 'resetCode', 'newPassword'],
 			type: 'POST',
 		},	
+		dashboardFe: {
+			url: '/admin-dashboard',
+			path: '/adminFe',
+			type: 'GET',
+		},
   }
 };
