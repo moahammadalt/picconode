@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e7f1f237ef2893578809194adc5dabc7",
+    "revision": "69e1ea6896da4d786d9773df458c8af5",
     "url": "../adminFe/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "../adminFe/static/css/2.f605fb63.chunk.css"
   },
   {
-    "revision": "32a7c2be8381f44dfa62",
+    "revision": "183c23bfdd2d4a9dba6e",
     "url": "../adminFe/static/css/main.86a331b3.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "../adminFe/static/js/2.ef1bbe6f.chunk.js"
   },
   {
-    "revision": "32a7c2be8381f44dfa62",
-    "url": "../adminFe/static/js/main.d9f39ca8.chunk.js"
+    "revision": "183c23bfdd2d4a9dba6e",
+    "url": "../adminFe/static/js/main.69975262.chunk.js"
   },
   {
     "revision": "ae4e24ecc26803f46c6d",
