@@ -25,6 +25,7 @@ export const viewServiceHandler = async ({req, res, next, viewPathUrl, service})
     }
     req.headerViewData = {...headerViewData};
 		if(service) {
+      req.fromView = true;
 			const serviceData = await service(req);
 			response = {
 				...response,

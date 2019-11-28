@@ -14,12 +14,10 @@ import {
 
 export default async req => {
   // TODO: fix- static files also hit this function and making sql request to fetch a product
-
   let productItemArr = await select({
     table: 'product',
     condition: `${(isNaN(req.params.slug) ? 'slug' : 'id')}='${req.params.slug}'`
   });
-
   if(!productItemArr || productItemArr.length === 0) {
     if(!req.ignoreErrorRender) {
       throw {
@@ -34,7 +32,7 @@ export default async req => {
 
   let productItem = productItemArr[0];
 
-  if(productItem.stock_status === 0) {
+  if(productItem.stock_status === 0 && !req.ignoreErrorRender) {
     throw {
       errorRedirectPath: routes.publicApi.productNotFound.path,
       errorMessage: errorMessages.outOfStock,

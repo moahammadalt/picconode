@@ -17,14 +17,6 @@ export default router => {
     serviceHandler(...arg, productCreate);
   });
 
-  router.get(adminApi.productList.url, (...arg) => {
-    serviceHandler(...arg, productListGet);
-  });
-
-  router.get(adminApi.productItem.url, (...arg) => {
-    serviceHandler(...arg, productItemGet);
-  });
-
   router.post(adminApi.productUpdate.url, (...arg) => {
     serviceHandler(...arg, productUpdate);
   });
@@ -35,5 +27,13 @@ export default router => {
 
   router.post(adminApi.productImageCreate.url, (...arg) => {
     serviceHandler(...arg, ImageUpload);
+  });
+
+  router.get(adminApi.productList.url, (...arg) => {
+    serviceHandler(...arg, productListGet);
+  });
+
+  router.get(adminApi.productItem.url, (...arg) => {
+    serviceHandler(...arg, productItemGet);
   });
 };

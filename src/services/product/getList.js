@@ -76,7 +76,6 @@ export default async (req) => {
 				productColorItem['images'] = productImages.filter(productImageObj => productColorItem.product_id === productImageObj.product_id && productColorItem.id === productImageObj.product_color_id);
 				return productColorItem;
 			});
-			//productItem['colors'] = productItem['colors'].reverse();
 
 			//make the default color the same of the last queried color
 			if(req.query.color && req.originalUrl.includes('/products/')) {

@@ -9,27 +9,11 @@ import {
 } from "services";
 
 export default async (req) => {
+  try {
+  
   const { params } = req;
   
-  const productItem = await productItemGet({ params });
-
-  if(productItem.main_image) {
-    const productImage = await productImageGet({
-      body: {
-        'product_id': productItem.id
-      },
-      key: 'product_id'
-    });
-    if(productImage && productImage[0]) {
-      const imageDeleteKey = 'product_id';
-      await productImageDelete({
-        body: {
-          [imageDeleteKey]: productItem.id
-        },
-        key: imageDeleteKey,
-      });
-    }
-  }
+  const productItem = await productItemGet({ params, ignoreErrorRender: true });
   
   const deleteKey = 'id';
 
@@ -40,6 +24,22 @@ export default async (req) => {
         [deleteKey]: sizes
       },
       key: deleteKey,
+    });
+  }
+
+  const productImage = await productImageGet({
+    body: {
+      'product_id': productItem.id
+    },
+    key: 'product_id'
+  });
+  if(productImage && productImage[0]) {
+    const imageDeleteKey = 'product_id';
+    await productImageDelete({
+      body: {
+        [imageDeleteKey]: productItem.id
+      },
+      key: imageDeleteKey,
     });
   }
 
@@ -61,5 +61,8 @@ export default async (req) => {
   });
 
   return { ...deletedRecord, deletedProductSlug: req.params.slug };
-  
+}
+catch( err ) {
+  console.log('err: ', err);
+}
 };
