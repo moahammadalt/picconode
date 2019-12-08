@@ -16,7 +16,7 @@ export default async (req) => {
 		let productList = await select({
 			table: 'product',
 			...req.query,
-			orderBy: req.query.orderBy || 'id',
+			orderBy: req.query.orderBy || 'sort_index',
 			sort: 'ASC',
 			condition: req.condition,
 		});

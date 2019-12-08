@@ -27,12 +27,14 @@ export default async (req) => {
 		});
 
 		// update sort_index with the new id
-		await update({
-      table: 'product',
-      fields: ['sort_index'],
-      values: [productResponse.id],
-      condition: `id = '${productResponse.id}'`,
-    });
+		if(!req.body.sort_index) {
+			await update({
+				table: 'product',
+				fields: ['sort_index'],
+				values: [productResponse.id],
+				condition: `id = '${productResponse.id}'`,
+			});
+		}
 
 		if(mainImage) {
 			const mainImageCreated = await productImageCreate({
