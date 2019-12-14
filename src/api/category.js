@@ -5,7 +5,8 @@ import {
   categoryCreate,
   categoryListGet,
   categoryItemGet,
-  categoryUpdate
+  categoryUpdate,
+  categoryDelete,
 } from "services";
 
 export default router => {
@@ -26,4 +27,9 @@ export default router => {
   router.post(adminApi.categoryUpdate.url, (...arg) => {
     serviceHandler(...arg, categoryUpdate);
   });
+
+  router.post(adminApi.categoryDelete.url, (...arg) => {
+    serviceHandler(...arg, categoryDelete);
+  });
+  
 };

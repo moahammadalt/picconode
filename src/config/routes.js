@@ -31,6 +31,10 @@ export default {
 			url: '/adminAPI/category/:slug',
 			type: 'POST',
 		},
+		categoryDelete: {
+			url: '/adminAPI/category/:slug/delete',
+			type: 'POST',
+		},
 		sizeCreate: {
 			url: '/adminAPI/size/create',
 			type: 'POST',
