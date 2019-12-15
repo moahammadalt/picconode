@@ -24,7 +24,7 @@ export default async req => {
     if (requestedCategoryHasChildCategories()) {
       throw {
         errorMessage:
-          'category has children categories, delete its children first'
+          'This category has children categories, delete its children first'
       };
     }
 

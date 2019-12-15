@@ -28,7 +28,7 @@ export default {
 			type: 'GET',
 		},
 		categoryUpdate: {
-			url: '/adminAPI/category/:slug',
+			url: '/adminAPI/category/:slug/update',
 			type: 'POST',
 		},
 		categoryDelete: {

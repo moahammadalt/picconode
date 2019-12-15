@@ -5,7 +5,8 @@ import {
   sizeCreate,
   sizeListGet,
   sizeItemGet,
-  sizeUpdate
+  sizeUpdate,
+  sizeDelete,
 } from "services";
 
 export default router => {
@@ -25,5 +26,9 @@ export default router => {
 
   router.post(adminApi.sizeUpdate.url, (...arg) => {
     serviceHandler(...arg, sizeUpdate);
+  });
+
+  router.post(adminApi.sizeDelete.url, (...arg) => {
+    serviceHandler(...arg, sizeDelete);
   });
 };

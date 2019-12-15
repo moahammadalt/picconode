@@ -1,7 +1,29 @@
-import { deleteRow } from "utils/db";
+import { deleteRow } from 'utils/db';
 
-export default async (req) => await deleteRow({
-  table: "size",
-  condition: `slug = '${req.params.slug}'`,
-  data: req.body
-});
+import { sizeListGet } from 'services';
+import { createHash } from 'globals/helpers';
+
+export default async req => {
+  try {
+    const sizeList = await sizeListGet();
+    const sizesHash = createHash(sizeList, 'slug');
+
+    if (!sizesHash.data[req.params.slug]) {
+      throw {
+        errorMessage: 'size is not exist'
+      };
+    }
+
+    await deleteRow({
+      table: 'size',
+      fields: 'slug',
+      values: req.params.slug,
+    });
+
+    return {
+      message: `size ${req.params.slug} has been deleted`
+    }
+  } catch (err) {
+    throw err;
+  }
+};
