@@ -1,6 +1,7 @@
 import { responseStatuses, errorMessages, viewsPath } from 'globals/constants';
 import { sendClientAlarm } from 'globals/helpers';
 import { headerView } from 'services';
+import logger from 'utils/logger';
 
 export const serviceHandler = async (req, res, next, service) => {
   try {
@@ -33,24 +34,20 @@ export const viewServiceHandler = async ({req, res, next, viewPathUrl, service})
 			}
     }
     
-    res.render(viewsPath + viewPathUrl, { data: response })
+    res.render(viewsPath + viewPathUrl, { data: response });
 		
   } catch (err) {
-    if(err) {
-      console.log('err: ', err);
-      if(err.errorRedirectPath) {
-        res.render(viewsPath + err.errorRedirectPath, {
-          data: {
-            errorMessage: err.errorMessage || errorMessages.GenericError
-          },
-        });
-      }
-      else{
-        res.send(sendClientAlarm(err.errorMessage));
-      }
+    console.log('err: ', err);
+    logger.error(err.message || err);
+    if(err.errorRedirectPath) {
+      res.render(viewsPath + err.errorRedirectPath, {
+        data: {
+          errorMessage: err.errorMessage || errorMessages.GenericError
+        },
+      });
     }
-    else {
-      res.send(sendClientAlarm());
+    else{
+      res.send(sendClientAlarm(err.errorMessage));
     }
   }
 };
