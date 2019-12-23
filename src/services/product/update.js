@@ -34,9 +34,7 @@ export default async (req) => {
   }
   try {
 
-    productBeforUpdate = await productItemGet({ params });
-    
-    
+    productBeforUpdate = await productItemGet({ params, ignoreErrorRender: true });
     
     if(reqProductMainImage && reqProductMainImage.image_name){
       if(productBeforUpdate.main_image) {
@@ -70,7 +68,7 @@ export default async (req) => {
         req.body.main_image = mainImageCreated.image_name;
       }
     }
-
+    req.body.sort_index = req.body.sort_index || req.body.id;
     await update({
       table: 'product',
       fields: Object.keys(req.body),
@@ -94,9 +92,27 @@ export default async (req) => {
 
       for(const reqProductSizeObj of reqProductSizes) {
         const productSizeObj = productSizes.find(productSize => productSize['size_id'] === reqProductSizeObj.id);
-        const isreqProductIdAndreqSizeIdExistInProductSizes = !!productSizeObj;
+        const isReqProductIdAndReqSizeIdExistInProductSizes = !!productSizeObj;
+        if(reqProductSizeObj.refId) {
+          console.log('reqProductSizeObj.refId: ', reqProductSizeObj.refId);
+          await productSizeUpdate({
+            body: {
+              'product_id': reqProductId,
+              'size_id': reqProductSizeObj.id,
+              'size_details': reqProductSizeObj.details,
+              'height': reqProductSizeObj.height,
+              'chest': reqProductSizeObj.chest,
+              'waistline': reqProductSizeObj.waistline,
+              'hips': reqProductSizeObj.hips,
+              'size_price': reqProductSizeObj.size_price,
+              'amount': reqProductSizeObj.amount,
+            },
+            condition: `id = ${reqProductSizeObj.refId}`,
+          });
+          continue;
+        }
         
-        if(!isreqProductIdAndreqSizeIdExistInProductSizes){
+        if(!isReqProductIdAndReqSizeIdExistInProductSizes){
           if(!reqProductSizeObj.is_checked){
             continue;
           }

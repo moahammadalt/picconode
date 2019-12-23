@@ -4,7 +4,7 @@ import { headerView } from 'services';
 
 export const serviceHandler = async (req, res, next, service) => {
   try {
-    const serviceResponse = await service(req);
+    const serviceResponse = await service({...req, ignoreErrorRender: true});
     res.send({
       status: responseStatuses.success,
       data: serviceResponse
