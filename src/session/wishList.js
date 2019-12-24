@@ -5,7 +5,7 @@ export const saveWishlistProduct = req => {
     req.session.productsWishlistSlugs = [];
   }
 
-  if (!req.session.productsWishlistSlugs.includes(req.body.slug)) {
+  if (req.session.productsWishlistSlugs && !req.session.productsWishlistSlugs.includes(req.body.slug)) {
     req.session.productsWishlistSlugs.push(req.body.slug);
   }
   return req.session.productsWishlistSlugs || [];

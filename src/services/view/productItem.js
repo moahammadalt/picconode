@@ -43,7 +43,7 @@ export default async req => {
     productItem.colors.unshift(defaultColorObj);
   }
 
-  if (productsWishlistSlugs.includes(productItem.slug)) {
+  if (productsWishlistSlugs && productsWishlistSlugs.includes(productItem.slug)) {
     productItem['isWishlisted'] = true;
   }
 

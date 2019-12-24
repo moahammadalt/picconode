@@ -78,7 +78,7 @@ export default async (req) => {
 			});
 
 			//make the default color the same of the last queried color
-			if(req.query.color && req.originalUrl.includes('/products/')) {
+			if(req.query.color && req.originalUrl && req.originalUrl.includes('/products/')) {
 				const allFilteredColors = req.query.color.split(',');
 				const lastQueriedColorSlug = allFilteredColors[allFilteredColors.length - 1];
 				const lastQueriedColorID = colorListHashObj.data[lastQueriedColorSlug].id;
@@ -107,7 +107,7 @@ export default async (req) => {
 			}
 
 			//handle if product in wishlist
-			if(productsWishlistSlugs.includes(productItem.slug)) {
+			if(productsWishlistSlugs && productsWishlistSlugs.includes(productItem.slug)) {
 				productItem['isWishlisted'] = true;
 			}
 

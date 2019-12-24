@@ -48,7 +48,7 @@ export const getFilterFieldsObjNames = () =>
 export const getFilterHref = (query, key, value) => {
   let newQuery = getFilteredQueryParamObj({ ...query }, key) || {};
 
-  if (newQuery[key] && !singlurParams.includes(key)) {
+  if (newQuery[key] && singlurParams && !singlurParams.includes(key)) {
     const keysArr = newQuery[key].split(',');
 
     var index = keysArr.indexOf(value);
