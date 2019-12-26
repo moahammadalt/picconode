@@ -94,7 +94,6 @@ export default async (req) => {
         const productSizeObj = productSizes.find(productSize => productSize['size_id'] === reqProductSizeObj.id);
         const isReqProductIdAndReqSizeIdExistInProductSizes = !!productSizeObj;
         if(reqProductSizeObj.refId) {
-          console.log('reqProductSizeObj.refId: ', reqProductSizeObj.refId);
           await productSizeUpdate({
             body: {
               'product_id': reqProductId,
@@ -165,6 +164,18 @@ export default async (req) => {
         const productColorObj = productColors.find(productColor => productColor['color_id'] === reqProductColorObj.id);
         const isreqProductIdAndreqColorIdExistInProductColors = !!productColorObj;
 
+        if(reqProductColorObj.refId) {
+          await productColorUpdate({
+            body: {
+              'color_id': reqProductColorObj.id,
+              'amount': reqProductColorObj.amount,
+              'product_color_code': reqProductColorObj.product_color_code,
+            },
+            condition: `id = ${reqProductColorObj.refId}`,
+          });
+          continue;
+        }
+
         if(!isreqProductIdAndreqColorIdExistInProductColors){
           if(!reqProductColorObj.is_checked){
             continue;
@@ -173,7 +184,8 @@ export default async (req) => {
 						body: {
 							'product_id': reqProductId,
 							'color_id': reqProductColorObj.id,
-							'amount': reqProductColorObj.amount,
+              'amount': reqProductColorObj.amount,
+              'product_color_code': reqProductColorObj.product_color_code,
 						}
           });
 
@@ -213,6 +225,7 @@ export default async (req) => {
                 'product_id': reqProductId,
                 'color_id': reqProductColorObj.id,
                 'amount': reqProductColorObj.amount,
+                'product_color_code': reqProductColorObj.product_color_code,
               }
             });
             if(Array.isArray(reqProductColorObj.images)) {
