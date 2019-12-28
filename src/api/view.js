@@ -27,6 +27,10 @@ export default router => {
     res.render(viewsPath + publicApi.dashboardFe.path);
   });
 
+  router.get(publicApi.dashboardFe.url + '/*', (req, res) => { 
+    res.render(viewsPath + publicApi.dashboardFe.path);
+  });
+
   router.get(publicApi.notFound.url, (...arg) => {
     const res = arg[1];
     res.render(viewsPath + publicApi.notFound.path);

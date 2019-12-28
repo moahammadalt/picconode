@@ -38,7 +38,15 @@ export const viewServiceHandler = async ({req, res, next, viewPathUrl, service})
 		
   } catch (err) {
     console.log('err: ', err);
-    logger.error(err.message || err);
+    let error ;
+    if(typeof err === 'object' && !err.message) {
+      error = JSON.stringify(err);
+    }
+    else {
+      error = err.message
+    }
+    logger.error(error);
+    
     if(err.errorRedirectPath) {
       res.render(viewsPath + err.errorRedirectPath, {
         data: {
