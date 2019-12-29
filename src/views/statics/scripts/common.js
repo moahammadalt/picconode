@@ -83,7 +83,6 @@ $(function() {
         email: email
       }),
       success: function(data) {
-        console.log('data: ', data);
         $('#email-subscription-success-message').removeClass('hidden');
         $('#email-subscription-field').val('');
         hideResponseMessage();

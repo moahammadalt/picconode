@@ -110,6 +110,18 @@ export default {
 			url: '/adminAPI/logout',
 			type: 'POST',
 		},
+		productUserDemandsList: {
+			url: '/adminAPI/productUserDemands',
+			type: 'GET',
+		},
+		subscriptionList: {
+			url: '/adminAPI/subscribers',
+			type: 'GET',
+		},
+		emailUserList: {
+			url: '/adminAPI/users',
+			type: 'GET',
+		},
   },
   publicApi: {
     home: {

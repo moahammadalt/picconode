@@ -54,14 +54,22 @@ export { default as homeGet } from './view/homeGet.js';
 export { default as headerView } from './view/header';
 export { default as productItem } from './view/productItem.js';
 export { default as productList } from './view/productList.js';
-export { userDemandSend } from './view/productUserDemand';
-export { userDemandList } from './view/productUserDemand';
-export { userDemandReply } from './view/productUserDemand';
-export { emailSubscribe } from './view/subscription';
+export { default as userDemandSend } from './userDemand/send';
+export { default as userDemandList } from './userDemand/getList';
+export { default as userDemandReply } from './userDemand/reply';
+export { default as emailSubscribe } from './emailSubscription/subscribe';
+export { default as subscriptionGetList } from './emailSubscription/getList';
 
 export { default as emailUserRegister } from './emailUser/register';
-export { default as emailUserVerification } from './emailUser/emailVerification';
+export {
+  default as emailUserVerification
+} from './emailUser/emailVerification';
 export { default as emailUserLogOut } from './emailUser/logOut';
 export { default as emailUserLogIn } from './emailUser/logIn';
-export { default as emailUserForgottenPasswordSend } from './emailUser/forgottenPasswordEmailSending';
-export { default as emailUserForgottenPasswordReset } from './emailUser/forgottenPasswordReset';
+export {
+  default as emailUserForgottenPasswordSend
+} from './emailUser/forgottenPasswordEmailSending';
+export {
+  default as emailUserForgottenPasswordReset
+} from './emailUser/forgottenPasswordReset';
+export { default as emailUserGetList } from './emailUser/getList';

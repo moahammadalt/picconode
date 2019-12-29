@@ -6,18 +6,11 @@ import path from 'path';
 import {
   productItem,
   productList,
-  userDemandSend,
   wishlistItemCreate,
   wishlistItemDelete,
   wishlistGet,
-  emailSubscribe,
   homeGet,
-  emailUserRegister,
   emailUserVerification,
-  emailUserLogOut,
-  emailUserLogIn,
-  emailUserForgottenPasswordSend,
-  emailUserForgottenPasswordReset,
 } from "services";
 
 export default router => {
@@ -90,39 +83,11 @@ export default router => {
     });
   });
 
-  router.post(publicApi.productUserDemand.url, (...arg) => {
-    serviceHandler(...arg, userDemandSend);
-  });
-
   router.post(publicApi.wishlistItemCreate.url, (...arg) => {
     serviceHandler(...arg, wishlistItemCreate);
   });
 
   router.post(publicApi.wishlistItemDelete.url, (...arg) => {
     serviceHandler(...arg, wishlistItemDelete);
-  });
-
-  router.post(publicApi.emailSubscription.url, (...arg) => {
-    serviceHandler(...arg, emailSubscribe);
-  });
-
-  router.post(publicApi.emailUserRegister.url, (...arg) => {
-    serviceHandler(...arg, emailUserRegister);
-  });
-
-  router.post(publicApi.emailUserLogOut.url, (...arg) => {
-    serviceHandler(...arg, emailUserLogOut);
-  });
-
-  router.post(publicApi.emailUserLogIn.url, (...arg) => {
-    serviceHandler(...arg, emailUserLogIn);
-  });
-
-  router.post(publicApi.emailUserForgottenPasswordSend.url, (...arg) => {
-    serviceHandler(...arg, emailUserForgottenPasswordSend);
-  });
-
-  router.post(publicApi.emailUserForgottenPasswordReset.url, (...arg) => {
-    serviceHandler(...arg, emailUserForgottenPasswordReset);
   });
 };

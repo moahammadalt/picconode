@@ -671,7 +671,6 @@
             email: $('#userForgottenEmail').val(),
           }),
           success: function (data) {
-            console.log('data: ', data);
             $('#userForgottenPasswordReset').removeClass('hidden');
             $('#userForgottenPassword').addClass('hidden');
             setTimeout(function () {
