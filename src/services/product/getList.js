@@ -73,6 +73,8 @@ export default async (req) => {
 			productItem['colors'] = productColorItemArr.map(productColorItem => {
 				productColorItem['color_name'] = colors[productColorItem.color_id].name;
 				productColorItem['color_slug'] = colors[productColorItem.color_id].slug;
+				productColorItem['color_hex'] = colors[productColorItem.color_id].hex_code;
+				productColorItem['color_hex_arr'] = colors[productColorItem.color_id].hex_code ? colors[productColorItem.color_id].hex_code.split(',') : [];
 				productColorItem['images'] = productImages.filter(productImageObj => productColorItem.product_id === productImageObj.product_id && productColorItem.id === productImageObj.product_color_id);
 				return productColorItem;
 			});

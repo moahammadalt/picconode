@@ -1,5 +1,5 @@
 .color-group .circle.orange,
-.single-product-detail .single-product-info .size-group .circle.red {
+.single-product-detail .single-product-info .size-group .circle.orange {
 	background: orange;
 }
 
@@ -268,4 +268,13 @@ position: absolute;
 	display:inline-block;
   border-top:30px solid #3d6385;
 	border-right:30px solid #008000;
+}
+.multi-color-border.active:before{
+	position: absolute !important;
+	content: '' !important;
+	left: -3px !important;
+	top: -32px !important;
+	right: -32px !important;
+	bottom: -2px !important;
+	border: 1px solid #f2dac0 !important;
 }

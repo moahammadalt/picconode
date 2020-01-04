@@ -100,6 +100,23 @@ $(function() {
       $(this).addClass('active');
     }
   });
+
+  $('.circle').each(function () {
+    var colorHex = $(this).attr('data-color-hex');
+    if (colorHex) {
+      if (!colorHex.includes(',')) {
+        $(this).css('background-color', colorHex);
+      }
+      else {
+        var colorHexArr = colorHex.split(',');
+        $(this).addClass('multi-color-border');
+        $(this).css({
+          'border-top': '30px solid ' + colorHexArr[0] + '',
+          'border-right': '30px solid ' + colorHexArr[1] + '',
+        });
+      }
+    }
+  });
   
   $('.js-user-login').on('click', function() {
     $('.login-form-wrapper').addClass('account--open');

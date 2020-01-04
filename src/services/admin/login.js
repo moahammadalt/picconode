@@ -30,7 +30,7 @@ export default async (req) => {
     } else {
       throw {
         statusCode: 400,
-        errorMessage: "user nor matched"
+        errorMessage: "User not matched"
       };
     }
   } catch (err) {

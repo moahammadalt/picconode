@@ -143,7 +143,7 @@
                           <div class="color-group1">
                             {{#each data.product.colors}}
                             <a data-color-slug="{{color_slug}}" data-color-name="{{color_name}}"
-                              data-color-code="{{product_color_code}}"
+                              data-color-code="{{product_color_code}}" data-color-hex="{{color_hex}}"
                               class="circle color-option {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"></a>
                             {{/each}}
                           </div>
@@ -396,7 +396,7 @@
           <div class="color-group">
             {{#each colors}}
             <div class="other-product-color circle {{color_slug}} {{#ifCond @index '===' 0}}active{{/ifCond}}"
-              data-other-product-color="{{color_slug}}"></div>
+              data-other-product-color="{{color_slug}}" data-color-hex="{{color_hex}}"></div>
             {{/each}}
           </div>
         </div>
@@ -442,15 +442,15 @@
     //change chosen color text
     chosenColorText.text(selectedElm.attr('data-color-name'));
     chosenColorCode.text(selectedElm.attr('data-color-code'));
-    
+
     var selectedImagesParentElm = $('.product-color-images[data-color-images-slug=' + selectedColorSlug + ']');
-    
+
     //change color images wrapper
-    if(selectedImagesParentElm.find('.img-responsive').length > 0) {
+    if (selectedImagesParentElm.find('.img-responsive').length > 0) {
       $('.product-color-images[data-color-images-slug=' + prevActiveElmColorSlug + ']').removeClass('active').addClass('hidden');
       selectedImagesParentElm.removeClass('hidden').addClass('active');
     }
-    
+
     $('.js-product-slider-normal, .js-click-product-normal').slick('refresh');
 
   });
