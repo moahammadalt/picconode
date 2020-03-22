@@ -199,10 +199,10 @@
                                 </tr>
                                 {{/ifCond}}
 
-                                {{#ifCond waistline '>' 0}}
+                                {{#ifCond waist '>' 0}}
                                 <tr>
                                   <th>Waist: </th>
-                                  <td>{{waistline}} / {{getInch waistline}}</td>
+                                  <td>{{waist}} / {{getInch waist}}</td>
                                 </tr>
                                 <tr>
                                   <th></th>
@@ -231,6 +231,84 @@
                                   <td class="empty"></td>
                                 </tr>
                                 {{/ifCond}}
+
+                                {{#ifCond neck '>' 0}}
+                                <tr>
+                                  <th>Neck: </th>
+                                  <td>{{neck}} / {{getInch neck}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                {{/ifCond}}
+
+                                {{#ifCond shoulders '>' 0}}
+                                <tr>
+                                  <th>Shoulders: </th>
+                                  <td>{{shoulders}} / {{getInch shoulders}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                {{/ifCond}}
+
+                                {{#ifCond sleeves '>' 0}}
+                                <tr>
+                                  <th>Sleeves: </th>
+                                  <td>{{sleeves}} / {{getInch sleeves}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                {{/ifCond}}
+
+                                {{#ifCond length '>' 0}}
+                                <tr>
+                                  <th>Length: </th>
+                                  <td>{{length}} / {{getInch length}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                {{/ifCond}}
+
+                                {{#ifCond total_height '>' 0}}
+                                <tr>
+                                  <th>Total Height: </th>
+                                  <td>{{total_height}} / {{getInch total_height}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                {{/ifCond}}
+
+                                {{#ifCond head_circumference '>' 0}}
+                                <tr>
+                                  <th>Head Circumference: </th>
+                                  <td>{{head_circumference}} / {{getInch head_circumference}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                {{/ifCond}}
+
+                                {{#ifCond foot_length '>' 0}}
+                                <tr>
+                                  <th>Foot Length: </th>
+                                  <td>{{foot_length}} / {{getInch foot_length}}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <td class="empty"></td>
+                                </tr>
+                                {{/ifCond}}
+
                               </table>
                             </div>
                             {{/each}}

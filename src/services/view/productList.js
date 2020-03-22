@@ -42,7 +42,6 @@ export default async req => {
       ...req,
       query: {
         ...req.query,
-        orderBy: 'sort_index',
         sort: req.query.sort,
       }
     });

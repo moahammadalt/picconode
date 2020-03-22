@@ -232,3 +232,17 @@ ADD COLUMN `is_handmade` TINYINT(1) NOT NULL DEFAULT 0;
 /*Added 07/12/2019*/
 ALTER TABLE `product` MODIFY `sort_index` DOUBLE;
 /*END*/
+
+/*Added 22/03/2020*/
+ALTER TABLE `product_size`
+CHANGE waistline waist VARCHAR(50) NULL,
+ADD COLUMN `neck` VARCHAR(50) NULL,
+ADD COLUMN `shoulders` VARCHAR(50) NULL,
+ADD COLUMN `sleeves` VARCHAR(50) NULL,
+ADD COLUMN `length` VARCHAR(50) NULL,
+ADD COLUMN `total_height` VARCHAR(50) NULL,
+ADD COLUMN `head_circumference` VARCHAR(50) NULL,
+ADD COLUMN `foot_length` VARCHAR(50) NULL;
+
+ALTER TABLE `product` MODIFY `sort_index` VARCHAR(20);
+/*END*/

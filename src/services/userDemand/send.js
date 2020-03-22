@@ -47,7 +47,7 @@ const userDemandSend = async (req) => {
       id: response.id
     };
   } catch (err) {
-    console.log(err);
+    console.log('err: ', err);
     throw err;
   }
 };
